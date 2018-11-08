@@ -3,10 +3,10 @@
   <input type="radio" name="typeuser" (change)="TypeFormulaire()"  >Créer un compte Tuteur
 </form>
 <form #formEleve="ngForm" (submit)="createEleve()">
-  <app-test-component></app-test-component>
+  <app-create-personne></app-create-personne>
 </form>
 <form [hidden] ="!isHidden" action="" #formProf="ngForm" (submit)="createEleve()">
-  <app-test-component></app-test-component>
+  <app-create-tutor></app-create-tutor>
 </form>
 
 <input type="submit" value="Envoie" disabled>

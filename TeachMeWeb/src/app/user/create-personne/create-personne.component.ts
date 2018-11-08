@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+// @ts-ignore
 @Component({
   selector: 'app-create-personne',
   templateUrl: './create-personne.component.html',
