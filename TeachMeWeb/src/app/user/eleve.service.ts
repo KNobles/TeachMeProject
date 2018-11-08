@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class EleveService {
-  public static readonly URL_API_ELEVE = '/api/eleve';
+  public static readonly URL_API_ELEVE = '/api/user';
 
   constructor(public http:HttpClient) { }
 
