@@ -1,9 +1,9 @@
 export class Eleve {
   private _id: number;
-  private _name:string;
-  private _mail:string;
-  private _tel:string;
-  private _password:string;
+  private _name: string;
+  private _mail: string;
+  private _tel: string;
+  private _password: string;
   private _isWarned: boolean;
   private _isModerator: boolean
 
