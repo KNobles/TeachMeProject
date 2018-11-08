@@ -2,19 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AdComponent } from './ad/ad.component';
-import { CreateUserComponent } from './eleve/create-eleve/create-user.component';
-import {FormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
+import {FormsModule} from '@angular/forms';
+import { TestComponentComponent } from './test-component/test-component.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdComponent,
-    CreateUserComponent
+    LoginComponent,
+    TestComponentComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
