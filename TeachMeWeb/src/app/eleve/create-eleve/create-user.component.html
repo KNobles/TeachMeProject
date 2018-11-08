@@ -1,0 +1,8 @@
+<form action="" #formEleve="ngForm" (submit)="createEleve()">
+  <input type="text" name="nameEleve"
+         [(ngModel)]="eleveTmp.name"
+         required pattern="^[^ ].*">
+
+  <input type="submit" value="Create"
+         [disabled]="!formEleve.form.valid">
+</form>
