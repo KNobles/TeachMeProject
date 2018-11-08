@@ -455,7 +455,7 @@
       <summary>Gets an instance of a <see cref="T:System.Web.Http.Routing.UrlHelper" />, which is used to generate URLs to other APIs. </summary>
       <returns>A <see cref="T:System.Web.Http.Routing.UrlHelper" />, which is used to generate URLs to other APIs.</returns>
     </member>
-    <member name="P:System.Web.Http.ApiController.User">
+    <member name="P:System.Web.Http.ApiController.Eleve">
       <summary>Returns the current principal associated with this request.</summary>
       <returns>The current principal associated with this request.</returns>
     </member>
