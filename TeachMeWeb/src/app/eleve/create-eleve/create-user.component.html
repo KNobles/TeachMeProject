@@ -2,7 +2,7 @@
   <input type="radio" name="typeuser" (change)="TypeFormulaire()" checked>Créer un compte éléve
   <input type="radio" name="typeuser" (change)="TypeFormulaire()"  >Créer un compte Tuteur
 </form>
-<form [hidden]="isHidden" action="" #formEleve="ngForm" (submit)="createEleve()">
+<form #formEleve="ngForm" (submit)="createEleve()">
   <app-test-component></app-test-component>
 </form>
 <form [hidden] ="!isHidden" action="" #formProf="ngForm" (submit)="createEleve()">
