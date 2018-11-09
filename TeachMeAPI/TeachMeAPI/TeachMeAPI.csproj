@@ -86,12 +86,15 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EleveController.cs" />
+    <Compile Include="Controllers\TutorController.cs" />
     <Compile Include="DAO\EleveDAO.cs" />
+    <Compile Include="DAO\TutorDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataBase.cs" />
     <Compile Include="Models\Eleve.cs" />
+    <Compile Include="Models\Tutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
