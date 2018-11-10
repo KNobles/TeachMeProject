@@ -8,40 +8,39 @@ using TeachMeAPI.Models;
 
 namespace TeachMeAPI.Controllers
 {
-    public class EleveController : ApiController
+    public class TutorController : ApiController
     {
-        public List<Eleve> GetAll()
+        public List<Tutor> GetAll()
         {
-            return DAO.EleveDAO.Query();
+            return DAO.TutorDAO.Query();
         }
 
-        public Eleve Post(Eleve user)
+        public Tutor Post(Tutor user)
         {
-            return DAO.EleveDAO.Insert(user);
+            return DAO.TutorDAO.Insert(user);
         }
 
-        public Eleve Get(int id)
+        public Tutor Get(int id)
         {
-            return DAO.EleveDAO.Get(id);
+            return DAO.TutorDAO.Get(id);
         }
 
-        public IHttpActionResult Delete(int idEleve)
+        public IHttpActionResult Delete(int idTutor)
         {
-            if (DAO.EleveDAO.Delete(idEleve))
+            if (DAO.TutorDAO.Delete(idTutor))
             {
                 return Ok();
             }
             return BadRequest();
         }
 
-        public IHttpActionResult Put(Eleve eleve)
+        public IHttpActionResult Put(Tutor tutor)
         {
-            if (DAO.EleveDAO.Update(eleve))
+            if (DAO.TutorDAO.Update(tutor))
             {
                 return Ok();
             }
             return BadRequest();
         }
-
     }
 }
