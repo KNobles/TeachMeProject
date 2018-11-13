@@ -1,14 +1,14 @@
-export class Eleve {
-  private _id: number;
-  private _name: string;
-  private _mail: string;
-  private _tel: string;
-  private _password: string;
+export class Student {
+  private _idStudent: number;
+  private _username:string;
+  private _mail:string;
+  private _tel:string;
+  private _password:string;
   private _isWarned: boolean;
   private _isModerator: boolean
 
   constructor(name: string="user", mail: string="user@hotmail.com", password: string="password", tel: string="0123456789", isWarned:boolean=false, isModerator:boolean=false) {
-    this._name = name;
+    this._username = name;
     this._mail = mail;
     this._password = password;
     this._tel = tel;
@@ -16,20 +16,20 @@ export class Eleve {
     this._isModerator = isModerator;
   }
 
-  get id(): number {
-    return this._id;
+  get idStudent(): number {
+    return this._idStudent;
   }
 
-  set id(value: number) {
-    this._id = value;
+  set idStudent(value: number) {
+    this._idStudent = value;
   }
 
-  get name(): string {
-    return this._name;
+  get username(): string {
+    return this._username;
   }
 
-  set name(value: string) {
-    this._name = value;
+  set username(value: string) {
+    this._username = value;
   }
 
   get mail(): string {
@@ -72,15 +72,15 @@ export class Eleve {
     this._isModerator = value;
   }
 
-  public deserializable(json: any) : Eleve {
-    //OBJECT ASSIGN
+  public deserializable(json: any) : Student {
+    Object.assign(this, json);
     return this;
   }
 
   public serialize() : any {
     return {
-      id: this._id,
-      name: this._name,
+      idStudent: this._idStudent,
+      username: this._username,
       mail: this._mail,
       tel: this._tel,
       password: this._password,

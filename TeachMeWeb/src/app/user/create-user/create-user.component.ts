@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {Eleve} from "../eleve";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Student} from "../student";
 
 @Component({
   selector: 'app-create-user',
@@ -7,28 +7,29 @@ import {Eleve} from "../eleve";
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-  private _eleveTmp: Eleve = new Eleve;
-  private _eleveCreated:EventEmitter<Eleve> = new EventEmitter();
+  private _studentTmp: Student = new Student;
+  private _studentCreated:EventEmitter<Student> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  get eleveTmp(): Eleve {
-    return this._eleveTmp;
+  get eleveTmp(): Student {
+    return this._studentTmp;
   }
 
   createEleve() {
-    this._eleveCreated.next(this.eleveTmp);
+    this._studentCreated.next(this.eleveTmp);
   }
 
   reset() {
-    this._eleveTmp = new Eleve;
+    this._studentTmp = new Student;
   }
 
-  getUserCreated(): EventEmitter<Eleve> {
-    return this._eleveCreated;
+  @Output()
+  getUserCreated(): EventEmitter<Student> {
+    return this._studentCreated;
   }
 
 }

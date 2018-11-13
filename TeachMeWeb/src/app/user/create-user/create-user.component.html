@@ -1,6 +1,6 @@
 <form action="" #formEleve="ngForm" (submit)="createEleve()">
   <input type="text" name="nameEleve"
-         [(ngModel)]="eleveTmp.name"
+         [(ngModel)]="eleveTmp.username"
          required pattern="^[^ ].*">
 
   <input type="submit" value="Create"
