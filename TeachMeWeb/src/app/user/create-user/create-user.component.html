@@ -1,5 +1,5 @@
 <form>
-  <input type="radio" name="typeuser" (change)="TypeFormulaire()" checked>Créer un compte éléve
+  <input type="radio" name="typeuser" (change)="TypeFormulaire()" checked>Créer un compte Eléve
   <input type="radio" name="typeuser" (change)="TypeFormulaire()"  >Créer un compte Tuteur
 </form>
 <form #formEleve="ngForm" (submit)="createEleve()">
@@ -9,4 +9,5 @@
   <app-create-tutor></app-create-tutor>
 </form>
 <br>
-<input type="submit" value="Envoie" disabled>
+<button routerLink="/Login">Retour</button> <input type="submit" value="Envoie">
+
