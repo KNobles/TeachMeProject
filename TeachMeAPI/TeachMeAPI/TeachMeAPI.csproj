@@ -87,12 +87,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\AnnouncementController.cs" />
+    <Compile Include="Controllers\BlackListEleveController.cs" />
+    <Compile Include="Controllers\BlackListTutorController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EleveController.cs" />
     <Compile Include="Controllers\TutorController.cs" />
     <Compile Include="Controllers\TutorCourseController.cs" />
     <Compile Include="DAO\AdministratorDAO.cs" />
     <Compile Include="DAO\AnnouncementDAO.cs" />
+    <Compile Include="DAO\BlackListEleveDAO.cs" />
+    <Compile Include="DAO\BlackListTutorDAO.cs" />
     <Compile Include="DAO\CourseDAO.cs" />
     <Compile Include="DAO\EleveDAO.cs" />
     <Compile Include="DAO\TutorCourseDAO.cs" />
@@ -102,6 +106,8 @@
     </Compile>
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\BlackListEleve.cs" />
+    <Compile Include="Models\BlackListTutor.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DataBase.cs" />
     <Compile Include="Models\Eleve.cs" />
