@@ -1,3 +1,14 @@
-<p>
-  create-personne works!
-</p>
+<div>
+  <h1>Encodez vos données</h1>
+  <form #formEleve="ngForm" (submit)="Test()">
+    Nom d'utilisateur : <br>
+    <input type="text" name="user" [(ngModel)]="userName"> <br>
+    Mot de passe : <br>
+    <input type="text" name="psw" [(ngModel)]="password"> <br>
+    Email : <br>
+    <input type="text" name="mail" [(ngModel)]="mail"> <br>
+    Numéro de téléphone : <br>
+    <input type="text" name="telnum" [(ngModel)]="telNumber"> <br>
+    <input type ="submit" [disabled] ="!form.form.valid"  class="btn btn-success" value="create">
+  </form>
+</div>

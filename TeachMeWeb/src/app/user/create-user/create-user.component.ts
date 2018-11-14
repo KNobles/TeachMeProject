@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {Student} from "../student";
+
 
 @Component({
   selector: 'app-create-user',
@@ -10,17 +11,27 @@ export class CreateUserComponent implements OnInit {
   private _studentTmp: Student = new Student;
   private _studentCreated:EventEmitter<Student> = new EventEmitter();
 
+  private _isHidden: boolean;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  get eleveTmp(): Student {
+  TypeFormulaire () {
+    this._isHidden = ! this._isHidden;
+  }
+
+  get isHidden(): boolean {
+    return this._isHidden;
+  }
+
+  get studentTmp(): Student {
     return this._studentTmp;
   }
 
-  createEleve() {
-    this._studentCreated.next(this.eleveTmp);
+  createStudent() {
+    this._studentCreated.next(this._studentTmp);
   }
 
   reset() {
