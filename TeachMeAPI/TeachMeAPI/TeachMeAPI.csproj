@@ -85,16 +85,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EleveController.cs" />
     <Compile Include="Controllers\TutorController.cs" />
+    <Compile Include="Controllers\TutorCourseController.cs" />
+    <Compile Include="DAO\AdministratorDAO.cs" />
+    <Compile Include="DAO\AnnouncementDAO.cs" />
+    <Compile Include="DAO\CourseDAO.cs" />
     <Compile Include="DAO\EleveDAO.cs" />
+    <Compile Include="DAO\TutorCourseDAO.cs" />
     <Compile Include="DAO\TutorDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Administrator.cs" />
+    <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\DataBase.cs" />
     <Compile Include="Models\Eleve.cs" />
     <Compile Include="Models\Tutor.cs" />
+    <Compile Include="Models\TutorCourse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
