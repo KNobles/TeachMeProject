@@ -10,7 +10,7 @@ using TeachMeAPI.DAO;
 
 namespace TeachMeAPI.Controllers
 {
-    public class AnonuncementController : ApiController
+    public class AnnouncementController : ApiController
     {
         public List<Announcement> GetAll()
         {
