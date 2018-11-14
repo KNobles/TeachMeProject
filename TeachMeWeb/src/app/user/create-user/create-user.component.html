@@ -1,8 +1,13 @@
-<form action="" #formEleve="ngForm" (submit)="createEleve()">
-  <input type="text" name="nameEleve"
-         [(ngModel)]="eleveTmp.name"
-         required pattern="^[^ ].*">
-
-  <input type="submit" value="Create"
-         [disabled]="!formEleve.form.valid">
+<form>
+  <input type="radio" name="typeuser" (change)="TypeFormulaire()" checked>Créer un compte Eléve
+  <input type="radio" name="typeuser" (change)="TypeFormulaire()"  >Créer un compte Tuteur
 </form>
+<form #formEleve="ngForm" (submit)="createEleve()">
+  <app-create-personne></app-create-personne>
+</form>
+<form [hidden] ="!isHidden" action="" #formProf="ngForm" (submit)="createEleve()">
+  <app-create-tutor></app-create-tutor>
+</form>
+<br>
+<button routerLink="/Login">Retour</button> <input type="submit" value="Envoie">
+
