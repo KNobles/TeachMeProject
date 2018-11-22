@@ -1,14 +1,13 @@
 <div>
   <h1>Encodez vos données</h1>
-  <form #form="ngForm" class="container"  (submit)="Test()">
+  <form #formStudent="ngForm" class="container" name="formStudent" (change)="Send($event)">
     Nom d'utilisateur : <br>
-    <input type="text" name="user" [(ngModel)]="userName" required> <br>
+    <input type="text" name="user" [(ngModel)]="userName"  required> <br>
     Mot de passe : <br>
-    <input type="text" name="psw" [(ngModel)]="password" required> <br>
+    <input type="text" name="psw" [(ngModel)]="password"  required> <br>
     Email : <br>
     <input type=" text" name="mail" [(ngModel)]="mail" required> <br>
     Numéro de téléphone : <br>
-    <input type="text" name="telnum" [(ngModel)]="telNumber" required> <br>
-    <input type ="submit" [disabled] ="!form.form.valid"  class="btn btn-success" value="create">
+    <input type="text" name="telnum" [(ngModel)]="telNumber"  required > <br>
   </form>
 </div>

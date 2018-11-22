@@ -1,5 +1,8 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {Eleve} from '../../eleve/eleve';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Student} from "../student";
+import {CreatePersonneComponent} from '../create-personne/create-personne.component';
+import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
+
 
 @Component({
   selector: 'app-create-user',
@@ -7,35 +10,58 @@ import {Eleve} from '../../eleve/eleve';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-  private _eleveTmp: Eleve = new Eleve;
-  private _eleveCreated: EventEmitter<Eleve> = new EventEmitter();
-  private _isHidden: boolean;
 
-  constructor() { }
+  private _studentTmp: Student = new Student;
+  private _studentCreated: EventEmitter<Student> = new EventEmitter();
+  private _isHidden: boolean;
+  private formvalidation : any = {} ;
+  private _isValid : boolean=false;
+
+
+  constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
 
   ngOnInit() {
+  this.InitFormStudent();
   }
   TypeFormulaire () {
     this._isHidden = ! this._isHidden;
   }
+
   get isHidden(): boolean {
     return this._isHidden;
   }
 
-  get eleveTmp(): Eleve {
-    return this._eleveTmp;
+  get studentTmp(): Student {
+    return this._studentTmp;
   }
 
-  createEleve() {
-    this._eleveCreated.next(this.eleveTmp);
+  createStudent() {
+    this._studentCreated.next(this._studentTmp);
   }
 
   reset() {
-    this._eleveTmp = new Eleve;
+    this._studentTmp = new Student;
   }
 
-  getUserCreated(): EventEmitter<Eleve> {
-    return this._eleveCreated;
+  @Output()
+  getUserCreated(): EventEmitter<Student> {
+    return this._studentCreated;
+  }
+  InitFormStudent() {
+    this.BroadcastStudentForm.formCreated$.subscribe(form => this.formValid(form)  );
+  }
+  formValid(form: any){
+    if(!form) return;
+     if(this.formvalidation[form.name] = form.valid){
+       this._isValid=true;
+     }
+  }
+  get isValid(): boolean {
+    return this._isValid;
+    console.log(this._isValid);
   }
 
+  set isValid(value: boolean) {
+    this._isValid = value;
+  }
 }
