@@ -10,35 +10,35 @@ using TeachMeAPI.DAO;
 
 namespace TeachMeAPI.Controllers
 {
-    public class AnnouncementController : ApiController
+    public class BlackListTutorController : ApiController
     {
-        public List<Announcement> GetAll()
+        public List<BlackListTutor> GetAll()
         {
-            return AnnouncementDAO.Query();
+            return BlackListTutorDAO.Query();
         }
 
-        public Announcement Post(Announcement announce)
+        public BlackListTutor Post(BlackListTutor black)
         {
-            return AnnouncementDAO.Insert(announce);
+            return BlackListTutorDAO.Insert(black);
         }
 
-        public Announcement Get(int id)
+        public BlackListTutor Get(int id)
         {
-            return AnnouncementDAO.Get(id);
+            return BlackListTutorDAO.Get(id);
         }
 
         public IHttpActionResult Delete(int id)
         {
-            if (AnnouncementDAO.Delete(id))
+            if (BlackListTutorDAO.Delete(id))
             {
                 return Ok();
             }
             return BadRequest();
         }
 
-        public IHttpActionResult Put(Announcement announce)
+        public IHttpActionResult Put(BlackListTutor black)
         {
-            if (AnnouncementDAO.Update(announce))
+            if (BlackListTutorDAO.Update(black))
             {
                 return Ok();
             }
