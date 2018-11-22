@@ -13,9 +13,8 @@ export class CreateUserComponent implements OnInit {
 
   private _studentTmp: Student = new Student;
   private _studentCreated: EventEmitter<Student> = new EventEmitter();
-  private _isHidden: boolean;
-  private formvalidation : any = {} ;
-  private _isValid : boolean=false;
+  private _isHidden: boolean = false;
+  public formvalidation : any = {} ;
 
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
@@ -48,20 +47,18 @@ export class CreateUserComponent implements OnInit {
     return this._studentCreated;
   }
   InitFormStudent() {
-    this.BroadcastStudentForm.formCreated$.subscribe(form => this.formValid(form)  );
+    this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
   }
-  formValid(form: any){
-    if(!form) return;
-     if(this.formvalidation[form.name] = form.valid){
-       this._isValid=true;
-     }
+  saveForm(form:any){
+    if (!form)return;
+    setTimeout(() => this.formvalidation[form.name] = form.valid, 0);
   }
-  get isValid(): boolean {
-    return this._isValid;
-    console.log(this._isValid);
-  }
-
-  set isValid(value: boolean) {
-    this._isValid = value;
+  formValid(){
+    for(let name in this.formvalidation){
+      if(!this.formvalidation[name]){
+        return false;
+      }
+    }
+    return true;
   }
 }

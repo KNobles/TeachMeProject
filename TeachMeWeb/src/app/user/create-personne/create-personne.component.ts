@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 
 
@@ -8,7 +8,7 @@ import {BroadcastStudentFormService} from '../../broadcast-student-form.service'
   templateUrl: './create-personne.component.html',
   styleUrls: ['./create-personne.component.css']
 })
-export class CreatePersonneComponent implements OnInit, AfterViewInit {
+export class CreatePersonneComponent implements OnInit, AfterViewChecked{
     private _userName: string;
     private _password: string;
     private _mail: string;
@@ -22,9 +22,6 @@ export class CreatePersonneComponent implements OnInit, AfterViewInit {
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
 
-  ngAfterViewInit(): void {
-    //this.broadcastForm(this._formStudent);
-  }
   ngOnInit() {
   }
   get userName(): string {
@@ -55,9 +52,12 @@ export class CreatePersonneComponent implements OnInit, AfterViewInit {
     this.BroadcastStudentForm.broadcastStudent({"name": "personneForm", "valid": form.form.valid});
   }
   Send(form: any) {
-    if(this.formStudent.form.valid) {
+
       this.broadcastForm(this._formStudent);
-    }
-    else return;
+
+  }
+
+  ngAfterViewChecked(): void {
+    this.broadcastForm(this._formStudent);
   }
 }

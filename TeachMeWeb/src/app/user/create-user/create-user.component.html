@@ -1,12 +1,12 @@
 <form>
-  <input type="radio" name="typeuser" (change)="TypeFormulaire()" checked>Créer un compte Eléve
-  <input type="radio" name="typeuser" (change)="TypeFormulaire()"  >Créer un compte Tuteur
+  <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent()" checked>Créer un compte Eléve
+  <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent()"  >Créer un compte Tuteur
 </form>
 <app-create-personne></app-create-personne>
 <div *ngIf="isHidden">
   <app-create-tutor></app-create-tutor>
 </div>
 <br>
-<button routerLink="/Login">Retour</button> <input type ="submit" [disabled]="!isValid" class="btn btn-success" value="Envoie">
+<button routerLink="/Login">Retour</button> <input type ="submit" [disabled]="!formValid()" class="btn btn-success" value="Envoie">
 
 
