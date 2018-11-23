@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 import {Student} from '../student';
 
@@ -16,7 +16,8 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
     private _telNumber: string;
     private _tmpStudent = new Student;
    @ViewChild('formStudent')
-   private _formStudent;
+    private _formStudent;
+    private _studentCreated:EventEmitter<Student> = new EventEmitter();
 
   get formStudent() {
     return this._formStudent;
@@ -57,7 +58,7 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
 
       this.broadcastForm(this._formStudent);
       this.tmpStudentCreate();
-
+      this.createStudent();
   }
 
 
@@ -70,13 +71,26 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
       this.tmpStudent.password=this._password  ;
       this.tmpStudent.mail=this._mail;
       this.tmpStudent.tel=this._telNumber;
-      console.log(this.tmpStudent)
       return this.tmpStudent;
     }
     else{
       return ;
     }
 
+  }
+
+  createStudent() {
+    this._studentCreated.next(this.tmpStudent);
+    this.reset();
+  }
+
+  reset() {
+    this._tmpStudent = new Student;
+  }
+
+  @Output()
+  get studentCreated(): EventEmitter<Student> {
+    return this._studentCreated;
   }
 
 
