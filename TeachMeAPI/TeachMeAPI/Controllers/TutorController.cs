@@ -8,9 +8,9 @@ using TeachMeAPI.Models;
 
 namespace TeachMeAPI.Controllers
 {
-    [Authorize]
     public class TutorController : ApiController
     {
+        [Authorize]
         public List<Tutor> GetAll()
         {
             return DAO.TutorDAO.Query();
@@ -21,16 +21,19 @@ namespace TeachMeAPI.Controllers
             return DAO.TutorDAO.Insert(user);
         }
 
+        [Authorize]
         public Tutor Get(int id)
         {
             return DAO.TutorDAO.Get(id);
         }
 
+        [Authorize(Roles = "Admin")]
         public bool Get(String password)
         {
             return DAO.TutorDAO.Get(password);
         }
 
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult Delete(int idTutor)
         {
             if (DAO.TutorDAO.Delete(idTutor))
@@ -40,6 +43,7 @@ namespace TeachMeAPI.Controllers
             return BadRequest();
         }
 
+        [Authorize(Roles = "Admin")]
         public IHttpActionResult Put(Tutor tutor)
         {
             if (DAO.TutorDAO.Update(tutor))
