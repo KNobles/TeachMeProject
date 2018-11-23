@@ -4,6 +4,7 @@ import {CreatePersonneComponent} from '../create-personne/create-personne.compon
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 
 
+
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
@@ -15,6 +16,7 @@ export class CreateUserComponent implements OnInit {
   private _studentCreated: EventEmitter<Student> = new EventEmitter();
   private _isHidden: boolean = false;
   public formvalidation : any = {} ;
+
 
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
@@ -48,6 +50,7 @@ export class CreateUserComponent implements OnInit {
   }
   InitFormStudent() {
     this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
+
   }
   saveForm(form:any){
     if (!form)return;
@@ -60,5 +63,8 @@ export class CreateUserComponent implements OnInit {
       }
     }
     return true;
+  }
+  test(){
+    console.log("test");
   }
 }

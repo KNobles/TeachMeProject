@@ -7,6 +7,6 @@
   <app-create-tutor></app-create-tutor>
 </div>
 <br>
-<button routerLink="/Login">Retour</button> <input type ="submit" [disabled]="!formValid()" class="btn btn-success" value="Envoie">
+<button routerLink="/Login">Retour</button> <Button (click)="test()" [disabled]="!formValid()" class="btn btn-success">Envoie</Button>
 
 

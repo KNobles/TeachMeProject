@@ -42,7 +42,7 @@ export class CreateTutorComponent implements OnInit {
     this._section = value;
   }
   broadcastForm(form : any) {
-    this.BroadcastTutorForm.broadcastStudent({"name": "personneForm", "valid": form.form.valid});
+    this.BroadcastTutorForm.broadcastStudent({"name": "tutorForm", "valid": form.form.valid});
   }
   Send(form: any) {
     if(this.formTutor.form.valid) {

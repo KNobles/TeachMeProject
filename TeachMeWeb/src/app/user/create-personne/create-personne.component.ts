@@ -1,5 +1,6 @@
 import {AfterViewChecked, AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
+import {Student} from '../student';
 
 
 // @ts-ignore
@@ -13,6 +14,7 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
     private _password: string;
     private _mail: string;
     private _telNumber: string;
+    private _tmpStudent = new Student;
    @ViewChild('formStudent')
    private _formStudent;
 
@@ -54,10 +56,32 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
   Send(form: any) {
 
       this.broadcastForm(this._formStudent);
+      this.tmpStudentCreate();
 
   }
 
+
+  get tmpStudent(): Student {
+    return this._tmpStudent;
+  }
+  tmpStudentCreate():Student{
+    if(this._formStudent.form.valid){
+      this.tmpStudent.username=this._userName  ;
+      this.tmpStudent.password=this._password  ;
+      this.tmpStudent.mail=this._mail;
+      this.tmpStudent.tel=this._telNumber;
+      console.log(this.tmpStudent)
+      return this.tmpStudent;
+    }
+    else{
+      return ;
+    }
+
+  }
+
+
   ngAfterViewChecked(): void {
     this.broadcastForm(this._formStudent);
+
   }
 }
