@@ -8,8 +8,10 @@ using TeachMeAPI.Models;
 
 namespace TeachMeAPI.Controllers
 {
+    
     public class EleveController : ApiController
     {
+        [Authorize]
         public List<Eleve> GetAll()
         {
             return DAO.EleveDAO.Query();
@@ -20,11 +22,19 @@ namespace TeachMeAPI.Controllers
             return DAO.EleveDAO.Insert(user);
         }
 
+        [Authorize]
         public Eleve Get(int id)
         {
             return DAO.EleveDAO.Get(id);
         }
 
+        [Authorize(Roles = "Administrator")]
+        public bool Get(String password)
+        {
+            return DAO.EleveDAO.Get(password);
+        }
+
+        [Authorize(Roles = "Administrator")]
         public IHttpActionResult Delete(int idEleve)
         {
             if (DAO.EleveDAO.Delete(idEleve))

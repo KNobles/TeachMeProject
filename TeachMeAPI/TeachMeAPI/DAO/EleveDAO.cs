@@ -23,7 +23,8 @@ namespace TeachMeAPI.DAO
         public static readonly string COLUMN_TEL = "Tel";
 
         public static readonly string QUERY = "SELECT * FROM " + TABLE_NAME;
-        public static readonly string GET = QUERY + " WHERE " + COLUMN_ID + " = @idEleve";
+        public static readonly string GETID = QUERY + " WHERE " + COLUMN_ID + " = @idEleve";
+        public static readonly string GETPPASSWORD = QUERY + " WHERE " + COLUMN_PASSWORD + " = @password";
         public static readonly string INSERT = "INSERT INTO " + TABLE_NAME + "(" + COLUMN_NAME + ", " + COLUMN_PASSWORD + ", " + COLUMN_MAIL + ", "
             + COLUMN_TEL + ", " + COLUMN_AVERTISSEMENT+ ", " + COLUMN_IS_MODERATEUR 
             +") OUTPUT INSERTED.idEleve VALUES(@name, @password, @mail, @tel, 0, 0)";
@@ -80,7 +81,7 @@ namespace TeachMeAPI.DAO
             using (SqlConnection connection = DataBase.GetConnection())
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(GET, connection);
+                SqlCommand command = new SqlCommand(GETID, connection);
 
                 command.Parameters.AddWithValue("@idEleve", idEleve);
 
@@ -94,6 +95,25 @@ namespace TeachMeAPI.DAO
 
             return eleve;
 
+        }
+
+        public static bool Get(String password)
+        {
+            using (SqlConnection connection = DataBase.GetConnection())
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(GETPPASSWORD, connection);
+
+                command.Parameters.AddWithValue("@password", password);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if(reader.Read())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool Delete(int idEleve)

@@ -10,6 +10,7 @@ using TeachMeAPI.DAO;
 
 namespace TeachMeAPI.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class AdministratorController : ApiController
     {
         public List<Administrator> GetAll()
@@ -25,6 +26,11 @@ namespace TeachMeAPI.Controllers
         public Administrator Get(int id)
         {
             return AdministratorDAO.Get(id);
+        }
+
+        public bool Get(String password)
+        {
+            return AdministratorDAO.Get(password);
         }
 
         public IHttpActionResult Delete(int id)
