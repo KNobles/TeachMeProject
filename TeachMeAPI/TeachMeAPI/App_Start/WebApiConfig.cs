@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+using TeachMeAPI.Util;
+
 namespace TeachMeAPI
 {
     public static class WebApiConfig
@@ -13,6 +15,8 @@ namespace TeachMeAPI
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.MessageHandlers.Add(new TokenValidationHandler());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

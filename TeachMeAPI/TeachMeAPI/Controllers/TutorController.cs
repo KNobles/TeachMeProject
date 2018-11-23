@@ -8,6 +8,7 @@ using TeachMeAPI.Models;
 
 namespace TeachMeAPI.Controllers
 {
+    [Authorize]
     public class TutorController : ApiController
     {
         public List<Tutor> GetAll()
@@ -23,6 +24,11 @@ namespace TeachMeAPI.Controllers
         public Tutor Get(int id)
         {
             return DAO.TutorDAO.Get(id);
+        }
+
+        public bool Get(String password)
+        {
+            return DAO.TutorDAO.Get(password);
         }
 
         public IHttpActionResult Delete(int idTutor)
