@@ -10,7 +10,7 @@ using TeachMeAPI.DAO;
 
 namespace TeachMeAPI.Controllers
 {
-    [Authorize(Roles ="Administrator")]
+    [Authorize(Roles ="Admin")]
     public class AdministratorController : ApiController
     {
         public List<Administrator> GetAll()

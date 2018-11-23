@@ -32,17 +32,28 @@ namespace TeachMeAPI.Controllers
             if (login != null)
             {
                 isUsernamePasswordValid = EleveDAO.Get(loginrequest.Password) ? true : false;
+                if (isUsernamePasswordValid)
+                    loginrequest.role = "Eleve";
                 if (!isUsernamePasswordValid)
+                {
                     isUsernamePasswordValid = TutorDAO.Get(loginrequest.Password) ? true : false;
+                    if (isUsernamePasswordValid)
+                        loginrequest.role = "Tutor";
+                }                
                 if (!isUsernamePasswordValid)
+                {
                     isUsernamePasswordValid = AdministratorDAO.Get(loginrequest.Password) ? true : false;
+                    if (isUsernamePasswordValid)
+                        loginrequest.role = "Admin";
+                }
+                    
 
             }
                 
             // if credentials are valid
             if (isUsernamePasswordValid)
             {
-                string token = createToken(loginrequest.Username);
+                string token = createToken(loginrequest.Username, loginrequest.role);
                 //return the token
                 return Ok<string>(token);
             }
@@ -55,7 +66,7 @@ namespace TeachMeAPI.Controllers
             }
         }
 
-        private string createToken(string username)
+        private string createToken(string username, string role)
         {
             //Set issued at date
             DateTime issuedAt = DateTime.UtcNow;
@@ -68,9 +79,12 @@ namespace TeachMeAPI.Controllers
             //create a identity and add claims to the user which we want to log in
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, username)
+                new Claim(ClaimTypes.Name, username, ClaimTypes.Role, role)
+     
+                
             });
-
+            
+           
             const string sec = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
             var now = DateTime.UtcNow;
             var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(sec));
