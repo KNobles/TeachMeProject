@@ -12,21 +12,25 @@ namespace TeachMeAPI.Controllers
 {
     public class BlackListEleveController : ApiController
     {
+        [Authorize]
         public List<BlackListEleve> GetAll()
         {
             return BlackListEleveDAO.Query();
         }
 
+        [Authorize(Roles ="Admin")]
         public BlackListEleve Post(BlackListEleve black)
         {
             return BlackListEleveDAO.Insert(black);
         }
-
+        
+        [Authorize]        
         public BlackListEleve Get(int id)
         {
             return BlackListEleveDAO.Get(id);
         }
 
+        [Authorize(Roles ="Admin")]
         public IHttpActionResult Delete(int id)
         {
             if (BlackListEleveDAO.Delete(id))
@@ -36,6 +40,7 @@ namespace TeachMeAPI.Controllers
             return BadRequest();
         }
 
+        [Authorize(Roles ="Admin")]
         public IHttpActionResult Put(BlackListEleve black)
         {
             if (BlackListEleveDAO.Update(black))

@@ -9,5 +9,6 @@ namespace TeachMeAPI.Models
     {
         public string Username;
         public string Password;
+        public string role;
     }
 }
