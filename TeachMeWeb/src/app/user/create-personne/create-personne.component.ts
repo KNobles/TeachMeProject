@@ -72,7 +72,6 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
       this.tmpStudent.password=this._password  ;
       this.tmpStudent.mail=this._mail;
       this.tmpStudent.tel=this._telNumber;
-      console.log(this.tmpStudent);
       return this.tmpStudent;
     }
     else{

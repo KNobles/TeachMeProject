@@ -2,6 +2,7 @@ import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from 
 import {Student} from "../student";
 import {CreatePersonneComponent} from '../create-personne/create-personne.component';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
+import {Tutor} from '../tutor';
 
 
 
@@ -14,8 +15,7 @@ export class CreateUserComponent implements OnInit {
   private _isHidden: boolean = false;
   public formvalidation : any = {} ;
   private _tmpStudent : Student;
-
-
+  private _tmpTutor : Tutor;
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
 
@@ -45,10 +45,20 @@ export class CreateUserComponent implements OnInit {
     }
     return true;
   }
-  test(){
-    console.log("test");
+  Validation(){
+    if(!this.isHidden){
+      console.log(this._tmpStudent);
+    }
+    else{
+      console.log(this._tmpTutor);
+    }
+
   }
   receiveStudent(value:Student) {
     this._tmpStudent = value;
+
+  }
+  receiveTutor(value:Tutor){
+    this._tmpTutor=value;
   }
 }
