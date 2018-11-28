@@ -11,11 +11,9 @@ import {BroadcastStudentFormService} from '../../broadcast-student-form.service'
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
-
-  private _studentTmp: Student = new Student;
-  private _studentCreated: EventEmitter<Student> = new EventEmitter();
   private _isHidden: boolean = false;
   public formvalidation : any = {} ;
+  private _tmpStudent : Student;
 
 
 
@@ -30,23 +28,6 @@ export class CreateUserComponent implements OnInit {
 
   get isHidden(): boolean {
     return this._isHidden;
-  }
-
-  get studentTmp(): Student {
-    return this._studentTmp;
-  }
-
-  createStudent() {
-    this._studentCreated.next(this._studentTmp);
-  }
-
-  reset() {
-    this._studentTmp = new Student;
-  }
-
-  @Output()
-  getUserCreated(): EventEmitter<Student> {
-    return this._studentCreated;
   }
   InitFormStudent() {
     this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
@@ -66,6 +47,9 @@ export class CreateUserComponent implements OnInit {
   }
   test(){
     console.log("test");
+  }
+  receiveStudent(student:Student) {
+    this._tmpStudent = student;
   }
 
 }
