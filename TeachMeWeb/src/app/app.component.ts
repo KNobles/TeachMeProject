@@ -8,10 +8,5 @@ import {Student} from './user/student';
 })
 export class AppComponent {
   title = 'TeachMe';
-  private _tmpStudent = Student;
-
-  receiveStudent(student:Student){
-  //  this._tmpStudent=student;
-  }
 }
 

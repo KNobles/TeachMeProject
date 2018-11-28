@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 import {Tutor} from '../tutor';
 import {Student} from '../student';
@@ -14,7 +14,7 @@ export class CreateTutorComponent implements OnInit {
   private _section:string;
   @ViewChild('formTutor')
   private _formTutor;
-  private _tmpStudent:Student;
+  private _tmpStudent:Student = null;
   private _tmpTutor:Tutor = new Tutor;
   constructor(public BroadcastTutorForm: BroadcastStudentFormService) { }
 
@@ -58,13 +58,13 @@ export class CreateTutorComponent implements OnInit {
   set formTutor(value) {
     this._formTutor = value;
   }
-
   get tmpStudent(): Student {
     return this._tmpStudent;
   }
   @Input()
   set tmpStudent(value: Student) {
-    this._tmpStudent = value;
+    this._tmpStudent= value;
+
   }
   tmpTutorCreate():Tutor{
     if(this._formTutor.form.valid){
@@ -75,6 +75,7 @@ export class CreateTutorComponent implements OnInit {
       this.tmpTutor.description=this._description;
       this.tmpTutor.year=this._year;
       this.tmpTutor.section=this.section;
+      console.log(this.tmpTutor);
       return this.tmpTutor;
     }
     else{
@@ -85,4 +86,5 @@ export class CreateTutorComponent implements OnInit {
   get tmpTutor(): Tutor {
     return this._tmpTutor;
   }
+
 }
