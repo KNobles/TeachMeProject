@@ -4,9 +4,9 @@
 </form>
 <app-create-personne (studentCreated)="receiveStudent($event)" ></app-create-personne>
 <div *ngIf="isHidden">
-  <app-create-tutor  tmpStudent=" _tmpStudent" ></app-create-tutor>
+  <app-create-tutor  [tmpStudent]="_tmpStudent" (tutorCreated)="receiveTutor($event)"></app-create-tutor>
 </div>
 <br>
-<button routerLink="/Login">Retour</button> <Button (click)="test()" [disabled]="!formValid()" class="btn btn-success">Envoie</Button>
+<button routerLink="/Login">Retour</button> <Button (click)="Validation()" [disabled]="!formValid()" class="btn btn-success">Envoie</Button>
 
 

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 import {Tutor} from '../tutor';
 import {Student} from '../student';
+
 
 @Component({
   selector: 'app-create-tutor',
@@ -14,8 +15,9 @@ export class CreateTutorComponent implements OnInit {
   private _section:string;
   @ViewChild('formTutor')
   private _formTutor;
-  private _tmpStudent:Student = null;
+  private _tmpStudent:Student = new Student;
   private _tmpTutor:Tutor = new Tutor;
+  private _tutorCreated : EventEmitter<Tutor> = new EventEmitter();
   constructor(public BroadcastTutorForm: BroadcastStudentFormService) { }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class CreateTutorComponent implements OnInit {
   Send(form: any) {
       this.broadcastForm(this._formTutor);
       this.tmpTutorCreate();
+      this.createTutor();
   }
   get formTutor() {
     return this._formTutor;
@@ -69,22 +72,33 @@ export class CreateTutorComponent implements OnInit {
   tmpTutorCreate():Tutor{
     if(this._formTutor.form.valid){
       this.tmpTutor.username=this.tmpStudent.username;
-      this.tmpTutor.password=this.tmpStudent.password ;
+      this.tmpTutor.password=this.tmpStudent.password;
       this.tmpTutor.mail=this.tmpStudent.mail;
       this.tmpTutor.tel=this.tmpStudent.tel;
       this.tmpTutor.description=this._description;
       this.tmpTutor.year=this._year;
       this.tmpTutor.section=this.section;
-      console.log(this.tmpTutor);
       return this.tmpTutor;
     }
-    else{
-      return ;
+    else {
+      return;
     }
-
+  }
+  createTutor(){
+    this._tutorCreated.next(this.tmpTutor);
+    this.reset();
   }
   get tmpTutor(): Tutor {
     return this._tmpTutor;
+  }
+
+  reset() {
+    this._tmpTutor = new Tutor;
+  }
+
+  @Output()
+  get tutorCreated(): EventEmitter<Tutor> {
+    return this._tutorCreated;
   }
 
 }
