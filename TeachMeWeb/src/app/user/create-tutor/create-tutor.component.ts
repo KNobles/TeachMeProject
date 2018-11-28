@@ -14,7 +14,7 @@ export class CreateTutorComponent implements OnInit {
   private _section:string;
   @ViewChild('formTutor')
   private _formTutor;
-  private _tmpStudent:Student = null;
+  private _tmpStudent:Student = new Student;
   private _tmpTutor:Tutor = new Tutor;
   constructor(public BroadcastTutorForm: BroadcastStudentFormService) { }
 
@@ -69,7 +69,7 @@ export class CreateTutorComponent implements OnInit {
   tmpTutorCreate():Tutor{
     if(this._formTutor.form.valid){
       this.tmpTutor.username=this.tmpStudent.username;
-      this.tmpTutor.password=this.tmpStudent.password ;
+      this.tmpTutor.password=this.tmpStudent.password;
       this.tmpTutor.mail=this.tmpStudent.mail;
       this.tmpTutor.tel=this.tmpStudent.tel;
       this.tmpTutor.description=this._description;

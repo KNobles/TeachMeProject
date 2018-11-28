@@ -1,3 +1,5 @@
+import {Output} from '@angular/core';
+
 export class Student {
   private _idStudent: number;
   private _username:string;
@@ -23,7 +25,7 @@ export class Student {
   set idStudent(value: number) {
     this._idStudent = value;
   }
-
+  @Output()
   get username(): string {
     return this._username;
   }

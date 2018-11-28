@@ -48,8 +48,7 @@ export class CreateUserComponent implements OnInit {
   test(){
     console.log("test");
   }
-  receiveStudent(student:Student) {
-    this._tmpStudent = student;
+  receiveStudent(value:Student) {
+    this._tmpStudent = value;
   }
-
 }

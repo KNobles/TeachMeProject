@@ -17,7 +17,7 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
     private _tmpStudent = new Student;
    @ViewChild('formStudent')
     private _formStudent;
-    private _studentCreated:EventEmitter<Student> = new EventEmitter();
+    private _studentCreated : EventEmitter<Student> = new EventEmitter();
 
   get formStudent() {
     return this._formStudent;
@@ -98,6 +98,5 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
 
   ngAfterViewChecked(): void {
     this.broadcastForm(this._formStudent);
-
   }
 }
