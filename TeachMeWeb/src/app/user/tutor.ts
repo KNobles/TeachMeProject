@@ -10,11 +10,14 @@ export class Tutor {
   private _description: string;
   private _isWarned: boolean;
   private _isModerator: boolean;
-  private _courses: Course[];
+  private _year:number;
+  private _section:string;
+
 
 
   constructor(username: string="tutor", password: string="password", mail: string="tutor@hotmail.com",
-              tel: string="0123456789", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false, courses: Course[] = []) {
+              tel: string="0123456789", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false
+  ,year: number = 1,section:string="undifined") {
     this._username = username;
     this._password = password;
     this._mail = mail;
@@ -23,9 +26,18 @@ export class Tutor {
     this._description = description;
     this._isWarned = isWarned;
     this._isModerator = isModerator;
-    this._courses = courses;
+    this._year=year;
+    this._section=section;
   }
 
+
+  get year(): number {
+    return this._year;
+  }
+
+  get section(): string {
+    return this._section;
+  }
 
   get idTutor(): number {
     return this._idTutor;
@@ -99,12 +111,12 @@ export class Tutor {
     this._isModerator = value;
   }
 
-  get courses(): Course[] {
-    return this._courses;
+  set year(value: number) {
+    this._year = value;
   }
 
-  set courses(value: Course[]) {
-    this._courses = value;
+  set section(value: string) {
+    this._section = value;
   }
 
   public deserializable(json: any) : Tutor {
@@ -123,7 +135,8 @@ export class Tutor {
       description: this._description,
       isWarned: this._isWarned,
       isModerator: this._isModerator,
-      courses: this._courses
+      year: this._year,
+      section:this._section
     };
   }
 }
