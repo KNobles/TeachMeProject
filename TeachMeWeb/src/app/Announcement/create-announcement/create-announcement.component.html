@@ -1,0 +1,11 @@
+<div>
+  <form #formAnnouncement="ngForm" class="container" name="formAnnouncement" (submit)="createAnnouncement()">
+    Title : <br>
+    <input name="title" [(ngModel)]="announcementTmp.title" type="text" required> <br>
+    Description : <br>
+    <textarea name="description" [(ngModel)]="announcementTmp.description" rows="5" cols="50" required></textarea> <br>
+    Fee :<br>
+    <input name="fee" [(ngModel)]="announcementTmp.fee" type="text" required> <br>
+    <input type="submit" value="Create">
+  </form>
+</div>
