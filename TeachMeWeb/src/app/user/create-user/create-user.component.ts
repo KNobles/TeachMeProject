@@ -3,6 +3,8 @@ import {Student} from "../student";
 import {CreatePersonneComponent} from '../create-personne/create-personne.component';
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 import {Tutor} from '../tutor';
+import {TutorService} from '../tutor.service';
+import {StudentService} from '../student.service';
 
 
 
@@ -17,7 +19,9 @@ export class CreateUserComponent implements OnInit {
   private _tmpStudent : Student;
   private _tmpTutor : Tutor;
 
-  constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
+  constructor(public BroadcastStudentForm: BroadcastStudentFormService,
+             public  tutorService :TutorService,
+             public  studentService :StudentService) { }
 
   ngOnInit() {
   this.InitFormStudent();
@@ -47,10 +51,11 @@ export class CreateUserComponent implements OnInit {
   }
   Validation(){
     if(!this.isHidden){
-      console.log(this._tmpStudent);
+
+      this.studentService.create(this._tmpStudent);
     }
     else{
-      console.log(this._tmpTutor);
+      this.tutorService.create(this._tmpTutor);
     }
 
   }
