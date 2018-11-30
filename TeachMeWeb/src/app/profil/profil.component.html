@@ -1,0 +1,23 @@
+<div>
+  <form #formProfil="ngForm" class="container" name="formProfile">
+    Nom d'utilisateur : <br>
+    <input type="text" name="user" [(ngModel)]="username" [disabled]="modify" required > <br>
+    Mot de passe : <br>
+    <input type="text" name="psw" [(ngModel)]="password"  [disabled]="modify" required > <br>
+    Email : <br>
+    <input type=" text" name="mail" [(ngModel)]="mail"  [disabled]="modify" required> <br>
+    Numéro de téléphone : <br>
+    <input type="text" name="telnum" [(ngModel)]="tel"  [disabled]="modify" required > <br>
+    Evaluation : <br>
+    <input type="text" name="evaluation" [(ngModel)]="evaluation"   [disabled]="modify" required > <br>
+    Description : <br>
+    <input type="text" name="description" [(ngModel)]="description"  [disabled]="modify" required > <br>
+    Avertissement : <br>
+    <input type="text" name="warning" [(ngModel)]="isWarned"   [disabled]="modify" required > <br>
+    Année: <br>
+    <input type="text" name="year" [(ngModel)]="year"   [disabled]="modify" required > <br>
+    Section : <br>
+    <input type="text" name="section" [(ngModel)]="section"  [disabled]="modify" required > <br>
+  </form>
+  <Button (click)="Modification()" class="btn btn-success">Modify</Button>
+</div>

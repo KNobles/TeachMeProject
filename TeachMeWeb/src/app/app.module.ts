@@ -10,6 +10,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {CreateTutorComponent} from './user/create-tutor/create-tutor.component';
 import {CreatePersonneComponent} from './user/create-personne/create-personne.component';
 import {CreateUserComponent} from "./user/create-user/create-user.component";
+import {HttpClientModule} from '@angular/common/http';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -19,12 +21,14 @@ import {CreateUserComponent} from "./user/create-user/create-user.component";
     TestComponentComponent,
     CreateUserComponent,
     CreatePersonneComponent,
-    CreateTutorComponent
+    CreateTutorComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

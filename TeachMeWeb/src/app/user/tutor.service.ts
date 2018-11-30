@@ -16,6 +16,10 @@ export class TutorService {
     return this.http.get<Tutor[]>(TutorService.URL_API_TUTOR);
   }
 
+  public get(id : number): Observable<Tutor> {
+    return this.http.get<Tutor>(TutorService.URL_API_TUTOR+"/" + id);
+  }
+
   public create(tutor: Tutor): Observable<Tutor> {
     return this.http.post<Tutor>(TutorService.URL_API_TUTOR, tutor.serialize());
   }

@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Student} from "../student";
-import {CreatePersonneComponent} from '../create-personne/create-personne.component';
+
 import {BroadcastStudentFormService} from '../../broadcast-student-form.service';
 import {Tutor} from '../tutor';
 import {TutorService} from '../tutor.service';
 import {StudentService} from '../student.service';
+import {Subscription} from 'rxjs';
 
 
 
@@ -13,11 +14,12 @@ import {StudentService} from '../student.service';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit ,OnDestroy{
   private _isHidden: boolean = false;
   public formvalidation : any = {} ;
   private _tmpStudent : Student;
   private _tmpTutor : Tutor;
+  private _subBroad:Subscription;
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService,
              public  tutorService :TutorService,
@@ -34,7 +36,7 @@ export class CreateUserComponent implements OnInit {
     return this._isHidden;
   }
   InitFormStudent() {
-    this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
+    this._subBroad=this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
 
   }
   saveForm(form:any){
@@ -51,7 +53,6 @@ export class CreateUserComponent implements OnInit {
   }
   Validation(){
     if(!this.isHidden){
-
       this.studentService.create(this._tmpStudent);
     }
     else{
@@ -65,5 +66,11 @@ export class CreateUserComponent implements OnInit {
   }
   receiveTutor(value:Tutor){
     this._tmpTutor=value;
+  }
+
+  ngOnDestroy(): void {
+    if( this._subBroad){
+      this._subBroad.unsubscribe();
+    }
   }
 }
