@@ -81,13 +81,10 @@ export class Student {
 
   public serialize() : any {
     return {
-      idEleve: this._idStudent,
       name: this._name,
       mail: this._mail,
       tel: this._tel,
       password: this._password,
-      avertissement: this._avertissement,
-      isModerateurr: this._isModerateur
     };
   }
 

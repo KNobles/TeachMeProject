@@ -16,6 +16,7 @@ export class StudentService {
   }
 
   public create(student: Student) : Observable<Student> {
+    console.log(StudentService.URL_API_STUDENT);
     return this.http.post<Student>(StudentService.URL_API_STUDENT, student.serialize());
   }
 

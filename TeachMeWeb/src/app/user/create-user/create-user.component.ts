@@ -5,6 +5,7 @@ import {BroadcastStudentFormService} from '../../broadcast-student-form.service'
 import {Tutor} from '../tutor';
 import {TutorService} from '../tutor.service';
 import {StudentService} from '../student.service';
+import {BroadcastStudentCreatedService} from "../../broadcast-student-created.service";
 
 
 
@@ -14,6 +15,13 @@ import {StudentService} from '../student.service';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
+  get tmpStudent(): Student {
+    return this._tmpStudent;
+  }
+
+  set tmpStudent(value: Student) {
+    this._tmpStudent = value;
+  }
   private _isHidden: boolean = false;
   public formvalidation : any = {} ;
   private _tmpStudent : Student;
@@ -21,7 +29,7 @@ export class CreateUserComponent implements OnInit {
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService,
              public  tutorService :TutorService,
-             public  studentService :StudentService) { }
+             public  studentService :StudentService, public broadcastStudentCreated : BroadcastStudentCreatedService) { }
 
   ngOnInit() {
   this.InitFormStudent();
@@ -51,16 +59,20 @@ export class CreateUserComponent implements OnInit {
     return true;
   }
 
-  Validation(){
+  Validation(user : any){
     if(!this.isHidden){
-
-      this.studentService.create(this._tmpStudent);//.subscribe(this._tmpStudent => this.BroadcastStudentForm.broadcastStudent(this._tmpStudent));
+      this.studentService.create(this._tmpStudent).subscribe();
       console.log(this._tmpStudent);
     }
     else{
-      this.tutorService.create(this._tmpTutor);
+      this.tutorService.create(this._tmpTutor).subscribe();
+      console.log(this._tmpTutor);
     }
 
+  }
+
+  broadcastStudent(student : Student){
+    this.broadcastStudentCreated.broadcastStudent(student);
   }
   receiveStudent(value:Student) {
     this._tmpStudent = value;
