@@ -41,6 +41,7 @@ export class CreateUserComponent implements OnInit {
     if (!form)return;
     setTimeout(() => this.formvalidation[form.name] = form.valid, 0);
   }
+
   formValid(){
     for(let name in this.formvalidation){
       if(!this.formvalidation[name]){
@@ -49,10 +50,12 @@ export class CreateUserComponent implements OnInit {
     }
     return true;
   }
+
   Validation(){
     if(!this.isHidden){
 
-      this.studentService.create(this._tmpStudent);
+      this.studentService.create(this._tmpStudent);//.subscribe(this._tmpStudent => this.BroadcastStudentForm.broadcastStudent(this._tmpStudent));
+      console.log(this._tmpStudent);
     }
     else{
       this.tutorService.create(this._tmpTutor);

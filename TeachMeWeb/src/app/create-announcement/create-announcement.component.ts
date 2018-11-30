@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Announcement} from "./Announcement";
-import {AnnouncementService} from "../announcement.service";
+import {AnnouncementService} from "../announcement/announcement.service";
+import {Announcement} from 'src/app/announcement/announcement';
 
 @Component({
   selector: 'app-create-announcement',
@@ -16,10 +16,6 @@ export class CreateAnnouncementComponent implements OnInit {
   constructor(public announcementService: AnnouncementService   ) { }
 
   ngOnInit() {
-  }
-
-  sendAnnouncement(announcement: Announcement) {
-    this.announcementService.create(announcement);
   }
 
 
@@ -41,11 +37,4 @@ export class CreateAnnouncementComponent implements OnInit {
   get announcementCreated():EventEmitter<Announcement>{
     return this._announcementCreated;
   }
-
-
-
-
-
-
-
 }

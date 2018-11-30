@@ -237,6 +237,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\teachme-angular\favicon.ico" />
     <Content Include="Scripts\teachme-angular\index.html" />
     <Content Include="Scripts\teachme-angular\main.js" />
@@ -244,6 +245,15 @@
     <Content Include="Scripts\teachme-angular\runtime.js" />
     <Content Include="Scripts\teachme-angular\styles.js" />
     <Content Include="Scripts\teachme-angular\vendor.js" />
+=======
+    <Content Include="Script\Angular\favicon.ico" />
+    <Content Include="Script\Angular\index.html" />
+    <Content Include="Script\Angular\main.js" />
+    <Content Include="Script\Angular\polyfills.js" />
+    <Content Include="Script\Angular\runtime.js" />
+    <Content Include="Script\Angular\styles.js" />
+    <Content Include="Script\Angular\vendor.js" />
+>>>>>>> fcff10bf8c0442a51da84be4bed9e1bf5ebcf225
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -296,12 +306,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\web.config" />
+<<<<<<< HEAD
     <Content Include="Scripts\teachme-angular\main.js.map" />
     <Content Include="Scripts\teachme-angular\polyfills.js.map" />
     <Content Include="Scripts\teachme-angular\runtime.js.map" />
     <Content Include="Scripts\teachme-angular\styles.js.map" />
     <Content Include="Scripts\teachme-angular\vendor.js.map" />
     <Content Include="Views\Home\Index.cshtml" />
+=======
+    <Content Include="Script\Angular\main.js.map" />
+    <Content Include="Script\Angular\polyfills.js.map" />
+    <Content Include="Script\Angular\runtime.js.map" />
+    <Content Include="Script\Angular\styles.js.map" />
+    <Content Include="Script\Angular\vendor.js.map" />
+>>>>>>> fcff10bf8c0442a51da84be4bed9e1bf5ebcf225
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
