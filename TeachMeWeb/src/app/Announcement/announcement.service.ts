@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Announcement} from "./create-announcement/Announcement";
+import {Announcement} from "./Announcement";
 import {Tutor} from "../user/tutor";
 
 @Injectable({

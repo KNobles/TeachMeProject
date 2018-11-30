@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class StudentService {
-  public static readonly URL_API_STUDENT = '/api/user';
+  public static readonly URL_API_STUDENT = '/api/eleve';
 
   constructor(public http:HttpClient) { }
 

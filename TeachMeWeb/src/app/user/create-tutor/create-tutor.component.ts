@@ -71,7 +71,7 @@ export class CreateTutorComponent implements OnInit {
   }
   tmpTutorCreate():Tutor{
     if(this._formTutor.form.valid){
-      this.tmpTutor.username=this.tmpStudent.username;
+      this.tmpTutor.username=this.tmpStudent.name;
       this.tmpTutor.password=this.tmpStudent.password;
       this.tmpTutor.mail=this.tmpStudent.mail;
       this.tmpTutor.tel=this.tmpStudent.tel;

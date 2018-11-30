@@ -237,6 +237,13 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Script\Angular\favicon.ico" />
+    <Content Include="Script\Angular\index.html" />
+    <Content Include="Script\Angular\main.js" />
+    <Content Include="Script\Angular\polyfills.js" />
+    <Content Include="Script\Angular\runtime.js" />
+    <Content Include="Script\Angular\styles.js" />
+    <Content Include="Script\Angular\vendor.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -288,6 +295,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\web.config" />
+    <Content Include="Script\Angular\main.js.map" />
+    <Content Include="Script\Angular\polyfills.js.map" />
+    <Content Include="Script\Angular\runtime.js.map" />
+    <Content Include="Script\Angular\styles.js.map" />
+    <Content Include="Script\Angular\vendor.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,5 +1,5 @@
-import {Course} from "../../course/course";
-import {Tutor} from "../../user/tutor";
+import {Course} from "../course/course";
+import {Tutor} from "../user/tutor";
 
 export class Announcement{
 
