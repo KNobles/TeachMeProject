@@ -18,6 +18,10 @@ namespace TeachMeAPI.Controllers
             return TutorCourseDAO.Query();
         }
         [Authorize(Roles ="Tutor")]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 96d82f2e25698a1f5fa1bf1624e3a5e246113cea
         public TutorCourse Post(TutorCourse tutorCourse)
         {
             return TutorCourseDAO.Insert(tutorCourse);

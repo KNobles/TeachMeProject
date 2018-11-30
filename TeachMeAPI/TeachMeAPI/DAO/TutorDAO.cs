@@ -25,7 +25,7 @@ namespace TeachMeAPI.DAO
         public static readonly string GETPASSWORD = QUERY + " WHERE " + COLUMN_PASSWORD + " = @password";
         public static readonly string INSERT = "INSERT INTO " + TABLE_NAME + "(" + COLUMN_NAME + ", " + COLUMN_PASSWORD + ", " + COLUMN_MAIL + ", "
             + COLUMN_PHONE + ", " + COLUMN_IS_WARNED + ", " + COLUMN_IS_MODERATOR + ", " + COLUMN_DESCRIPTION + ", " + COLUMN_EVALUATION
-            + ") OUTPUT INSERTED.idTutor VALUES(@name, @password, @mail, @tel, 0, 0, @description, 100)";
+            + ") OUTPUT INSERTED.idTutor VALUES(@username, @password, @mail, @tel, 0, 0, @description, 100)";
         public static readonly string UPDATE = "UPDATE " + TABLE_NAME + " SET " + COLUMN_NAME + " = @name, " + COLUMN_PHONE + " = @tel, " +
             COLUMN_PASSWORD + " = @password, " + COLUMN_IS_WARNED + " = @avertissement, " + COLUMN_IS_MODERATOR + " = @isModerator, "
             + COLUMN_MAIL + " = @mail, " + COLUMN_DESCRIPTION + " = @desc, " + COLUMN_EVALUATION + " = @evaluation WHERE " + COLUMN_ID + " = @idTutor";
@@ -59,7 +59,7 @@ namespace TeachMeAPI.DAO
                 connection.Open();
                 SqlCommand command = new SqlCommand(INSERT, connection);
 
-                command.Parameters.AddWithValue("@name", tutor.UserName);
+                command.Parameters.AddWithValue("@username", tutor.UserName);
                 command.Parameters.AddWithValue("@mail", tutor.Mail);
                 command.Parameters.AddWithValue("@tel", tutor.Phone);
                 command.Parameters.AddWithValue("@description", tutor.Description);

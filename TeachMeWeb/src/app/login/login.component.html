@@ -1,8 +1,21 @@
-<H1>Teach Me</H1>
-<div>
-  <table>
-    <tr><td>Login :</td><td><input type="text" [(ngModel)]="login"></td></tr>
-    <tr><td>Password : </td><td><input type="text" [(ngModel)]="password"></td></tr>
-    <tr><td><button (click)="Connection()"  >Login</button></td><button routerLink="/Creation">Créer un compte</button></tr>
-  </table>
+<div class="container-fluid backgr">
+  <div class="row">
+    <div class="col-md-4 col-sm-4 col-xs-12"></div>
+      <form class="form-container">
+        <h1>Teach Me Login</h1>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" name="log" [(ngModel)]="login" placeholder="username">
+        </div>
+          <label for="password">Password</label>
+        <div class="form-group">
+          <input type="password" class="form-control" name="passwd"[(ngModel)]="password" placeholder="password">
+        </div>
+          <button class="btn btn-success btn-block" (click)="Connection()">Sign in</button>
+          <button class="btn btn-default btn-block" routerLink="/Creation">Sign up</button>
+      </form>
+
+  </div>
+  <div class="col-md-4 col-sm-4 col-xs-12"></div>
 </div>
+

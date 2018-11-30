@@ -2,20 +2,20 @@ import {Output} from '@angular/core';
 
 export class Student {
   private _idStudent: number;
-  private _username:string;
+  private _name:string;
   private _mail:string;
   private _tel:string;
   private _password:string;
-  private _isWarned: boolean;
-  private _isModerator: boolean
+  private _avertissement: boolean;
+  private _isModerateur: boolean;
 
   constructor(name: string="user", mail: string="user@hotmail.com", password: string="password", tel: string="0123456789", isWarned:boolean=false, isModerator:boolean=false) {
-    this._username = name;
+    this._name = name;
     this._mail = mail;
     this._password = password;
     this._tel = tel;
-    this._isWarned = isWarned;
-    this._isModerator = isModerator;
+    this._avertissement = isWarned;
+    this._isModerateur = isModerator;
   }
 
   get idStudent(): number {
@@ -26,12 +26,12 @@ export class Student {
     this._idStudent = value;
   }
   @Output()
-  get username(): string {
-    return this._username;
+  get name(): string {
+    return this._name;
   }
 
-  set username(value: string) {
-    this._username = value;
+  set name(value: string) {
+    this._name = value;
   }
 
   get mail(): string {
@@ -58,20 +58,20 @@ export class Student {
     this._tel = value;
   }
 
-  get isWarned(): boolean {
-    return this._isWarned;
+  get avertissement(): boolean {
+    return this._avertissement;
   }
 
-  set isWarned(value: boolean) {
-    this._isWarned = value;
+  set avertissement(value: boolean) {
+    this._avertissement = value;
   }
 
-  get isModerator(): boolean {
-    return this._isModerator;
+  get isModerateur(): boolean {
+    return this._isModerateur;
   }
 
-  set isModerator(value: boolean) {
-    this._isModerator = value;
+  set isModerateur(value: boolean) {
+    this._isModerateur = value;
   }
 
   public deserializable(json: any) : Student {
@@ -81,13 +81,10 @@ export class Student {
 
   public serialize() : any {
     return {
-      idStudent: this._idStudent,
-      username: this._username,
+      name: this._name,
       mail: this._mail,
       tel: this._tel,
       password: this._password,
-      isWarned: this._isWarned,
-      isModerator: this._isModerator
     };
   }
 

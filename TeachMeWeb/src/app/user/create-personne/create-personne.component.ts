@@ -68,10 +68,11 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
   }
   tmpStudentCreate():Student{
     if(this._formStudent.form.valid){
-      this.tmpStudent.username=this._userName  ;
+      this.tmpStudent.name=this._userName  ;
       this.tmpStudent.password=this._password  ;
       this.tmpStudent.mail=this._mail;
       this.tmpStudent.tel=this._telNumber;
+
       return this.tmpStudent;
     }
     else{

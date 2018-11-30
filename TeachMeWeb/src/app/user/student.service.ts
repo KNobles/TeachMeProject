@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class StudentService {
-  public static readonly URL_API_STUDENT = '/api/user';
+  public static readonly URL_API_STUDENT = '/api/eleve';
 
   constructor(public http:HttpClient) { }
 
@@ -16,6 +16,7 @@ export class StudentService {
   }
 
   public create(student: Student) : Observable<Student> {
+    console.log(StudentService.URL_API_STUDENT);
     return this.http.post<Student>(StudentService.URL_API_STUDENT, student.serialize());
   }
 

@@ -3,7 +3,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 namespace TeachMeAPI
 {
-    public class ChatHub : Hub
+    public class AnnouncementHub : Hub
     {
         public void Send(string name, string message)
         {

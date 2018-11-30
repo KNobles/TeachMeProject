@@ -126,17 +126,17 @@ export class Tutor {
 
   public serialize() : any {
     return {
-      idTutor: this._idTutor,
+     // idTutor: this._idTutor,
       username: this._username,
       password: this._password,
       mail: this._mail,
-      tel: this._tel,
-      evaluation: this._evaluation,
-      description: this._description,
-      isWarned: this._isWarned,
+      phone: this._tel,
+    //  evaluation: this._evaluation,
+      description: this._description
+   /*   isWarned: this._isWarned,
       isModerator: this._isModerator,
       year: this._year,
-      section:this._section
+      section:this._section*/
     };
   }
 }
