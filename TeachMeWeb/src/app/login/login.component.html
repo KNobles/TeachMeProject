@@ -5,11 +5,11 @@
         <h1>Teach Me Login</h1>
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" [(ngModel)]="login" placeholder="username">
+          <input type="text" class="form-control" name="log" [(ngModel)]="login" placeholder="username">
         </div>
           <label for="password">Password</label>
         <div class="form-group">
-          <input type="password" class="form-control" [(ngModel)]="password" placeholder="password">
+          <input type="password" class="form-control" name="passwd"[(ngModel)]="password" placeholder="password">
         </div>
           <button class="btn btn-success btn-block" (click)="Connection()">Sign in</button>
           <button class="btn btn-default btn-block" routerLink="/Creation">Sign up</button>

@@ -10,13 +10,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {CreateTutorComponent} from './user/create-tutor/create-tutor.component';
 import {CreatePersonneComponent} from './user/create-personne/create-personne.component';
 import {CreateUserComponent} from "./user/create-user/create-user.component";
-<<<<<<< HEAD
 import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
-=======
-import {HttpClientModule} from "@angular/common/http";
 import { CreateAnnouncementComponent } from './create-announcement/create-announcement.component';
->>>>>>> fcff10bf8c0442a51da84be4bed9e1bf5ebcf225
+import {ListAnnouncementComponent} from "./list-announcement/list-announcement.component";
 
 
 @NgModule({
@@ -27,11 +24,9 @@ import { CreateAnnouncementComponent } from './create-announcement/create-announ
     CreateUserComponent,
     CreatePersonneComponent,
     CreateTutorComponent,
-<<<<<<< HEAD
-    HomeComponent
-=======
-    CreateAnnouncementComponent
->>>>>>> fcff10bf8c0442a51da84be4bed9e1bf5ebcf225
+    HomeComponent,
+    CreateAnnouncementComponent,
+    ListAnnouncementComponent
   ],
   imports: [
     BrowserModule,
