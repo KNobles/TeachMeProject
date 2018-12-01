@@ -12,28 +12,24 @@ namespace TeachMeAPI.Controllers
 {
     public class TutorCourseController : ApiController
     {
-        [Authorize]
+       // [Authorize]
         public List<TutorCourse> GetAll()
         {
             return TutorCourseDAO.Query();
         }
-        [Authorize(Roles ="Tutor")]
-<<<<<<< HEAD
-=======
-
->>>>>>> 96d82f2e25698a1f5fa1bf1624e3a5e246113cea
+        //[Authorize(Roles ="Tutor")]
         public TutorCourse Post(TutorCourse tutorCourse)
         {
             return TutorCourseDAO.Insert(tutorCourse);
         }
 
-        [Authorize]
+        //[Authorize]
         public TutorCourse Get(int id)
         {
             return TutorCourseDAO.Get(id);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IHttpActionResult Delete(int id)
         {
             if (TutorCourseDAO.Delete(id))
@@ -43,7 +39,7 @@ namespace TeachMeAPI.Controllers
             return BadRequest();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IHttpActionResult Put(TutorCourse tutorCourse)
         {
             if (TutorCourseDAO.Update(tutorCourse))

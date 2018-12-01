@@ -10,15 +10,12 @@ import {AppRoutingModule} from './app-routing.module';
 import {CreateTutorComponent} from './user/create-tutor/create-tutor.component';
 import {CreatePersonneComponent} from './user/create-personne/create-personne.component';
 import {CreateUserComponent} from "./user/create-user/create-user.component";
-<<<<<<< HEAD
-import {HttpClientModule} from '@angular/common/http';
-import { ProfilComponent } from './profil/profil.component';
-=======
-import { HomeComponent } from './home/home.component';
-import {HttpClientModule} from "@angular/common/http";
-import { CreateAnnouncementComponent } from './create-announcement/create-announcement.component';
 import {ListAnnouncementComponent} from "./list-announcement/list-announcement.component";
->>>>>>> 96d82f2e25698a1f5fa1bf1624e3a5e246113cea
+import {CreateAnnouncementComponent} from "./create-announcement/create-announcement.component";
+import {HomeComponent} from "./home/home.component";
+import {ProfilComponent} from "./profil/profil.component";
+import {HttpClientModule} from "@angular/common/http";
+
 
 
 @NgModule({
@@ -29,13 +26,10 @@ import {ListAnnouncementComponent} from "./list-announcement/list-announcement.c
     CreateUserComponent,
     CreatePersonneComponent,
     CreateTutorComponent,
-<<<<<<< HEAD
-    ProfilComponent
-=======
+    ProfilComponent,
     HomeComponent,
     CreateAnnouncementComponent,
     ListAnnouncementComponent
->>>>>>> 96d82f2e25698a1f5fa1bf1624e3a5e246113cea
   ],
   imports: [
     BrowserModule,

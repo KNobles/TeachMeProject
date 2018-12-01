@@ -173,6 +173,10 @@ var Announcement = /** @class */ (function () {
             fee: this._fee
         };
     };
+    Announcement.prototype.deserializable = function (json) {
+        Object.assign(this, json);
+        return this;
+    };
     return Announcement;
 }());
 
@@ -194,14 +198,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user/create-user/create-user.component */ "./src/app/user/create-user/create-user.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
+/* harmony import */ var _profil_profil_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profil/profil.component */ "./src/app/profil/profil.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -216,10 +222,13 @@ var routes = [
         path: "Creation", component: _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_3__["CreateUserComponent"]
     },
     {
-        path: "Home", component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"]
+        path: "Profil", component: _profil_profil_component__WEBPACK_IMPORTED_MODULE_4__["ProfilComponent"]
     },
     {
-        path: "announcement", component: _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_5__["CreateAnnouncementComponent"]
+        path: "Home", component: _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
+    },
+    {
+        path: "announcement", component: _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__["CreateAnnouncementComponent"]
     },
     {
         path: "", redirectTo: "/Login", pathMatch: "full"
@@ -319,16 +328,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_create_tutor_create_tutor_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./user/create-tutor/create-tutor.component */ "./src/app/user/create-tutor/create-tutor.component.ts");
 /* harmony import */ var _user_create_personne_create_personne_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user/create-personne/create-personne.component */ "./src/app/user/create-personne/create-personne.component.ts");
 /* harmony import */ var _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./user/create-user/create-user.component */ "./src/app/user/create-user/create-user.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
-/* harmony import */ var _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./list-announcement/list-announcement.component */ "./src/app/list-announcement/list-announcement.component.ts");
+/* harmony import */ var _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./list-announcement/list-announcement.component */ "./src/app/list-announcement/list-announcement.component.ts");
+/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _profil_profil_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./profil/profil.component */ "./src/app/profil/profil.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -355,21 +366,114 @@ var AppModule = /** @class */ (function () {
                 _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_9__["CreateUserComponent"],
                 _user_create_personne_create_personne_component__WEBPACK_IMPORTED_MODULE_8__["CreatePersonneComponent"],
                 _user_create_tutor_create_tutor_component__WEBPACK_IMPORTED_MODULE_7__["CreateTutorComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
-                _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_12__["CreateAnnouncementComponent"],
-                _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_13__["ListAnnouncementComponent"]
+                _profil_profil_component__WEBPACK_IMPORTED_MODULE_13__["ProfilComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"],
+                _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_11__["CreateAnnouncementComponent"],
+                _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_10__["ListAnnouncementComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/broadcast-create-announcement.service.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/broadcast-create-announcement.service.ts ***!
+  \**********************************************************/
+/*! exports provided: BroadcastCreateAnnouncementService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BroadcastCreateAnnouncementService", function() { return BroadcastCreateAnnouncementService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var BroadcastCreateAnnouncementService = /** @class */ (function () {
+    function BroadcastCreateAnnouncementService() {
+        this.subjectAnnouncementCreated = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.AnnouncementCreated = this.subjectAnnouncementCreated.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (announcement) { return !!announcement; }));
+    }
+    BroadcastCreateAnnouncementService.prototype.broadcastAnnouncement = function (announcement) {
+        this.subjectAnnouncementCreated.next(announcement);
+    };
+    BroadcastCreateAnnouncementService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], BroadcastCreateAnnouncementService);
+    return BroadcastCreateAnnouncementService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/broadcast-student-created.service.ts":
+/*!******************************************************!*\
+  !*** ./src/app/broadcast-student-created.service.ts ***!
+  \******************************************************/
+/*! exports provided: BroadcastStudentCreatedService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BroadcastStudentCreatedService", function() { return BroadcastStudentCreatedService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var BroadcastStudentCreatedService = /** @class */ (function () {
+    function BroadcastStudentCreatedService() {
+        this.subjectStudentCreated = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.todoCreated$ = this.subjectStudentCreated.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (student) { return !!student; }));
+    }
+    BroadcastStudentCreatedService.prototype.broadcastStudent = function (student) {
+        this.subjectStudentCreated.next(student);
+    };
+    BroadcastStudentCreatedService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], BroadcastStudentCreatedService);
+    return BroadcastStudentCreatedService;
 }());
 
 
@@ -535,7 +639,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\">Teach Me</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n    <div class=\"navbar-nav\">\n      <a class=\"nav-item nav-link active\" routerLink=\"/Home\" routerLinkActive=\"active\">Home <span class=\"sr-only\">(current)</span></a>\n      <a class=\"nav-item nav-link\" routerLink=\"/Login\">Profile </a>\n    </div>\n  </div>\n</nav>\n<div id=\"container\">\n  <div class=\"container-fluid\">\n\n  </div>\n\n</div>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen\">\r\n  <a class=\"navbar-brand text-white mb-0 h1\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <div class=\"navbar-nav\">\r\n      <a class=\"nav-item nav-link active\" routerLink=\"/Home\" routerLinkActive=\"active\">Home <span class=\"sr-only\">(current)</span></a>\r\n      <a class=\"nav-item nav-link\" routerLink=\"/Login\">Profile </a>\r\n    </div>\r\n  </div>\r\n</nav>\r\n<div id=\"container\">\r\n    <app-list-announcement></app-list-announcement>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -598,7 +702,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  list-announcement works!\n</p>\n"
+module.exports = "<div class=\"align-items-center justify-content-center\" *ngFor=\"let announcement of announcements\" style=\"padding: 30px\">\r\n  <div class=\"card text-center\" style=\"width: 40rem;\">\r\n    <div class=\"card-header\">\r\n      {{announcement.idTutor}}\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n      <p class=\"card-text\">{{announcement.description}}</p>\r\n    </div>\r\n    <div class=\"card-footer text-muted\">\r\n      {{announcement.fee}} €\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -613,6 +717,9 @@ module.exports = "<p>\n  list-announcement works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListAnnouncementComponent", function() { return ListAnnouncementComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../announcement/announcement.service */ "./src/app/announcement/announcement.service.ts");
+/* harmony import */ var _broadcast_create_announcement_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../broadcast-create-announcement.service */ "./src/app/broadcast-create-announcement.service.ts");
+/* harmony import */ var _announcement_announcement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../announcement/announcement */ "./src/app/announcement/announcement.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -623,18 +730,69 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var ListAnnouncementComponent = /** @class */ (function () {
-    function ListAnnouncementComponent() {
+    function ListAnnouncementComponent(announcementService, broadcastCreateAnnouncement) {
+        this.announcementService = announcementService;
+        this.broadcastCreateAnnouncement = broadcastCreateAnnouncement;
+        this._announcements = [];
     }
-    ListAnnouncementComponent.prototype.ngOnInit = function () {
+    ListAnnouncementComponent.prototype.receiveAnnouncement = function (announcement) {
+        this._announcements.push(announcement);
     };
+    ListAnnouncementComponent.prototype.listAnnouncementCreated = function () {
+        var _this = this;
+        this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated.subscribe(function (announcementFromServer) { return _this._announcements.push(announcementFromServer); });
+    };
+    ListAnnouncementComponent.prototype.ngOnInit = function () {
+        this.listAnnouncementCreated();
+        this.getAnnouncements();
+    };
+    ListAnnouncementComponent.prototype.ngOnDestroy = function () {
+        if (this.subDelete) {
+            this.subDelete.unsubscribe();
+        }
+        if (this.subUpdate) {
+            this.subUpdate.unsubscribe();
+        }
+        if (this.subQuery) {
+            this.subQuery.unsubscribe();
+        }
+        if (this.subBroadcast) {
+            this.subBroadcast.unsubscribe();
+        }
+    };
+    ListAnnouncementComponent.prototype.deleteAnnouncement = function (announcement) {
+        this.subDelete = this.announcementService.delete(announcement).subscribe();
+    };
+    ListAnnouncementComponent.prototype.updateAnnouncement = function (announcement) {
+        //this.subUpdate = this.announcementService.update(announcement).subscribe();
+    };
+    ListAnnouncementComponent.prototype.getAnnouncements = function () {
+        var _this = this;
+        this.subQuery = this.announcementService
+            .query()
+            .subscribe(function (announcements) { return _this._announcements = announcements.map(function (a) { return new _announcement_announcement__WEBPACK_IMPORTED_MODULE_3__["Announcement"]().deserializable(a); }); });
+    };
+    Object.defineProperty(ListAnnouncementComponent.prototype, "announcements", {
+        get: function () {
+            return this._announcements;
+        },
+        set: function (value) {
+            this._announcements = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ListAnnouncementComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-list-announcement',
             template: __webpack_require__(/*! ./list-announcement.component.html */ "./src/app/list-announcement/list-announcement.component.html"),
             styles: [__webpack_require__(/*! ./list-announcement.component.css */ "./src/app/list-announcement/list-announcement.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"], _broadcast_create_announcement_service__WEBPACK_IMPORTED_MODULE_2__["BroadcastCreateAnnouncementService"]])
     ], ListAnnouncementComponent);
     return ListAnnouncementComponent;
 }());
@@ -729,6 +887,200 @@ var LoginComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/profil/profil.component.css":
+/*!*********************************************!*\
+  !*** ./src/app/profil/profil.component.css ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/profil/profil.component.html":
+/*!**********************************************!*\
+  !*** ./src/app/profil/profil.component.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"user\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"psw\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"telnum\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   [disabled]=\"modify\" required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   [disabled]=\"modify\" required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/profil/profil.component.ts":
+/*!********************************************!*\
+  !*** ./src/app/profil/profil.component.ts ***!
+  \********************************************/
+/*! exports provided: ProfilComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfilComponent", function() { return ProfilComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _user_tutor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../user/tutor */ "./src/app/user/tutor.ts");
+/* harmony import */ var _user_tutor_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../user/tutor.service */ "./src/app/user/tutor.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ProfilComponent = /** @class */ (function () {
+    function ProfilComponent(tutor) {
+        this.tutor = tutor;
+        this._tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_1__["Tutor"];
+        this._modify = true;
+    }
+    ProfilComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(ProfilComponent.prototype, "tmpTutor", {
+        get: function () {
+            return this._tmpTutor;
+        },
+        set: function (value) {
+            this._tmpTutor = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProfilComponent.prototype.getTutor = function (id) {
+        var _this = this;
+        this._subGet = this.tutor.get(id).subscribe(function (tutor) { return _this.tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_1__["Tutor"]().deserializable(tutor); });
+    };
+    Object.defineProperty(ProfilComponent.prototype, "username", {
+        get: function () {
+            return this.tmpTutor.username;
+        },
+        set: function (value) {
+            this._username = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "password", {
+        get: function () {
+            return this.tmpTutor.password;
+        },
+        set: function (value) {
+            this._password = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "mail", {
+        get: function () {
+            return this.tmpTutor.mail;
+        },
+        set: function (value) {
+            this._mail = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "tel", {
+        get: function () {
+            return this.tmpTutor.tel;
+        },
+        set: function (value) {
+            this._tel = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "evaluation", {
+        get: function () {
+            return this.tmpTutor.evaluation;
+        },
+        set: function (value) {
+            this._evaluation = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "description", {
+        get: function () {
+            return this.tmpTutor.description;
+        },
+        set: function (value) {
+            this._description = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "isWarned", {
+        get: function () {
+            return this.tmpTutor.isWarned;
+        },
+        set: function (value) {
+            this._isWarned = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "year", {
+        get: function () {
+            return this.tmpTutor.year;
+        },
+        set: function (value) {
+            this._year = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ProfilComponent.prototype, "section", {
+        get: function () {
+            return this.tmpTutor.section;
+        },
+        set: function (value) {
+            this._section = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProfilComponent.prototype.ngOnDestroy = function () {
+        if (this._subGet) {
+            this._subGet.unsubscribe();
+        }
+    };
+    ProfilComponent.prototype.Modification = function () {
+        if (this._modify) {
+            this._modify = false;
+        }
+        else {
+            this._modify = true;
+        }
+    };
+    Object.defineProperty(ProfilComponent.prototype, "modify", {
+        get: function () {
+            return this._modify;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProfilComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-profil-component',
+            template: __webpack_require__(/*! ./profil.component.html */ "./src/app/profil/profil.component.html"),
+            styles: [__webpack_require__(/*! ./profil.component.css */ "./src/app/profil/profil.component.css")]
+        }),
+        __metadata("design:paramtypes", [_user_tutor_service__WEBPACK_IMPORTED_MODULE_2__["TutorService"]])
+    ], ProfilComponent);
+    return ProfilComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/test-component/test-component.component.css":
 /*!*************************************************************!*\
   !*** ./src/app/test-component/test-component.component.css ***!
@@ -810,7 +1162,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <h1>Encodez vos données</h1>\r\n    <form #formStudent=\"ngForm\" class=\"container\" name=\"formStudent\" (change)=\"Send($event)\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"user\" [(ngModel)]=\"userName\"  required> <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"psw\" [(ngModel)]=\"password\"  required> <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"telnum\" [(ngModel)]=\"telNumber\"  required > <br>\r\n  </form>\r\n</div>\r\n"
+module.exports = "<div>\r\n  <h1>Encodez vos données</h1>\r\n    <form #formStudent=\"ngForm\" class=\"container\" name=\"formStudent\" (change)=\"Send($event)\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"user\" [(ngModel)]=\"userName\"  required [minlength]=\"6\" [maxlength]=\"15\"> <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"psw\" [(ngModel)]=\"password\"  required pattern=\"^[A-Z][a-z\\s+0-9]{8,}$\"> <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"telnum\" [(ngModel)]=\"telNumber\"  required > <br>\r\n  </form>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1162,7 +1514,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form>\r\n  <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent()\" checked>Créer un compte Eléve\r\n  <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent()\"  >Créer un compte Tuteur\r\n</form>\r\n<app-create-personne (studentCreated)=\"receiveStudent($event)\" ></app-create-personne>\r\n<div *ngIf=\"isHidden\">\r\n  <app-create-tutor  [tmpStudent]=\"_tmpStudent\" (tutorCreated)=\"receiveTutor($event)\"></app-create-tutor>\r\n</div>\r\n<br>\r\n<button routerLink=\"/Login\">Retour</button> <Button (click)=\"Validation()\" [disabled]=\"!formValid()\" class=\"btn btn-success\">Envoie</Button>\r\n\r\n\r\n"
+module.exports = "<form>\r\n  <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent()\" checked>Créer un compte Eléve\r\n  <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent()\"  >Créer un compte Tuteur\r\n</form>\r\n<app-create-personne (studentCreated)=\"receiveStudent($event)\" ></app-create-personne>\r\n<div *ngIf=\"isHidden\">\r\n  <app-create-tutor  [tmpStudent]=\"tmpStudent\" (tutorCreated)=\"receiveTutor($event)\"></app-create-tutor>\r\n</div>\r\n<br>\r\n<button routerLink=\"/Login\">Retour</button> <Button (click)=\"Validation()\" [disabled]=\"!formValid()\" class=\"btn btn-success\">Envoie</Button>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1180,6 +1532,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _broadcast_student_form_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../broadcast-student-form.service */ "./src/app/broadcast-student-form.service.ts");
 /* harmony import */ var _tutor_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tutor.service */ "./src/app/user/tutor.service.ts");
 /* harmony import */ var _student_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../student.service */ "./src/app/user/student.service.ts");
+/* harmony import */ var _broadcast_student_created_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../broadcast-student-created.service */ "./src/app/broadcast-student-created.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1193,14 +1546,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CreateUserComponent = /** @class */ (function () {
-    function CreateUserComponent(BroadcastStudentForm, tutorService, studentService) {
+    function CreateUserComponent(BroadcastStudentForm, tutorService, studentService, broadcastStudentCreated) {
         this.BroadcastStudentForm = BroadcastStudentForm;
         this.tutorService = tutorService;
         this.studentService = studentService;
+        this.broadcastStudentCreated = broadcastStudentCreated;
         this._isHidden = false;
         this.formvalidation = {};
     }
+    Object.defineProperty(CreateUserComponent.prototype, "tmpStudent", {
+        get: function () {
+            return this._tmpStudent;
+        },
+        set: function (value) {
+            this._tmpStudent = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     CreateUserComponent.prototype.ngOnInit = function () {
         this.InitFormStudent();
     };
@@ -1216,7 +1581,7 @@ var CreateUserComponent = /** @class */ (function () {
     });
     CreateUserComponent.prototype.InitFormStudent = function () {
         var _this = this;
-        this.BroadcastStudentForm.formCreated$.subscribe(function (form) { return _this.saveForm(form); });
+        this._subBroad = this.BroadcastStudentForm.formCreated$.subscribe(function (form) { return _this.saveForm(form); });
     };
     CreateUserComponent.prototype.saveForm = function (form) {
         var _this = this;
@@ -1234,18 +1599,27 @@ var CreateUserComponent = /** @class */ (function () {
     };
     CreateUserComponent.prototype.Validation = function () {
         if (!this.isHidden) {
-            this.studentService.create(this._tmpStudent); //.subscribe(this._tmpStudent => this.BroadcastStudentForm.broadcastStudent(this._tmpStudent));
+            this.studentService.create(this._tmpStudent).subscribe();
             console.log(this._tmpStudent);
         }
         else {
-            this.tutorService.create(this._tmpTutor);
+            this.tutorService.create(this._tmpTutor).subscribe();
+            console.log(this._tmpTutor);
         }
+    };
+    CreateUserComponent.prototype.broadcastStudent = function (student) {
+        this.broadcastStudentCreated.broadcastStudent(student);
     };
     CreateUserComponent.prototype.receiveStudent = function (value) {
         this._tmpStudent = value;
     };
     CreateUserComponent.prototype.receiveTutor = function (value) {
         this._tmpTutor = value;
+    };
+    CreateUserComponent.prototype.ngOnDestroy = function () {
+        if (this._subBroad) {
+            this._subBroad.unsubscribe();
+        }
     };
     CreateUserComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1255,7 +1629,7 @@ var CreateUserComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_broadcast_student_form_service__WEBPACK_IMPORTED_MODULE_1__["BroadcastStudentFormService"],
             _tutor_service__WEBPACK_IMPORTED_MODULE_2__["TutorService"],
-            _student_service__WEBPACK_IMPORTED_MODULE_3__["StudentService"]])
+            _student_service__WEBPACK_IMPORTED_MODULE_3__["StudentService"], _broadcast_student_created_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastStudentCreatedService"]])
     ], CreateUserComponent);
     return CreateUserComponent;
 }());
@@ -1296,6 +1670,7 @@ var StudentService = /** @class */ (function () {
         return this.http.get(StudentService_1.URL_API_STUDENT);
     };
     StudentService.prototype.create = function (student) {
+        console.log(StudentService_1.URL_API_STUDENT);
         return this.http.post(StudentService_1.URL_API_STUDENT, student.serialize());
     };
     StudentService.prototype.delete = function (student) {
@@ -1431,13 +1806,10 @@ var Student = /** @class */ (function () {
     };
     Student.prototype.serialize = function () {
         return {
-            idEleve: this._idStudent,
             name: this._name,
             mail: this._mail,
             tel: this._tel,
             password: this._password,
-            avertissement: this._avertissement,
-            isModerateurr: this._isModerateur
         };
     };
     __decorate([
@@ -1482,6 +1854,9 @@ var TutorService = /** @class */ (function () {
     TutorService_1 = TutorService;
     TutorService.prototype.query = function () {
         return this.http.get(TutorService_1.URL_API_TUTOR);
+    };
+    TutorService.prototype.get = function (id) {
+        return this.http.get(TutorService_1.URL_API_TUTOR + "/" + id);
     };
     TutorService.prototype.create = function (tutor) {
         return this.http.post(TutorService_1.URL_API_TUTOR, tutor.serialize());
@@ -1656,17 +2031,17 @@ var Tutor = /** @class */ (function () {
     };
     Tutor.prototype.serialize = function () {
         return {
-            idTutor: this._idTutor,
+            // idTutor: this._idTutor,
             username: this._username,
             password: this._password,
             mail: this._mail,
-            tel: this._tel,
-            evaluation: this._evaluation,
-            description: this._description,
-            isWarned: this._isWarned,
-            isModerator: this._isModerator,
-            year: this._year,
-            section: this._section
+            phone: this._tel,
+            //  evaluation: this._evaluation,
+            description: this._description
+            /*   isWarned: this._isWarned,
+               isModerator: this._isModerator,
+               year: this._year,
+               section:this._section*/
         };
     };
     return Tutor;

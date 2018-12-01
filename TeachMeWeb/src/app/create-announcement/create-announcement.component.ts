@@ -13,7 +13,7 @@ export class CreateAnnouncementComponent implements OnInit {
   private _announcementTmp: Announcement = new Announcement;
   private _announcementCreated:EventEmitter<Announcement> = new EventEmitter();
 
-  constructor(public announcementService: AnnouncementService   ) { }
+  constructor(public announcementService: AnnouncementService) { }
 
   ngOnInit() {
   }

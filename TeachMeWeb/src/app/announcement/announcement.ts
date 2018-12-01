@@ -74,6 +74,10 @@ export class Announcement{
     };
   }
 
+  public deserializable(json: any) : Announcement {
+    Object.assign(this, json);
+    return this;
+  }
 
 
 }

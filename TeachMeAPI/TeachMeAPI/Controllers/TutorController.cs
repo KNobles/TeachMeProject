@@ -20,8 +20,7 @@ namespace TeachMeAPI.Controllers
         {
             return DAO.TutorDAO.Insert(user);
         }
-
-        // [Authorize]
+        //[Authorize]
         public Tutor Get(int id)
         {
             return DAO.TutorDAO.Get(id);
