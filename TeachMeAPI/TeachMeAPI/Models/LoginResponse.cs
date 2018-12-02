@@ -10,5 +10,8 @@ namespace TeachMeAPI.Models
     public class LoginResponse
     {
         internal HttpResponseMessage responseMsg;
+        internal int id;
+        internal string className;
+        internal string role;
     }
 }

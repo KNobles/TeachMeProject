@@ -22,7 +22,7 @@ namespace TeachMeAPI.DAO
 
         public static readonly string QUERY = "SELECT * FROM " + TABLE_NAME;
         public static readonly string GETID = QUERY + " WHERE " + COLUMN_ID + " = @idTutor";
-        public static readonly string GETPASSWORD = QUERY + " WHERE " + COLUMN_PASSWORD + " = @password";
+        public static readonly string GET = QUERY + " WHERE " + COLUMN_NAME + " = @username AND "+ COLUMN_PASSWORD + " = @password";
         public static readonly string INSERT = "INSERT INTO " + TABLE_NAME + "(" + COLUMN_NAME + ", " + COLUMN_PASSWORD + ", " + COLUMN_MAIL + ", "
             + COLUMN_PHONE + ", " + COLUMN_IS_WARNED + ", " + COLUMN_IS_MODERATOR + ", " + COLUMN_DESCRIPTION + ", " + COLUMN_EVALUATION
             + ") OUTPUT INSERTED.idTutor VALUES(@username, @password, @mail, @tel, 0, 0, @description, 100)";
@@ -96,23 +96,25 @@ namespace TeachMeAPI.DAO
 
         }
 
-        public static bool Get(String password)
+        public static Tutor Get(String username, String password)
         {
+            Tutor tutor = null;
             using (SqlConnection connection = DataBase.GetConnection())
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand(GETPASSWORD, connection);
+                SqlCommand command = new SqlCommand(GET, connection);
 
+                command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", password);
 
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    return true;
+                    tutor = new Tutor(reader);
                 }
             }
-            return false;
+            return tutor;
         }
 
         public static bool Delete(int idTutor)

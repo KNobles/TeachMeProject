@@ -19,7 +19,7 @@ namespace TeachMeAPI.DAO
 
         public static readonly string QUERY = "SELECT * FROM " + TABLE_NAME;
         public static readonly string GETID = QUERY + " WHERE " + COLUMN_ID_ADMIN + " = @idAdmin";
-        public static readonly string GETPASSWORD = QUERY + " WHERE " + COLUMN_PASSWORD + " = @password";
+        public static readonly string GET = QUERY + " WHERE " + COLUMN_USERNAME + " = @username AND " + COLUMN_PASSWORD + " = @password";
         public static readonly string INSERT = "INSERT INTO " + TABLE_NAME + "(" + COLUMN_USERNAME + ", " + COLUMN_PASSWORD + ", " + COLUMN_MAIL
             + ") OUTPUT INSERTED.idAdmin VALUES(@name, @password, @mail)";
         public static readonly string UPDATE = "UPDATE " + TABLE_NAME + " SET " + COLUMN_USERNAME + " = @name, " + COLUMN_PASSWORD + " = @password, " 
@@ -89,23 +89,26 @@ namespace TeachMeAPI.DAO
 
         }
 
-        public static bool Get(String password)
+        public static Administrator Get(String username, String password)
         {
+            Administrator admin = null;
             using (SqlConnection connection = DataBase.GetConnection())
             {
+                
                 connection.Open();
-                SqlCommand command = new SqlCommand(GETPASSWORD, connection);
+                SqlCommand command = new SqlCommand(GET, connection);
 
+                command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", password);
 
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    return true;
+                    admin = new Administrator(reader);
                 }
             }
-            return false;
+            return admin;
         }
 
         public static bool Delete(int idAdmin)

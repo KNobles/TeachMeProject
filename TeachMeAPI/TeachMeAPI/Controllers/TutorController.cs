@@ -27,9 +27,9 @@ namespace TeachMeAPI.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        public bool Get(String password)
+        public Tutor Get(String username, String password)
         {
-            return DAO.TutorDAO.Get(password);
+            return DAO.TutorDAO.Get(username, password);
         }
 
         //[Authorize(Roles = "Admin")]
