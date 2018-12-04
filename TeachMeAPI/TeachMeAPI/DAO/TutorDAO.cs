@@ -27,8 +27,7 @@ namespace TeachMeAPI.DAO
             + COLUMN_PHONE + ", " + COLUMN_IS_WARNED + ", " + COLUMN_IS_MODERATOR + ", " + COLUMN_DESCRIPTION + ", " + COLUMN_EVALUATION
             + ") OUTPUT INSERTED.idTutor VALUES(@username, @password, @mail, @tel, 0, 0, @description, 100)";
         public static readonly string UPDATE = "UPDATE " + TABLE_NAME + " SET " + COLUMN_NAME + " = @name, " + COLUMN_PHONE + " = @tel, " +
-            COLUMN_PASSWORD + " = @password, " + COLUMN_IS_WARNED + " = @avertissement, " + COLUMN_IS_MODERATOR + " = @isModerator, "
-            + COLUMN_MAIL + " = @mail, " + COLUMN_DESCRIPTION + " = @desc, " + COLUMN_EVALUATION + " = @evaluation WHERE " + COLUMN_ID + " = @idTutor";
+            COLUMN_PASSWORD + " = @password, "+ COLUMN_MAIL + " = @mail, " + COLUMN_DESCRIPTION + " = @desc WHERE " + COLUMN_ID + " = @idTutor";
         public static readonly string DELETE = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = @idTutor";
 
 
@@ -144,12 +143,11 @@ namespace TeachMeAPI.DAO
                 command.Parameters.AddWithValue("@idTutor", tutor.IdTutor);
                 command.Parameters.AddWithValue("@name", tutor.UserName);
                 command.Parameters.AddWithValue("@tel", tutor.Phone);
-                command.Parameters.AddWithValue("@avertissement", tutor.IsWarned);
-                command.Parameters.AddWithValue("@password", tutor.Password);
-                command.Parameters.AddWithValue("@isModerator", tutor.IsModerator);
+
+                command.Parameters.AddWithValue("@password", tutor.Password);        
                 command.Parameters.AddWithValue("@mail", tutor.Mail);
                 command.Parameters.AddWithValue("@desc", tutor.Description);
-                command.Parameters.AddWithValue("@evaluation", tutor.Evaluation);
+
 
                 state = command.ExecuteNonQuery() != 0;
 

@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   constructor(public tutor :TutorService) { }
 
   ngOnInit() {
+    this.getTutor(2);
   }
   get tmpTutor(): Tutor {
     return this._tmpTutor;
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
   getTutor(id : number) {
    this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));
+   console.log(this.tmpTutor);
   }
   get username(): string {
     return this.tmpTutor.username;
@@ -130,7 +132,13 @@ export class ProfileComponent implements OnInit,OnDestroy {
     return this._modify;
   }
   Sending(){
-    this._subUpdate=this.tutor.update(this._tmpTutor).subscribe()
+    //this.tmpTutor.username=this._username;
+    this.tmpTutor.tel=this._tel;
+    this.tmpTutor.mail=this._mail;
+    this.tmpTutor.description=this._description;
+    //this.tmpTutor.password=this._password;
+    this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
+    console.log(this.tmpTutor);
   }
 
 }
