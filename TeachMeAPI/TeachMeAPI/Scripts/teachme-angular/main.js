@@ -1317,7 +1317,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbarheader></app-navbarheader>\r\n<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"user\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"psw\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"telnum\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   [disabled]=\"modify\" required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   [disabled]=\"modify\" required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button><Button (click)=\"Sending()\" [disabled]=\"!modify\">Send</Button>\r\n</div>\r\n"
+module.exports = "<app-navbarheader></app-navbarheader>\r\n<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"username\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"password\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"tel\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   disabled required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   disabled required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button><Button (click)=\"Sending()\" [disabled]=\"!modify\">Send</Button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1353,6 +1353,7 @@ var ProfileComponent = /** @class */ (function () {
         this._modify = true;
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getTutor(2);
     };
     Object.defineProperty(ProfileComponent.prototype, "tmpTutor", {
         get: function () {
@@ -1373,7 +1374,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.username;
         },
         set: function (value) {
-            this._username = value;
+            this.tmpTutor.username = value;
         },
         enumerable: true,
         configurable: true
@@ -1383,7 +1384,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.password;
         },
         set: function (value) {
-            this._password = value;
+            this.tmpTutor.password = value;
         },
         enumerable: true,
         configurable: true
@@ -1393,7 +1394,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.mail;
         },
         set: function (value) {
-            this._mail = value;
+            this.tmpTutor.mail = value;
         },
         enumerable: true,
         configurable: true
@@ -1403,7 +1404,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.tel;
         },
         set: function (value) {
-            this._tel = value;
+            this.tmpTutor.mail = value;
         },
         enumerable: true,
         configurable: true
@@ -1413,7 +1414,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.evaluation;
         },
         set: function (value) {
-            this._evaluation = value;
+            this.tmpTutor.evaluation = value;
         },
         enumerable: true,
         configurable: true
@@ -1423,7 +1424,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.description;
         },
         set: function (value) {
-            this._description = value;
+            this.tmpTutor.description = value;
         },
         enumerable: true,
         configurable: true
@@ -1433,7 +1434,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.isWarned;
         },
         set: function (value) {
-            this._isWarned = value;
+            this.tmpTutor.isWarned = value;
         },
         enumerable: true,
         configurable: true
@@ -1443,7 +1444,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.year;
         },
         set: function (value) {
-            this._year = value;
+            this.tmpTutor.year = value;
         },
         enumerable: true,
         configurable: true
@@ -1453,7 +1454,7 @@ var ProfileComponent = /** @class */ (function () {
             return this.tmpTutor.section;
         },
         set: function (value) {
-            this._section = value;
+            this.tmpTutor.section = value;
         },
         enumerable: true,
         configurable: true
@@ -1482,7 +1483,8 @@ var ProfileComponent = /** @class */ (function () {
         configurable: true
     });
     ProfileComponent.prototype.Sending = function () {
-        this._subUpdate = this.tutor.update(this._tmpTutor).subscribe();
+        this._subUpdate = this.tutor.update(this.tmpTutor).subscribe();
+        console.log(this.tmpTutor);
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2283,7 +2285,7 @@ var TutorService = /** @class */ (function () {
         return this.http.delete(TutorService_1.URL_API_TUTOR + '/' + tutor.idTutor);
     };
     TutorService.prototype.update = function (tutor) {
-        return this.http.put(TutorService_1.URL_API_TUTOR, tutor.serialize());
+        return this.http.put(TutorService_1.URL_API_TUTOR, tutor.serializeUpdate());
     };
     var TutorService_1;
     TutorService.URL_API_TUTOR = '/api/tutor';
@@ -2462,6 +2464,21 @@ var Tutor = /** @class */ (function () {
                section:this._section*/
         };
     };
+    Tutor.prototype.serializeUpdate = function () {
+        return {
+            idTutor: this._idTutor,
+            username: this._username,
+            password: this._password,
+            mail: this._mail,
+            phone: this._tel,
+            //  evaluation: this._evaluation,
+            description: this._description
+            /*   isWarned: this._isWarned,
+               isModerator: this._isModerator,
+               year: this._year,
+               section:this._section*/
+        };
+    };
     return Tutor;
 }());
 
@@ -2530,7 +2547,11 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+=======
+module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+>>>>>>> refs/remotes/origin/master
 
 
 /***/ })

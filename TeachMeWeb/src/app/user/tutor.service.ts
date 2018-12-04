@@ -29,6 +29,6 @@ export class TutorService {
   }
 
   public update(tutor: Tutor): Observable<any> {
-    return this.http.put<any>(TutorService.URL_API_TUTOR, tutor.serialize());
+    return this.http.put<any>(TutorService.URL_API_TUTOR, tutor.serializeUpdate());
   }
 }
