@@ -13,8 +13,11 @@ import {CreateUserComponent} from "./user/create-user/create-user.component";
 import {ListAnnouncementComponent} from "./list-announcement/list-announcement.component";
 import {CreateAnnouncementComponent} from "./create-announcement/create-announcement.component";
 import {HomeComponent} from "./home/home.component";
-import {ProfilComponent} from "./profil/profil.component";
+import {ProfileComponent} from "./profil/profile.component";
 import {HttpClientModule} from "@angular/common/http";
+import { FilterByPriceAnnouncementPipe } from './filter-by-price-announcement.pipe';
+import { NavbarheaderComponent } from './navbarheader/navbarheader.component';
+import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.pipe';
 
 
 
@@ -26,10 +29,13 @@ import {HttpClientModule} from "@angular/common/http";
     CreateUserComponent,
     CreatePersonneComponent,
     CreateTutorComponent,
-    ProfilComponent,
+    ProfileComponent,
     HomeComponent,
     CreateAnnouncementComponent,
-    ListAnnouncementComponent
+    ListAnnouncementComponent,
+    FilterByPriceAnnouncementPipe,
+    NavbarheaderComponent,
+    FilterByCourseAnnouncementPipe
   ],
   imports: [
     BrowserModule,

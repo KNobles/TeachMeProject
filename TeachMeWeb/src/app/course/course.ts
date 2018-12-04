@@ -3,7 +3,7 @@ export class Course {
   private _courseName: string;
 
 
-  constructor(courseName: string) {
+  constructor(courseName: string="course") {
     this._courseName = courseName;
   }
 
@@ -21,6 +21,17 @@ export class Course {
 
   set courseName(value: string) {
     this._courseName = value;
+  }
+
+  public deserializable(json: any) : Course {
+    Object.assign(this, json);
+    return this;
+  }
+
+  public serialize() : any {
+    return {
+      label: this._courseName
+    };
   }
 
 }

@@ -1,14 +1,54 @@
-<div class="align-items-center justify-content-center" *ngFor="let announcement of announcements" style="padding: 30px">
-  <div class="card text-center" style="width: 40rem;">
-    <div class="card-header">
-      {{announcement.idTutor}}
+<div class="pos-f-t">
+
+  <div class="collapse" id="navbarToggleExternalContent">
+
+    <div class="bg-dark p-4">
+
+      <div class="form-row">
+
+        <div class="form-group col-md-6">
+          <h5 class="text-white">Class</h5>
+          <select class="form-control form-control-sm col-md-6">
+            <option>Course</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <h5 class="text-white">Price</h5>
+          <select name="filterOption" [(ngModel)]="optionSelected" class="form-control form-control-sm col-md-6">
+            <option *ngFor="let o of OPTIONS" [ngValue]="o">
+              {{intToOrderOption(o)}}
+            </option>
+          </select>
+        </div>
+      </div>
+
     </div>
-    <div class="card-body">
-      <h5 class="card-title">{{announcement.title}}</h5>
-      <p class="card-text">{{announcement.description}}</p>
-    </div>
-    <div class="card-footer text-muted">
-      {{announcement.fee}} €
+
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span>Filter</span>
+    </button>
+  </nav>
+</div>
+
+<div  class="container-fluid" *ngFor="let announcement of announcements|filterAnnouncement:optionSelected" style="padding: 30px;">
+  <div class="row align-items-center justify-content-center">
+
+    <div class="card text-center" style="width: 40rem;">
+      <div class="card-header">
+       <!-- {{tutorById(announcement.idTutor).username}} -->
+        {{announcement.idTutor}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{announcement.title}}</h5>
+        <p class="card-text">{{announcement.description}}</p>
+      </div>
+        <div class="blockquote-footer text-left">{{announcement.idCourse}}</div>
+      <div class="card-footer text-muted">
+        {{announcement.fee}} €
+      </div>
     </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+<app-navbarheader></app-navbarheader>
 <div>
   <form #formProfil="ngForm" class="container" name="formProfile">
     Nom d'utilisateur : <br>
@@ -19,5 +20,5 @@
     Section : <br>
     <input type="text" name="section" [(ngModel)]="section"  [disabled]="modify" required > <br>
   </form>
-  <Button (click)="Modification()" class="btn btn-success">Modify</Button>
+  <Button (click)="Modification()" class="btn btn-success">Modify</Button><Button (click)="Sending()" [disabled]="!modify">Send</Button>
 </div>
