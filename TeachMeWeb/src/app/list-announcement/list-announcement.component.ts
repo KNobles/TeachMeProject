@@ -6,6 +6,8 @@ import {Announcement} from "../announcement/announcement";
 import {FilterByPriceAnnouncementPipe} from "../filter-by-price-announcement.pipe";
 import {Tutor} from "../user/tutor";
 import {TutorService} from "../user/tutor.service";
+import {Course} from "../course/course";
+import {CourseService} from "../course/course.service";
 
 
 @Component({
@@ -15,7 +17,8 @@ import {TutorService} from "../user/tutor.service";
 })
 export class ListAnnouncementComponent implements OnInit, OnDestroy {
   private _announcements: Announcement[] = [];
-   _tutor: Tutor;
+  private _tutors: Tutor[] = [];
+  private _courses: Course[] = [];
 
   private subDelete: Subscription;
   private subUpdate: Subscription;
@@ -26,7 +29,7 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   private _OPTIONS = [FilterByPriceAnnouncementPipe.ORDER_DEFAULT, FilterByPriceAnnouncementPipe.ORDER_ASCENDING, FilterByPriceAnnouncementPipe.ORDER_DESCENDING];
   optionSelected: number = FilterByPriceAnnouncementPipe.ORDER_DEFAULT;
 
-  constructor(public tutorService: TutorService, public announcementService: AnnouncementService, public broadcastCreateAnnouncement: BroadcastCreateAnnouncementService) {
+  constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService, public broadcastCreateAnnouncement: BroadcastCreateAnnouncementService) {
   }
 
   receiveAnnouncement(announcement: Announcement) {
@@ -44,6 +47,8 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.listAnnouncementCreated();
     this.getAnnouncements();
+    this.getTutors();
+    this.getCourses();
   }
 
   ngOnDestroy(): void {
@@ -94,13 +99,36 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
     this._OPTIONS = value;
   }
 
-  get tutor(): Tutor {
-    return this._tutor
+  getTutors(): void {
+    this.tutorService.query().subscribe(t => this._tutors = t.map(tutor => new Tutor().deserializable(tutor)));
   }
 
-  tutorById(id: number): Tutor {
-    this.tutorService.get(id).subscribe(t => this._tutor = new Tutor().deserializable(t));
-    return this._tutor;
+  get tutors(): Tutor[] {
+    return this._tutors;
+  }
+
+  getTutorById(id: number): Tutor{
+    for(let t of this.tutors){
+      if(t.idTutor == id){
+        return t;
+      }
+    }
+  }
+
+  getCourses(): void {
+    this.courseService.query().subscribe(c => this._courses = c.map(course => new Course().deserializable(course)));
+  }
+
+  get courses(): Course[] {
+    return this._courses;
+  }
+
+  getCoursesById(id: number): Course {
+    for(let c of this.courses){
+      if(c.idCourse == id){
+        return c;
+      }
+    }
   }
 }
 

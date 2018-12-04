@@ -1,10 +1,10 @@
 export class Course {
   private _idCourse: number;
-  private _courseName: string;
+  private _label: string;
 
 
   constructor(courseName: string="course") {
-    this._courseName = courseName;
+    this._label = courseName;
   }
 
   get idCourse(): number {
@@ -15,12 +15,12 @@ export class Course {
     this._idCourse = value;
   }
 
-  get courseName(): string {
-    return this._courseName;
+  get label(): string {
+    return this._label;
   }
 
-  set courseName(value: string) {
-    this._courseName = value;
+  set label(value: string) {
+    this._label = value;
   }
 
   public deserializable(json: any) : Course {
@@ -30,7 +30,7 @@ export class Course {
 
   public serialize() : any {
     return {
-      label: this._courseName
+      label: this._label
     };
   }
 

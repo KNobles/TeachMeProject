@@ -8,8 +8,8 @@
 
         <div class="form-group col-md-6">
           <h5 class="text-white">Class</h5>
-          <select class="form-control form-control-sm col-md-6">
-            <option>Course</option>
+          <select class="form-control form-control-sm col-md-6" >
+            <option *ngFor="let c of courses">{{c?.label}}</option>
           </select>
         </div>
 
@@ -38,14 +38,13 @@
 
     <div class="card text-center" style="width: 40rem;">
       <div class="card-header">
-       <!-- {{tutorById(announcement.idTutor).username}} -->
-        {{announcement.idTutor}}
+        {{getTutorById(announcement.idTutor)?.username}}
       </div>
       <div class="card-body">
         <h5 class="card-title">{{announcement.title}}</h5>
         <p class="card-text">{{announcement.description}}</p>
       </div>
-        <div class="blockquote-footer text-left">{{announcement.idCourse}}</div>
+        <div class="blockquote-footer text-left">{{getCoursesById(announcement.idCourse)?.label}}</div>
       <div class="card-footer text-muted">
         {{announcement.fee}} €
       </div>
