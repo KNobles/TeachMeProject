@@ -20,5 +20,5 @@
     Section : <br>
     <input type="text" name="section" [(ngModel)]="section"  [disabled]="modify" required > <br>
   </form>
-  <Button (click)="Modification()" class="btn btn-success">Modify</Button>
+  <Button (click)="Modification()" class="btn btn-success">Modify</Button><Button (click)="Sending()" [disabled]="!modify">Send</Button>
 </div>

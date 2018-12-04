@@ -12,6 +12,7 @@ import {Subscription} from 'rxjs';
 export class ProfileComponent implements OnInit,OnDestroy {
   private _tmpTutor:Tutor =new Tutor;
   private _subGet : Subscription;
+  private _subUpdate : Subscription;
   private _username: string;
   private _password: string;
   private _mail: string;
@@ -112,6 +113,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
     if(this._subGet) {
       this._subGet.unsubscribe();
     }
+    if(this._subUpdate) {
+      this._subUpdate.unsubscribe();
+    }
   }
   Modification(){
     if(this._modify){
@@ -125,6 +129,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
   get modify(): boolean {
     return this._modify;
   }
-
+  Sending(){
+    this._subUpdate=this.tutor.update(this._tmpTutor).subscribe()
+  }
 
 }
