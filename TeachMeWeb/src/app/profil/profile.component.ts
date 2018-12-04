@@ -10,9 +10,9 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit,OnDestroy {
-  private _tmpTutor:Tutor =new Tutor;
+  private _tmpTutor:Tutor=new Tutor;
   private _subGet : Subscription;
-  private _subUpdate : Subscription;
+  private _subUpdate : Subscription;/*
   private _username: string;
   private _password: string;
   private _mail: string;
@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   private _description: string;
   private _isWarned: boolean;
   private _year:number;
-  private _section:string;
+  private _section:string;*/
   private _modify:boolean=true;
 
   constructor(public tutor :TutorService) { }
@@ -37,14 +37,13 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
   getTutor(id : number) {
    this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));
-   console.log(this.tmpTutor);
   }
   get username(): string {
     return this.tmpTutor.username;
   }
 
   set username(value: string) {
-    this._username = value;
+    this.tmpTutor.username = value;
   }
 
   get password(): string {
@@ -52,7 +51,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set password(value: string) {
-    this._password = value;
+    this.tmpTutor.password = value;
   }
 
   get mail(): string {
@@ -60,7 +59,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set mail(value: string) {
-    this._mail = value;
+    this.tmpTutor.mail = value;
   }
 
   get tel(): string {
@@ -68,7 +67,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set tel(value: string) {
-    this._tel = value;
+    this.tmpTutor.mail = value;
   }
 
   get evaluation(): number {
@@ -76,7 +75,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set evaluation(value: number) {
-    this._evaluation = value;
+    this.tmpTutor.evaluation = value;
   }
 
   get description(): string {
@@ -84,7 +83,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set description(value: string) {
-    this._description = value;
+    this.tmpTutor.description = value;
   }
 
   get isWarned(): boolean {
@@ -92,7 +91,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set isWarned(value: boolean) {
-    this._isWarned = value;
+    this.tmpTutor.isWarned = value;
   }
 
   get year(): number {
@@ -100,7 +99,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set year(value: number) {
-    this._year = value;
+    this.tmpTutor.year = value;
   }
 
   get section(): string {
@@ -108,7 +107,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   set section(value: string) {
-    this._section = value;
+    this.tmpTutor.section = value;
   }
 
   ngOnDestroy():void{
@@ -132,11 +131,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
     return this._modify;
   }
   Sending(){
-    //this.tmpTutor.username=this._username;
-    this.tmpTutor.tel=this._tel;
-    this.tmpTutor.mail=this._mail;
-    this.tmpTutor.description=this._description;
-    //this.tmpTutor.password=this._password;
     this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
     console.log(this.tmpTutor);
   }
