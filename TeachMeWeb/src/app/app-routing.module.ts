@@ -20,7 +20,7 @@ const routes: Routes = [
     path: "Home", component: HomeComponent
   },
   {
-    path : "announcement", component : CreateAnnouncementComponent
+    path : "Announcement", component : CreateAnnouncementComponent
   },
   {
     path : "" , redirectTo: "/Login" , pathMatch: "full"

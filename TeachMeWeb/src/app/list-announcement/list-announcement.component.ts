@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subscription} from "rxjs";
 import {AnnouncementService} from "../announcement/announcement.service";
 import {BroadcastCreateAnnouncementService} from "../broadcast-create-announcement.service";
@@ -25,11 +25,16 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   private subQuery: Subscription;
   private subBroadcast: Subscription;
 
+  private _currentCourse: number = -1;
 
   private _OPTIONS = [FilterByPriceAnnouncementPipe.ORDER_DEFAULT, FilterByPriceAnnouncementPipe.ORDER_ASCENDING, FilterByPriceAnnouncementPipe.ORDER_DESCENDING];
   optionSelected: number = FilterByPriceAnnouncementPipe.ORDER_DEFAULT;
 
   constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService, public broadcastCreateAnnouncement: BroadcastCreateAnnouncementService) {
+  }
+
+  get currentCourse(): number {
+    return this._currentCourse;
   }
 
   receiveAnnouncement(announcement: Announcement) {
@@ -129,6 +134,10 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
         return c;
       }
     }
+  }
+
+  onChange(ev: any){
+    this._currentCourse = ev;
   }
 }
 

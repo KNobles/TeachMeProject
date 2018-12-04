@@ -228,7 +228,7 @@ var routes = [
         path: "Home", component: _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
     },
     {
-        path: "announcement", component: _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__["CreateAnnouncementComponent"]
+        path: "Announcement", component: _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__["CreateAnnouncementComponent"]
     },
     {
         path: "", redirectTo: "/Login", pathMatch: "full"
@@ -760,10 +760,21 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var FilterByCourseAnnouncementPipe = /** @class */ (function () {
     function FilterByCourseAnnouncementPipe() {
     }
-    FilterByCourseAnnouncementPipe.prototype.transform = function (value, args) {
-        return null;
+    FilterByCourseAnnouncementPipe_1 = FilterByCourseAnnouncementPipe;
+    FilterByCourseAnnouncementPipe.prototype.transform = function (announcements, args) {
+        // switch(args){
+        //   case FilterByCourseAnnouncementPipe.ANGLAIS: return announcements.filter(a => a.idCourse == FilterByCourseAnnouncementPipe.ANGLAIS);
+        // }
+        if (args == FilterByCourseAnnouncementPipe_1.ALL_COURSES) {
+            return announcements;
+        }
+        else {
+            return announcements.filter(function (a) { return a.idCourse == args; });
+        }
     };
-    FilterByCourseAnnouncementPipe = __decorate([
+    var FilterByCourseAnnouncementPipe_1;
+    FilterByCourseAnnouncementPipe.ALL_COURSES = -1;
+    FilterByCourseAnnouncementPipe = FilterByCourseAnnouncementPipe_1 = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
             name: 'filterByCourseAnnouncement'
         })
@@ -929,7 +940,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pos-f-t\">\r\n\r\n  <div class=\"collapse\" id=\"navbarToggleExternalContent\">\r\n\r\n    <div class=\"bg-dark p-4\">\r\n\r\n      <div class=\"form-row\">\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Class</h5>\r\n          <select class=\"form-control form-control-sm col-md-6\" >\r\n            <option *ngFor=\"let c of courses\">{{c?.label}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Price</h5>\r\n          <select name=\"filterOption\" [(ngModel)]=\"optionSelected\" class=\"form-control form-control-sm col-md-6\">\r\n            <option *ngFor=\"let o of OPTIONS\" [ngValue]=\"o\">\r\n              {{intToOrderOption(o)}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n  <nav class=\"navbar navbar-dark bg-dark\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span>Filter</span>\r\n    </button>\r\n  </nav>\r\n</div>\r\n\r\n<div  class=\"container-fluid\" *ngFor=\"let announcement of announcements|filterAnnouncement:optionSelected\" style=\"padding: 30px;\">\r\n  <div class=\"row align-items-center justify-content-center\">\r\n\r\n    <div class=\"card text-center\" style=\"width: 40rem;\">\r\n      <div class=\"card-header\">\r\n        {{getTutorById(announcement.idTutor)?.username}}\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n        <p class=\"card-text\">{{announcement.description}}</p>\r\n      </div>\r\n        <div class=\"blockquote-footer text-left\">{{getCoursesById(announcement.idCourse)?.label}}</div>\r\n      <div class=\"card-footer text-muted\">\r\n        {{announcement.fee}} €\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"pos-f-t\">\r\n\r\n  <div class=\"collapse\" id=\"navbarToggleExternalContent\">\r\n\r\n    <div class=\"bg-dark p-4\">\r\n\r\n      <div class=\"form-row\">\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Class</h5>\r\n          <select [(ngModel)]=\"currentCourse\" (change)=\"onChange($event.target.value)\" class=\"form-control form-control-sm col-md-6\" >\r\n            <option [value]=-1 selected=\"selected\">All</option>\r\n            <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" >{{c?.label}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Price</h5>\r\n          <select name=\"filterOption\" [(ngModel)]=\"optionSelected\" class=\"form-control form-control-sm col-md-6\">\r\n            <option *ngFor=\"let o of OPTIONS\" [ngValue]=\"o\">\r\n              {{intToOrderOption(o)}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n  <nav class=\"navbar navbar-dark bg-dark\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span>Filter</span>\r\n    </button>\r\n  </nav>\r\n</div>\r\n\r\n<div  class=\"container-fluid\" *ngFor=\"let announcement of announcements|filterAnnouncement:optionSelected | filterByCourseAnnouncement:currentCourse\" style=\"padding: 30px;\">\r\n  <div class=\"row align-items-center justify-content-center\">\r\n\r\n    <div class=\"card text-center\" style=\"width: 40rem;\">\r\n      <div class=\"card-header\">\r\n        {{getTutorById(announcement.idTutor)?.username}}\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n        <p class=\"card-text\">{{announcement.description}}</p>\r\n      </div>\r\n        <div class=\"blockquote-footer text-left\">{{getCoursesById(announcement.idCourse)?.label}}</div>\r\n      <div class=\"card-footer text-muted\">\r\n        {{announcement.fee}} €\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -979,9 +990,17 @@ var ListAnnouncementComponent = /** @class */ (function () {
         this._announcements = [];
         this._tutors = [];
         this._courses = [];
+        this._currentCourse = -1;
         this._OPTIONS = [_filter_by_price_announcement_pipe__WEBPACK_IMPORTED_MODULE_4__["FilterByPriceAnnouncementPipe"].ORDER_DEFAULT, _filter_by_price_announcement_pipe__WEBPACK_IMPORTED_MODULE_4__["FilterByPriceAnnouncementPipe"].ORDER_ASCENDING, _filter_by_price_announcement_pipe__WEBPACK_IMPORTED_MODULE_4__["FilterByPriceAnnouncementPipe"].ORDER_DESCENDING];
         this.optionSelected = _filter_by_price_announcement_pipe__WEBPACK_IMPORTED_MODULE_4__["FilterByPriceAnnouncementPipe"].ORDER_DEFAULT;
     }
+    Object.defineProperty(ListAnnouncementComponent.prototype, "currentCourse", {
+        get: function () {
+            return this._currentCourse;
+        },
+        enumerable: true,
+        configurable: true
+    });
     ListAnnouncementComponent.prototype.receiveAnnouncement = function (announcement) {
         this._announcements.push(announcement);
     };
@@ -1081,6 +1100,9 @@ var ListAnnouncementComponent = /** @class */ (function () {
                 return c;
             }
         }
+    };
+    ListAnnouncementComponent.prototype.onChange = function (ev) {
+        this._currentCourse = ev;
     };
     ListAnnouncementComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1254,7 +1276,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen\">\n  <a class=\"navbar-brand text-white\">Teach Me</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/Login\">Logout</a>\n      </li>\n    </ul>\n  </div>\n\n</nav>\n\n"
+module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen\">\r\n  <a class=\"navbar-brand text-white\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Login\">Logout</a>\r\n      </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n    <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\" routerLink=\"/Announcement\">Create Announcement</button>\r\n    </form>\r\n  </div>\r\n\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
@@ -2547,11 +2569,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
-=======
-module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
->>>>>>> refs/remotes/origin/master
 
 
 /***/ })
