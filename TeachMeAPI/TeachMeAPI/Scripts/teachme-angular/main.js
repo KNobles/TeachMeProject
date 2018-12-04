@@ -958,7 +958,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"user\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"psw\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"telnum\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   [disabled]=\"modify\" required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   [disabled]=\"modify\" required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button>\r\n</div>\r\n"
+module.exports = "<div>\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\n    Nom d'utilisateur : <br>\n    <input type=\"text\" name=\"user\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\n    Mot de passe : <br>\n    <input type=\"text\" name=\"psw\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\n    Email : <br>\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\n    Numéro de téléphone : <br>\n    <input type=\"text\" name=\"telnum\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\n    Evaluation : <br>\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   [disabled]=\"modify\" required > <br>\n    Description : <br>\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\n    Avertissement : <br>\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   [disabled]=\"modify\" required > <br>\n    Année: <br>\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\n    Section : <br>\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\n  </form>\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button>\n</div>\n"
 
 /***/ }),
 
@@ -1152,7 +1152,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  test-component works!\r\n</p>\r\n"
+module.exports = "<p>\n  test-component works!\n</p>\n"
 
 /***/ }),
 
@@ -2165,7 +2165,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\axoul\Desktop\TeachMe\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
 
 
 /***/ })
