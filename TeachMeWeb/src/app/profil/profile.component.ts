@@ -5,11 +5,11 @@ import {Subscription} from 'rxjs';
 
 
 @Component({
-  selector: 'app-profil-component',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css']
+  selector: 'app-profile-component',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class ProfilComponent implements OnInit,OnDestroy {
+export class ProfileComponent implements OnInit,OnDestroy {
   private _tmpTutor:Tutor =new Tutor;
   private _subGet : Subscription;
   private _username: string;
