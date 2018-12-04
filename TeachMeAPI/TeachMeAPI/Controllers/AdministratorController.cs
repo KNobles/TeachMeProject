@@ -28,9 +28,9 @@ namespace TeachMeAPI.Controllers
             return AdministratorDAO.Get(id);
         }
 
-        public bool Get(String password)
+        public Administrator Get(String username, String password)
         {
-            return AdministratorDAO.Get(password);
+            return AdministratorDAO.Get(username, password);
         }
 
         public IHttpActionResult Delete(int id)

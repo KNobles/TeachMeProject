@@ -29,9 +29,9 @@ namespace TeachMeAPI.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public bool Get(String password)
+        public Eleve Get(String username, String password)
         {
-            return DAO.EleveDAO.Get(password);
+            return DAO.EleveDAO.Get(username, password);
         }
 
         [Authorize(Roles = "Admin")]

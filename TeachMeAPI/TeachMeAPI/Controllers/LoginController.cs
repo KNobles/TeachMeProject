@@ -31,20 +31,32 @@ namespace TeachMeAPI.Controllers
 
             if (login != null)
             {
-                isUsernamePasswordValid = EleveDAO.Get(loginrequest.Password) ? true : false;
+                isUsernamePasswordValid = EleveDAO.Get(loginrequest.Username, loginrequest.Password) != null ? true : false;
                 if (isUsernamePasswordValid)
-                    loginrequest.role = "Eleve";
+                {
+                    loginResponse.role = "Eleve";
+                    loginResponse.id = EleveDAO.Get(loginrequest.Username, loginrequest.Password).IdEleve;
+                }
+                    
                 if (!isUsernamePasswordValid)
                 {
-                    isUsernamePasswordValid = TutorDAO.Get(loginrequest.Password) ? true : false;
+                    isUsernamePasswordValid = TutorDAO.Get(loginrequest.Username, loginrequest.Password) != null ? true : false;
                     if (isUsernamePasswordValid)
-                        loginrequest.role = "Tutor";
+                    {
+                        loginResponse.role = "Tutor";
+                        loginResponse.id = TutorDAO.Get(loginrequest.Username, loginrequest.Password).IdTutor;
+                    }
+                        
                 }                
                 if (!isUsernamePasswordValid)
                 {
-                    isUsernamePasswordValid = AdministratorDAO.Get(loginrequest.Password) ? true : false;
+                    isUsernamePasswordValid = AdministratorDAO.Get(loginrequest.Username, loginrequest.Password) != null ? true : false;
                     if (isUsernamePasswordValid)
-                        loginrequest.role = "Admin";
+                    {
+                        loginResponse.role = "Admin";
+                        loginResponse.id = AdministratorDAO.Get(loginrequest.Username, loginrequest.Password).IdAdmin;
+                    }
+                        
                 }
                     
 
