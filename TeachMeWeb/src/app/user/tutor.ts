@@ -5,7 +5,7 @@ export class Tutor {
   private _username: string;
   private _password: string;
   private _mail: string;
-  private _tel: string;
+  private _phone: string;
   private _evaluation: number;
   private _description: string;
   private _isWarned: boolean;
@@ -16,12 +16,12 @@ export class Tutor {
 
 
   constructor(username: string="tutor", password: string="password", mail: string="tutor@hotmail.com",
-              tel: string="0123456789", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false
+              tel: string="0987654321", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false
   ,year: number = 1,section:string="undifined") {
     this._username = username;
     this._password = password;
     this._mail = mail;
-    this._tel = tel;
+    this._phone = tel;
     this._evaluation = evaluation;
     this._description = description;
     this._isWarned = isWarned;
@@ -71,12 +71,12 @@ export class Tutor {
     this._mail = value;
   }
 
-  get tel(): string {
-    return this._tel;
+  get phone(): string {
+    return this._phone;
   }
 
-  set tel(value: string) {
-    this._tel = value;
+  set phone(value: string) {
+    this._phone = value;
   }
 
   get evaluation(): number {
@@ -130,7 +130,7 @@ export class Tutor {
       username: this._username,
       password: this._password,
       mail: this._mail,
-      phone: this._tel,
+      phone: this._phone,
     //  evaluation: this._evaluation,
       description: this._description
    /*   isWarned: this._isWarned,
@@ -146,10 +146,12 @@ export class Tutor {
       username: this._username,
       password: this._password,
       mail: this._mail,
-      phone: this._tel,
-      //  evaluation: this._evaluation,
+      phone: this._phone,
+
       description: this._description
-      /*   isWarned: this._isWarned,
+      /*
+         evaluation: this._evaluation,
+         isWarned: this._isWarned,
          isModerator: this._isModerator,
          year: this._year,
          section:this._section*/

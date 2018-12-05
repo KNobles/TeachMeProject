@@ -1310,7 +1310,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbarheader></app-navbarheader>\r\n<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"username\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"password\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"tel\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   disabled required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   disabled required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button><Button (click)=\"Sending()\" [disabled]=\"!modify\">Send</Button>\r\n</div>\r\n"
+module.exports = "<app-navbarheader></app-navbarheader>\r\n<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"username\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"password\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"tel\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   disabled required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   disabled required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button><Button (click)=\"Sending()\" routerLink=\"/Profile\" [disabled]=\"!modify\">Send</Button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1394,10 +1394,10 @@ var ProfileComponent = /** @class */ (function () {
     });
     Object.defineProperty(ProfileComponent.prototype, "tel", {
         get: function () {
-            return this.tmpTutor.tel;
+            return this.tmpTutor.phone;
         },
         set: function (value) {
-            this.tmpTutor.mail = value;
+            this.tmpTutor.phone = value;
         },
         enumerable: true,
         configurable: true
@@ -1477,7 +1477,7 @@ var ProfileComponent = /** @class */ (function () {
     });
     ProfileComponent.prototype.Sending = function () {
         this._subUpdate = this.tutor.update(this.tmpTutor).subscribe();
-        console.log(this.tmpTutor);
+        alert("Modification done");
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1512,7 +1512,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  test-component works!\r\n</p>\r\n"
+module.exports = "<p>\n  test-component works!\n</p>\n"
 
 /***/ }),
 
@@ -1680,7 +1680,7 @@ var CreatePersonneComponent = /** @class */ (function () {
             this.tmpStudent.name = this._userName;
             this.tmpStudent.password = this._password;
             this.tmpStudent.mail = this._mail;
-            this.tmpStudent.tel = this._telNumber;
+            this.tmpStudent.phone = this._telNumber;
             return this.tmpStudent;
         }
         else {
@@ -1849,7 +1849,7 @@ var CreateTutorComponent = /** @class */ (function () {
             this.tmpTutor.username = this.tmpStudent.name;
             this.tmpTutor.password = this.tmpStudent.password;
             this.tmpTutor.mail = this.tmpStudent.mail;
-            this.tmpTutor.tel = this.tmpStudent.tel;
+            this.tmpTutor.phone = this.tmpStudent.phone;
             this.tmpTutor.description = this._description;
             this.tmpTutor.year = this._year;
             this.tmpTutor.section = this.section;
@@ -2139,7 +2139,7 @@ var Student = /** @class */ (function () {
         this._name = name;
         this._mail = mail;
         this._password = password;
-        this._tel = tel;
+        this._phone = tel;
         this._avertissement = isWarned;
         this._isModerateur = isModerator;
     }
@@ -2183,12 +2183,12 @@ var Student = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Student.prototype, "tel", {
+    Object.defineProperty(Student.prototype, "phone", {
         get: function () {
-            return this._tel;
+            return this._phone;
         },
         set: function (value) {
-            this._tel = value;
+            this._phone = value;
         },
         enumerable: true,
         configurable: true
@@ -2221,7 +2221,7 @@ var Student = /** @class */ (function () {
         return {
             name: this._name,
             mail: this._mail,
-            tel: this._tel,
+            tel: this._phone,
             password: this._password,
         };
     };
@@ -2310,7 +2310,7 @@ var Tutor = /** @class */ (function () {
         if (username === void 0) { username = "tutor"; }
         if (password === void 0) { password = "password"; }
         if (mail === void 0) { mail = "tutor@hotmail.com"; }
-        if (tel === void 0) { tel = "0123456789"; }
+        if (tel === void 0) { tel = "0987654321"; }
         if (evaluation === void 0) { evaluation = 0; }
         if (description === void 0) { description = ""; }
         if (isWarned === void 0) { isWarned = false; }
@@ -2320,7 +2320,7 @@ var Tutor = /** @class */ (function () {
         this._username = username;
         this._password = password;
         this._mail = mail;
-        this._tel = tel;
+        this._phone = tel;
         this._evaluation = evaluation;
         this._description = description;
         this._isWarned = isWarned;
@@ -2388,12 +2388,12 @@ var Tutor = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tutor.prototype, "tel", {
+    Object.defineProperty(Tutor.prototype, "phone", {
         get: function () {
-            return this._tel;
+            return this._phone;
         },
         set: function (value) {
-            this._tel = value;
+            this._phone = value;
         },
         enumerable: true,
         configurable: true
@@ -2448,7 +2448,7 @@ var Tutor = /** @class */ (function () {
             username: this._username,
             password: this._password,
             mail: this._mail,
-            phone: this._tel,
+            phone: this._phone,
             //  evaluation: this._evaluation,
             description: this._description
             /*   isWarned: this._isWarned,
@@ -2463,10 +2463,11 @@ var Tutor = /** @class */ (function () {
             username: this._username,
             password: this._password,
             mail: this._mail,
-            phone: this._tel,
-            //  evaluation: this._evaluation,
+            phone: this._phone,
             description: this._description
-            /*   isWarned: this._isWarned,
+            /*
+               evaluation: this._evaluation,
+               isWarned: this._isWarned,
                isModerator: this._isModerator,
                year: this._year,
                section:this._section*/
@@ -2540,7 +2541,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\axoul\Desktop\TeachMe\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
 
 
 /***/ })
