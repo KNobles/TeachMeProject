@@ -74,7 +74,7 @@ export class CreateTutorComponent implements OnInit {
       this.tmpTutor.username=this.tmpStudent.name;
       this.tmpTutor.password=this.tmpStudent.password;
       this.tmpTutor.mail=this.tmpStudent.mail;
-      this.tmpTutor.tel=this.tmpStudent.tel;
+      this.tmpTutor.phone=this.tmpStudent.phone;
       this.tmpTutor.description=this._description;
       this.tmpTutor.year=this._year;
       this.tmpTutor.section=this.section;

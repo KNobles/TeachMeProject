@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Student} from "./student";
 import {Observable} from "rxjs";
+import {Tutor} from "./tutor";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class StudentService {
     return this.http.get<Student[]>(StudentService.URL_API_STUDENT);
   }
 
+  public getAccount(username : string, password: string): Observable<Student>{
+    return this.http.get<Student>(StudentService.URL_API_STUDENT + "?name=" + username +"&password=" + password);
+  }
+
   public create(student: Student) : Observable<Student> {
     console.log(StudentService.URL_API_STUDENT);
     return this.http.post<Student>(StudentService.URL_API_STUDENT, student.serialize());
@@ -25,7 +30,7 @@ export class StudentService {
   }
 
   public update(student: Student) : Observable<any>{
-    return this.http.put<any>(StudentService.URL_API_STUDENT, student.serialize());
+    return this.http.put<any>(StudentService.URL_API_STUDENT + '/' + student.idStudent, student.serializeUpdate());
   }
 
 }

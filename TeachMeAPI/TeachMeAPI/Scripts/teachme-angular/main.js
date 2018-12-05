@@ -336,12 +336,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_by_price_announcement_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./filter-by-price-announcement.pipe */ "./src/app/filter-by-price-announcement.pipe.ts");
 /* harmony import */ var _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./navbarheader/navbarheader.component */ "./src/app/navbarheader/navbarheader.component.ts");
 /* harmony import */ var _filter_by_course_announcement_pipe__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./filter-by-course-announcement.pipe */ "./src/app/filter-by-course-announcement.pipe.ts");
+/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./token-interceptor */ "./src/app/token-interceptor.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -386,7 +388,11 @@ var AppModule = /** @class */ (function () {
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"]
             ],
-            providers: [],
+            providers: [{
+                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HTTP_INTERCEPTORS"],
+                    useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_18__["TokenInterceptor"],
+                    multi: true
+                }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
@@ -533,6 +539,88 @@ var BroadcastStudentFormService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/connected.service.ts":
+/*!**************************************!*\
+  !*** ./src/app/connected.service.ts ***!
+  \**************************************/
+/*! exports provided: ConnectedService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConnectedService", function() { return ConnectedService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _user_student__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user/student */ "./src/app/user/student.ts");
+/* harmony import */ var _user_tutor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user/tutor */ "./src/app/user/tutor.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ConnectedService = /** @class */ (function () {
+    function ConnectedService() {
+        this._connected = false;
+    }
+    Object.defineProperty(ConnectedService.prototype, "connected", {
+        get: function () {
+            return this._connected;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ConnectedService.prototype.disconnected = function () {
+        return !this.connected;
+    };
+    ConnectedService.prototype.connecting = function () {
+        var accountTmp = localStorage.getItem("account");
+        if (accountTmp != null) {
+            if (localStorage.getItem("type") === "student") {
+                this._accountConnected = new _user_student__WEBPACK_IMPORTED_MODULE_1__["Student"]().deserializable(JSON.parse(accountTmp));
+            }
+            else {
+                this._accountConnected = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(JSON.parse(accountTmp));
+            }
+            this._connected = true;
+        }
+    };
+    ConnectedService.prototype.disconnecting = function () {
+        if (this.connected) {
+            this._connected = false;
+            this._accountConnected = null;
+            localStorage.removeItem("account");
+            localStorage.removeItem("type");
+        }
+    };
+    Object.defineProperty(ConnectedService.prototype, "accountConnected", {
+        get: function () {
+            if (this.connected) {
+                return this._accountConnected;
+            }
+            return null;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ConnectedService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], ConnectedService);
+    return ConnectedService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/course/course.service.ts":
 /*!******************************************!*\
   !*** ./src/app/course/course.service.ts ***!
@@ -660,7 +748,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div>\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\n    Title : <br>\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\n    Description : <br>\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\n    Fee :<br>\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\n    <input type=\"submit\" value=\"Create\">\n  </form>\n</div>\n\n\n"
 
 /***/ }),
 
@@ -1183,7 +1271,7 @@ module.exports = ".form-container{\r\n  border: 0px solid #fff;\r\n  padding: 50
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\">Username</label>\r\n          <input type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label for=\"password\">Password</label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\">Username</label>\r\n          <input type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label for=\"password\">Password</label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1199,6 +1287,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.service */ "./src/app/login/auth.service.ts");
+/* harmony import */ var _user_tutor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../user/tutor */ "./src/app/user/tutor.ts");
+/* harmony import */ var _user_student__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../user/student */ "./src/app/user/student.ts");
+/* harmony import */ var _user_student_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../user/student.service */ "./src/app/user/student.service.ts");
+/* harmony import */ var _user_tutor_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../user/tutor.service */ "./src/app/user/tutor.service.ts");
+/* harmony import */ var _node_modules_angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../node_modules/@angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1210,19 +1303,76 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
+
+
+
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(authService) {
+    function LoginComponent(authService, studentService, tutorService, router) {
         this.authService = authService;
+        this.studentService = studentService;
+        this.tutorService = tutorService;
+        this.router = router;
+        this._isStudent = true;
     }
     LoginComponent.prototype.ngOnInit = function () {
     };
-    LoginComponent.prototype.Connection = function () {
-        //alert(this._login + ' ' + this._password);
-        this.authService.login(this._login, this._password).subscribe(function () {
-            console.log("user is logged in");
-        });
-        console.log("connection");
+    LoginComponent.prototype.ngOnDestroy = function () {
+        this._subGet.unsubscribe();
+        this._subUpdate.unsubscribe();
     };
+    LoginComponent.prototype.Connection = function () {
+        var _this = this;
+        //alert(this._login + ' ' + this._password);
+        this.authService.login(this._login, this._password).subscribe(function (token) {
+            _this._token = token.substr(1, token.length - 1);
+            console.log(_this._token);
+            if (_this._isStudent) {
+                _this._subGet = _this.studentService.getAccount(_this.login, _this.password).subscribe(function (student) {
+                    _this.tmpStudent = new _user_student__WEBPACK_IMPORTED_MODULE_3__["Student"]().deserializable(student);
+                    _this.tmpStudent.token = _this._token;
+                    _this._subUpdate = _this.studentService.update(_this.tmpStudent).subscribe();
+                    _this.router.navigate(['/Home']);
+                    localStorage.setItem("account", JSON.stringify(_this.tmpStudent));
+                    localStorage.setItem("type", "student");
+                });
+            }
+            else {
+                _this._subGet = _this.tutorService.getAccount(_this.login, _this.password).subscribe(function (tutor) {
+                    _this.tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(tutor);
+                    _this.tmpTutor.token = _this._token;
+                    _this._subUpdate = _this.tutorService.update(_this.tmpTutor).subscribe();
+                    _this.router.navigate(['/Home']);
+                    localStorage.setItem("account", JSON.stringify(_this.tmpTutor));
+                    localStorage.setItem("type", "tutor");
+                });
+            }
+        });
+    };
+    LoginComponent.prototype.onChange = function () {
+        this._isStudent = !this._isStudent;
+    };
+    Object.defineProperty(LoginComponent.prototype, "tmpStudent", {
+        get: function () {
+            return this._tmpStudent;
+        },
+        set: function (value) {
+            this._tmpStudent = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LoginComponent.prototype, "tmpTutor", {
+        get: function () {
+            return this._tmpTutor;
+        },
+        set: function (value) {
+            this._tmpTutor = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(LoginComponent.prototype, "login", {
         get: function () {
             return this._login;
@@ -1249,7 +1399,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"], _user_student_service__WEBPACK_IMPORTED_MODULE_4__["StudentService"], _user_tutor_service__WEBPACK_IMPORTED_MODULE_5__["TutorService"], _node_modules_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1291,6 +1441,7 @@ module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarheaderComponent", function() { return NavbarheaderComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../connected.service */ "./src/app/connected.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1301,10 +1452,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var NavbarheaderComponent = /** @class */ (function () {
-    function NavbarheaderComponent() {
+    function NavbarheaderComponent(connectedService) {
+        this.connectedService = connectedService;
     }
     NavbarheaderComponent.prototype.ngOnInit = function () {
+        this.connectedService.connecting();
     };
     NavbarheaderComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1312,7 +1466,7 @@ var NavbarheaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./navbarheader.component.html */ "./src/app/navbarheader/navbarheader.component.html"),
             styles: [__webpack_require__(/*! ./navbarheader.component.css */ "./src/app/navbarheader/navbarheader.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_connected_service__WEBPACK_IMPORTED_MODULE_1__["ConnectedService"]])
     ], NavbarheaderComponent);
     return NavbarheaderComponent;
 }());
@@ -1423,10 +1577,10 @@ var ProfileComponent = /** @class */ (function () {
     });
     Object.defineProperty(ProfileComponent.prototype, "tel", {
         get: function () {
-            return this.tmpTutor.tel;
+            return this.tmpTutor.phone;
         },
         set: function (value) {
-            this.tmpTutor.mail = value;
+            this.tmpTutor.phone = value;
         },
         enumerable: true,
         configurable: true
@@ -1586,6 +1740,54 @@ var TestComponentComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/token-interceptor.ts":
+/*!**************************************!*\
+  !*** ./src/app/token-interceptor.ts ***!
+  \**************************************/
+/*! exports provided: TokenInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
+/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./connected.service */ "./src/app/connected.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var TokenInterceptor = /** @class */ (function () {
+    function TokenInterceptor(connectedService) {
+        this.connectedService = connectedService;
+    }
+    TokenInterceptor.prototype.intercept = function (req, next) {
+        if (this.connectedService.connected) {
+            req = req.clone({
+                setHeaders: {
+                    Authorization: this.connectedService.accountConnected.token
+                }
+            });
+        }
+        return next.handle(req);
+    };
+    TokenInterceptor = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        __metadata("design:paramtypes", [_connected_service__WEBPACK_IMPORTED_MODULE_0__["ConnectedService"]])
+    ], TokenInterceptor);
+    return TokenInterceptor;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/user/create-personne/create-personne.component.css":
 /*!********************************************************************!*\
   !*** ./src/app/user/create-personne/create-personne.component.css ***!
@@ -1709,7 +1911,7 @@ var CreatePersonneComponent = /** @class */ (function () {
             this.tmpStudent.name = this._userName;
             this.tmpStudent.password = this._password;
             this.tmpStudent.mail = this._mail;
-            this.tmpStudent.tel = this._telNumber;
+            this.tmpStudent.phone = this._telNumber;
             return this.tmpStudent;
         }
         else {
@@ -1878,7 +2080,7 @@ var CreateTutorComponent = /** @class */ (function () {
             this.tmpTutor.username = this.tmpStudent.name;
             this.tmpTutor.password = this.tmpStudent.password;
             this.tmpTutor.mail = this.tmpStudent.mail;
-            this.tmpTutor.tel = this.tmpStudent.tel;
+            this.tmpTutor.phone = this.tmpStudent.phone;
             this.tmpTutor.description = this._description;
             this.tmpTutor.year = this._year;
             this.tmpTutor.section = this.section;
@@ -2111,6 +2313,9 @@ var StudentService = /** @class */ (function () {
     StudentService.prototype.query = function () {
         return this.http.get(StudentService_1.URL_API_STUDENT);
     };
+    StudentService.prototype.getAccount = function (username, password) {
+        return this.http.get(StudentService_1.URL_API_STUDENT + "?name=" + username + "&password=" + password);
+    };
     StudentService.prototype.create = function (student) {
         console.log(StudentService_1.URL_API_STUDENT);
         return this.http.post(StudentService_1.URL_API_STUDENT, student.serialize());
@@ -2119,7 +2324,7 @@ var StudentService = /** @class */ (function () {
         return this.http.delete(StudentService_1.URL_API_STUDENT + '/' + student.idStudent);
     };
     StudentService.prototype.update = function (student) {
-        return this.http.put(StudentService_1.URL_API_STUDENT, student.serialize());
+        return this.http.put(StudentService_1.URL_API_STUDENT + '/' + student.idStudent, student.serializeUpdate());
     };
     var StudentService_1;
     StudentService.URL_API_STUDENT = '/api/eleve';
@@ -2168,7 +2373,7 @@ var Student = /** @class */ (function () {
         this._name = name;
         this._mail = mail;
         this._password = password;
-        this._tel = tel;
+        this._phone = tel;
         this._avertissement = isWarned;
         this._isModerateur = isModerator;
     }
@@ -2212,12 +2417,12 @@ var Student = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Student.prototype, "tel", {
+    Object.defineProperty(Student.prototype, "phone", {
         get: function () {
-            return this._tel;
+            return this._phone;
         },
         set: function (value) {
-            this._tel = value;
+            this._phone = value;
         },
         enumerable: true,
         configurable: true
@@ -2242,6 +2447,16 @@ var Student = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Student.prototype, "token", {
+        get: function () {
+            return this._token;
+        },
+        set: function (value) {
+            this._token = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Student.prototype.deserializable = function (json) {
         Object.assign(this, json);
         return this;
@@ -2250,8 +2465,23 @@ var Student = /** @class */ (function () {
         return {
             name: this._name,
             mail: this._mail,
-            tel: this._tel,
+            tel: this._phone,
             password: this._password,
+        };
+    };
+    Student.prototype.serializeUpdate = function () {
+        return {
+            idTutor: this._idStudent,
+            username: this._name,
+            password: this._password,
+            mail: this._mail,
+            phone: this._phone,
+            //  evaluation: this._evaluation,
+            token: this._token
+            /*   isWarned: this._isWarned,
+               isModerator: this._isModerator,
+               year: this._year,
+               section:this._section*/
         };
     };
     __decorate([
@@ -2300,6 +2530,9 @@ var TutorService = /** @class */ (function () {
     TutorService.prototype.get = function (id) {
         return this.http.get(TutorService_1.URL_API_TUTOR + "/" + id);
     };
+    TutorService.prototype.getAccount = function (username, password) {
+        return this.http.get(TutorService_1.URL_API_TUTOR + "?username=" + username + "&password=" + password);
+    };
     TutorService.prototype.create = function (tutor) {
         return this.http.post(TutorService_1.URL_API_TUTOR, tutor.serialize());
     };
@@ -2307,7 +2540,7 @@ var TutorService = /** @class */ (function () {
         return this.http.delete(TutorService_1.URL_API_TUTOR + '/' + tutor.idTutor);
     };
     TutorService.prototype.update = function (tutor) {
-        return this.http.put(TutorService_1.URL_API_TUTOR, tutor.serializeUpdate());
+        return this.http.put(TutorService_1.URL_API_TUTOR + '/' + tutor.idTutor, tutor.serializeUpdate());
     };
     var TutorService_1;
     TutorService.URL_API_TUTOR = '/api/tutor';
@@ -2349,7 +2582,7 @@ var Tutor = /** @class */ (function () {
         this._username = username;
         this._password = password;
         this._mail = mail;
-        this._tel = tel;
+        this._phone = tel;
         this._evaluation = evaluation;
         this._description = description;
         this._isWarned = isWarned;
@@ -2417,12 +2650,12 @@ var Tutor = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(Tutor.prototype, "tel", {
+    Object.defineProperty(Tutor.prototype, "phone", {
         get: function () {
-            return this._tel;
+            return this._phone;
         },
         set: function (value) {
-            this._tel = value;
+            this._phone = value;
         },
         enumerable: true,
         configurable: true
@@ -2467,6 +2700,16 @@ var Tutor = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(Tutor.prototype, "token", {
+        get: function () {
+            return this._token;
+        },
+        set: function (value) {
+            this._token = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Tutor.prototype.deserializable = function (json) {
         Object.assign(this, json);
         return this;
@@ -2477,7 +2720,7 @@ var Tutor = /** @class */ (function () {
             username: this._username,
             password: this._password,
             mail: this._mail,
-            phone: this._tel,
+            phone: this._phone,
             //  evaluation: this._evaluation,
             description: this._description
             /*   isWarned: this._isWarned,
@@ -2492,9 +2735,10 @@ var Tutor = /** @class */ (function () {
             username: this._username,
             password: this._password,
             mail: this._mail,
-            phone: this._tel,
+            phone: this._phone,
             //  evaluation: this._evaluation,
-            description: this._description
+            description: this._description,
+            token: this._token
             /*   isWarned: this._isWarned,
                isModerator: this._isModerator,
                year: this._year,
@@ -2569,7 +2813,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
 
 
 /***/ })

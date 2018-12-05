@@ -1,17 +1,19 @@
 import {Course} from "../course/course";
 
 export class Tutor {
+
   private _idTutor: number;
   private _username: string;
   private _password: string;
   private _mail: string;
-  private _tel: string;
+  private _phone: string;
   private _evaluation: number;
   private _description: string;
   private _isWarned: boolean;
   private _isModerator: boolean;
   private _year:number;
   private _section:string;
+  private _token:string;
 
 
 
@@ -21,7 +23,7 @@ export class Tutor {
     this._username = username;
     this._password = password;
     this._mail = mail;
-    this._tel = tel;
+    this._phone = tel;
     this._evaluation = evaluation;
     this._description = description;
     this._isWarned = isWarned;
@@ -71,12 +73,12 @@ export class Tutor {
     this._mail = value;
   }
 
-  get tel(): string {
-    return this._tel;
+  get phone(): string {
+    return this._phone;
   }
 
-  set tel(value: string) {
-    this._tel = value;
+  set phone(value: string) {
+    this._phone = value;
   }
 
   get evaluation(): number {
@@ -119,6 +121,14 @@ export class Tutor {
     this._section = value;
   }
 
+  get token(): string {
+    return this._token;
+  }
+
+  set token(value: string) {
+    this._token = value;
+  }
+
   public deserializable(json: any) : Tutor {
     Object.assign(this, json);
     return this;
@@ -130,7 +140,7 @@ export class Tutor {
       username: this._username,
       password: this._password,
       mail: this._mail,
-      phone: this._tel,
+      phone: this._phone,
     //  evaluation: this._evaluation,
       description: this._description
    /*   isWarned: this._isWarned,
@@ -146,9 +156,10 @@ export class Tutor {
       username: this._username,
       password: this._password,
       mail: this._mail,
-      phone: this._tel,
+      phone: this._phone,
       //  evaluation: this._evaluation,
-      description: this._description
+      description: this._description,
+      token: this._token
       /*   isWarned: this._isWarned,
          isModerator: this._isModerator,
          year: this._year,

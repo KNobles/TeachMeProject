@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "./auth.service";
+import {delay} from "rxjs/operators";
+import {Tutor} from '../user/tutor';
+import {Student} from "../user/student";
+import {StudentService} from "../user/student.service";
+import {TutorService} from "../user/tutor.service";
+import {Subscription} from "rxjs";
+import {Router} from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -7,19 +14,85 @@ import {AuthService} from "./auth.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+
   private _login: string ;
   private _password: string ;
-  constructor(public authService: AuthService) {}
+  private _subGet: Subscription;
+  private _subUpdate: Subscription;
+  private _tmpStudent: Student;
+  private _tmpTutor: Tutor;
+  private _token: string;
+  private _isStudent: boolean = true;
+
+  constructor(public authService: AuthService, public studentService: StudentService, public tutorService: TutorService, public router: Router) {}
   ngOnInit() {
   }
+
+  ngOnDestroy(){
+    this._subGet.unsubscribe();
+    this._subUpdate.unsubscribe();
+  }
+
   Connection() {
     //alert(this._login + ' ' + this._password);
     this.authService.login(this._login, this._password).subscribe(
-      () => {
-        console.log("user is logged in");
+      token => {
+        this._token = token.substr(1, token.length-1);
+        console.log(this._token);
+        if(this._isStudent)
+        {
+          this._subGet = this.studentService.getAccount(this.login, this.password).subscribe(student => {
+            this.tmpStudent = new Student().deserializable(student);
+            this.tmpStudent.token = this._token;
+            this._subUpdate = this.studentService.update(this.tmpStudent).subscribe();
+            this.router.navigate(['/Home']);
+            localStorage.setItem("account", JSON.stringify(this.tmpStudent));
+            localStorage.setItem("type", "student");
+          });
+
+        }
+        else
+        {
+          this._subGet = this.tutorService.getAccount(this.login, this.password).subscribe(tutor => {
+            this.tmpTutor = new Tutor().deserializable(tutor);
+            this.tmpTutor.token = this._token;
+            this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
+            this.router.navigate(['/Home']);
+            localStorage.setItem("account", JSON.stringify(this.tmpTutor));
+            localStorage.setItem("type", "tutor");
+          });
+
+        }
       });
-    console.log("connection");
+
+
+
+
+
+
   }
+
+  onChange(){
+    this._isStudent = ! this._isStudent;
+  }
+
+  get tmpStudent(): Student {
+    return this._tmpStudent;
+  }
+
+  set tmpStudent(value: Student) {
+    this._tmpStudent = value;
+  }
+
+  get tmpTutor(): Tutor {
+    return this._tmpTutor;
+  }
+
+  set tmpTutor(value: Tutor) {
+    this._tmpTutor = value;
+  }
+
 
   get login(): string {
     return this._login;

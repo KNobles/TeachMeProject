@@ -63,11 +63,11 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   get tel(): string {
-    return this.tmpTutor.tel;
+    return this.tmpTutor.phone;
   }
 
   set tel(value: string) {
-    this.tmpTutor.mail = value;
+    this.tmpTutor.phone = value;
   }
 
   get evaluation(): number {

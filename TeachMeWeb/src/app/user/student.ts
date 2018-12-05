@@ -1,19 +1,21 @@
 import {Output} from '@angular/core';
 
 export class Student {
+
   private _idStudent: number;
   private _name:string;
   private _mail:string;
-  private _tel:string;
+  private _phone:string;
   private _password:string;
   private _avertissement: boolean;
   private _isModerateur: boolean;
+  private _token: string;
 
   constructor(name: string="user", mail: string="user@hotmail.com", password: string="password", tel: string="0123456789", isWarned:boolean=false, isModerator:boolean=false) {
     this._name = name;
     this._mail = mail;
     this._password = password;
-    this._tel = tel;
+    this._phone = tel;
     this._avertissement = isWarned;
     this._isModerateur = isModerator;
   }
@@ -50,12 +52,12 @@ export class Student {
     this._password = value;
   }
 
-  get tel(): string {
-    return this._tel;
+  get phone(): string {
+    return this._phone;
   }
 
-  set tel(value: string) {
-    this._tel = value;
+  set phone(value: string) {
+    this._phone = value;
   }
 
   get avertissement(): boolean {
@@ -74,6 +76,14 @@ export class Student {
     this._isModerateur = value;
   }
 
+  get token(): string {
+    return this._token;
+  }
+
+  set token(value: string) {
+    this._token = value;
+  }
+
   public deserializable(json: any) : Student {
     Object.assign(this, json);
     return this;
@@ -83,8 +93,24 @@ export class Student {
     return {
       name: this._name,
       mail: this._mail,
-      tel: this._tel,
+      tel: this._phone,
       password: this._password,
+    };
+  }
+
+  public serializeUpdate(): any {
+    return {
+      idTutor: this._idStudent,
+      username: this._name,
+      password: this._password,
+      mail: this._mail,
+      phone: this._phone,
+      //  evaluation: this._evaluation,
+      token: this._token
+      /*   isWarned: this._isWarned,
+         isModerator: this._isModerator,
+         year: this._year,
+         section:this._section*/
     };
   }
 

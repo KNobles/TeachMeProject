@@ -28,11 +28,13 @@ namespace TeachMeAPI.Models
         public string Description { get; set; }
         [JsonProperty(PropertyName = "evaluation")]
         public double Evaluation { get; set; }
+        [JsonProperty(PropertyName = "token")]
+        public string Token { get; set; }
 
         public Tutor()
         { }
 
-        public Tutor(int id, string name, string mail, string password, string tel, bool avertissement, bool isModerateur, string description, double evaluation)
+        public Tutor(int id, string name, string mail, string password, string tel, bool avertissement, bool isModerateur, string description, double evaluation, string token)
         {
             IdTutor = id;
             UserName = name;
@@ -43,6 +45,7 @@ namespace TeachMeAPI.Models
             IsModerator = isModerateur;
             Description = description;
             Evaluation = evaluation;
+            Token = token;
         }
 
         public Tutor(SqlDataReader reader)
@@ -56,6 +59,7 @@ namespace TeachMeAPI.Models
             IsModerator = Boolean.Parse(reader[TutorDAO.COLUMN_IS_MODERATOR].ToString());
             Description = reader[TutorDAO.COLUMN_DESCRIPTION].ToString();
             Evaluation = Double.Parse(reader[TutorDAO.COLUMN_EVALUATION].ToString());
+            Token = reader[TutorDAO.COLUMN_TOKEN].ToString();
 
         }
     }

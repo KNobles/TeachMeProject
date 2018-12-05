@@ -14,10 +14,11 @@ import {ListAnnouncementComponent} from "./list-announcement/list-announcement.c
 import {CreateAnnouncementComponent} from "./create-announcement/create-announcement.component";
 import {HomeComponent} from "./home/home.component";
 import {ProfileComponent} from "./profil/profile.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FilterByPriceAnnouncementPipe } from './filter-by-price-announcement.pipe';
 import { NavbarheaderComponent } from './navbarheader/navbarheader.component';
 import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.pipe';
+import {TokenInterceptor} from "./token-interceptor";
 
 
 
@@ -43,7 +44,11 @@ import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide : HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
