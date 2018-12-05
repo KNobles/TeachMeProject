@@ -132,7 +132,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
   Sending(){
     this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
-    console.log(this.tmpTutor);
+    alert("Modification done");
+
   }
 
 }

@@ -539,7 +539,11 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+=======
+module.exports = __webpack_require__(/*! C:\Users\axoul\Desktop\TeachMe\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+>>>>>>> refs/remotes/origin/master
 
 
 /***/ })

@@ -18,7 +18,7 @@ export class Tutor {
 
 
   constructor(username: string="tutor", password: string="password", mail: string="tutor@hotmail.com",
-              tel: string="0123456789", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false
+              tel: string="0987654321", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false
   ,year: number = 1,section:string="undifined") {
     this._username = username;
     this._password = password;
@@ -157,10 +157,18 @@ export class Tutor {
       password: this._password,
       mail: this._mail,
       phone: this._phone,
+<<<<<<< HEAD
       //  evaluation: this._evaluation,
       description: this._description,
       token: this._token
       /*   isWarned: this._isWarned,
+=======
+
+      description: this._description
+      /*
+         evaluation: this._evaluation,
+         isWarned: this._isWarned,
+>>>>>>> refs/remotes/origin/master
          isModerator: this._isModerator,
          year: this._year,
          section:this._section*/
