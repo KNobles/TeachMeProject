@@ -9,14 +9,14 @@ import {StudentService} from '../student.service';
 import {Subscription} from 'rxjs';
 
 import {BroadcastStudentCreatedService} from "../../broadcast-student-created.service";
-
+import {animate, group, style, transition, trigger} from "@angular/animations";
 
 
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  styleUrls: ['./create-user.component.css'],
 })
 
 export class CreateUserComponent implements OnInit ,OnDestroy{

@@ -1,10 +1,21 @@
-<div>
+<div class="col-sm-5">
+    <div class="form-bottom">
   <form #formTutor="ngForm" class="container" name="formTutor" (change)="Send($event)">
-  Description : <br>
-    <textarea name="descrition" [(ngModel)]="description" rows="5" cols="50" required></textarea> <br>
-  Année :<br>
-    <input name="annee" [(ngModel)]="year" type="text" required> <br>
-   Section : <br>
-    <input name="section" [(ngModel)]="section" type="text" required> <br>
+  <div class="form-group ">
+    <label class="sr-only" for="form-about-yourself">About yourself</label>
+    <textarea name="form-about-yourself" placeholder="About yourself..."
+              class="form-about-yourself form-control" id="form-about-yourself" [(ngModel)]="description" rows="10" required></textarea>
+  </div>
+
+    <div class="form-group">
+      <label class="sr-only" for="form-year">Year</label>
+      <input type="text" name="form-year" placeholder="Year..." class="form-year form-control" id="form-year" [(ngModel)]="year"  required>
+    </div>
+
+    <div class="form-group">
+      <label class="sr-only" for="form-section">Section</label>
+      <input type="text" name="form-section" placeholder="Section..." class="form-section form-control" id="form-section" [(ngModel)]="section"  required>
+    </div>
   </form>
+  </div>
 </div>

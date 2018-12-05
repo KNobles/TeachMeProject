@@ -15,10 +15,9 @@ import {CreateAnnouncementComponent} from "./create-announcement/create-announce
 import {HomeComponent} from "./home/home.component";
 import {ProfileComponent} from "./profil/profile.component";
 import {HttpClientModule} from "@angular/common/http";
-import { FilterByPriceAnnouncementPipe } from './filter-by-price-announcement.pipe';
 import { NavbarheaderComponent } from './navbarheader/navbarheader.component';
-import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.pipe';
-
+import { FilterAnnouncementPipe } from './filter-announcement.pipe';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -33,15 +32,15 @@ import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.
     HomeComponent,
     CreateAnnouncementComponent,
     ListAnnouncementComponent,
-    FilterByPriceAnnouncementPipe,
     NavbarheaderComponent,
-    FilterByCourseAnnouncementPipe
+    FilterAnnouncementPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
