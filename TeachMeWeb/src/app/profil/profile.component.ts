@@ -63,11 +63,11 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   get tel(): string {
-    return this.tmpTutor.tel;
+    return this.tmpTutor.phone;
   }
 
   set tel(value: string) {
-    this.tmpTutor.mail = value;
+    this.tmpTutor.phone = value;
   }
 
   get evaluation(): number {
@@ -132,7 +132,8 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
   Sending(){
     this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
-    console.log(this.tmpTutor);
+    alert("Modification done");
+
   }
 
 }

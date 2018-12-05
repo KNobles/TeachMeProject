@@ -4,7 +4,7 @@ export class Student {
   private _idStudent: number;
   private _name:string;
   private _mail:string;
-  private _tel:string;
+  private _phone:string;
   private _password:string;
   private _avertissement: boolean;
   private _isModerateur: boolean;
@@ -13,7 +13,7 @@ export class Student {
     this._name = name;
     this._mail = mail;
     this._password = password;
-    this._tel = tel;
+    this._phone = tel;
     this._avertissement = isWarned;
     this._isModerateur = isModerator;
   }
@@ -50,12 +50,12 @@ export class Student {
     this._password = value;
   }
 
-  get tel(): string {
-    return this._tel;
+  get phone(): string {
+    return this._phone;
   }
 
-  set tel(value: string) {
-    this._tel = value;
+  set phone(value: string) {
+    this._phone = value;
   }
 
   get avertissement(): boolean {
@@ -83,7 +83,7 @@ export class Student {
     return {
       name: this._name,
       mail: this._mail,
-      tel: this._tel,
+      tel: this._phone,
       password: this._password,
     };
   }
