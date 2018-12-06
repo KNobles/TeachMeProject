@@ -29,7 +29,6 @@ export class ConnectedService {
   public connecting(){
 
     let accountTmp : string = localStorage.getItem("account");
-    console.log("let accountTmp fonctionne");
 
     if(accountTmp != null){
       if(localStorage.getItem("type") === "student")
@@ -38,11 +37,9 @@ export class ConnectedService {
         this.accountConnected = this.studentConnected;
       }
       else{
-        console.log("on rentre bien dans le else");
-        console.log(localStorage.getItem("account"));
+
         let tutor: Tutor;
         this._tutorConnected = new Tutor().deserializable(JSON.parse(localStorage.getItem("account")));
-        console.log(this._tutorConnected.username);
         this.accountConnected = this.tutorConnected;
       }
 

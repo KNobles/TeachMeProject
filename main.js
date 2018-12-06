@@ -578,14 +578,18 @@ var ConnectedService = /** @class */ (function () {
     };
     ConnectedService.prototype.connecting = function () {
         var accountTmp = localStorage.getItem("account");
+        console.log("let accountTmp fonctionne");
         if (accountTmp != null) {
             if (localStorage.getItem("type") === "student") {
                 this._studentConnected = new _user_student__WEBPACK_IMPORTED_MODULE_1__["Student"]().deserializable(localStorage.getItem("account"));
                 this.accountConnected = this.studentConnected;
             }
             else {
+                console.log("on rentre bien dans le else");
+                console.log(localStorage.getItem("account"));
                 var tutor = void 0;
                 this._tutorConnected = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(JSON.parse(localStorage.getItem("account")));
+                console.log(this._tutorConnected.username);
                 this.accountConnected = this.tutorConnected;
             }
             this._connected = true;
@@ -770,7 +774,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-2\">\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    <select class=\"form-control form-control-sm\" name=\"list\" [(ngModel)]=\"announcementTmp.idCourse\">\r\n        <option *ngFor=\"let c of courses\" name = \"course\" [value]=\"c?.idCourse\">{{c?.label}}</option>\r\n    </select>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input name=\"sumbitButton\" type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div class=\"col-md-2\">\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    <select class=\"form-control form-control-sm\" name=\"list\" [(ngModel)]=\"announcementTmp.idCourse\">\r\n        <option *ngFor=\"let c of courses\" name = \"c?.label\" [value]=\"c?.idCourse\">{{c?.label}}</option>\r\n    </select>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input name=\"sumbitButton\" type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -789,8 +793,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/announcement/announcement */ "./src/app/announcement/announcement.ts");
 /* harmony import */ var _course_course_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../course/course.service */ "./src/app/course/course.service.ts");
 /* harmony import */ var _course_course__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../course/course */ "./src/app/course/course.ts");
-/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connected.service */ "./src/app/connected.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -805,14 +807,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
 var CreateAnnouncementComponent = /** @class */ (function () {
-    function CreateAnnouncementComponent(courseService, announcementService, connectedService, router) {
+    function CreateAnnouncementComponent(courseService, announcementService) {
         this.courseService = courseService;
         this.announcementService = announcementService;
-        this.connectedService = connectedService;
-        this.router = router;
         this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"];
         this._announcementCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this._courses = [];
@@ -838,48 +836,10 @@ var CreateAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "title", {
-        get: function () {
-            return this.announcementTmp.title;
-        },
-        set: function (value) {
-            this.announcementTmp.title = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "description", {
-        get: function () {
-            return this.announcementTmp.description;
-        },
-        set: function (value) {
-            this.announcementTmp.description = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "fee", {
-        get: function () {
-            return this.announcementTmp.fee;
-        },
-        set: function (value) {
-            this.announcementTmp.fee = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     CreateAnnouncementComponent.prototype.createAnnouncement = function () {
-        if (localStorage.getItem("type") === "tutor") {
-            this.connectedService.connecting();
-            this.announcementTmp.idTutor = this.connectedService.tutorConnected.idTutor;
-            this.announcementService.create(this.announcementTmp).subscribe();
-            alert("Votre annonce a bien été créée");
-            this.router.navigate(['/Home']);
-        }
-        else {
-            alert("Veuillez-vous connecter avant de créer une annonce");
-            this.router.navigate(['/Login']);
-        }
+        console.log(this._announcementTmp);
+        this._announcementCreated.next(this.announcementTmp);
+        this.reset();
     };
     CreateAnnouncementComponent.prototype.reset = function () {
         this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"];
@@ -902,7 +862,7 @@ var CreateAnnouncementComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./create-announcement.component.html */ "./src/app/create-announcement/create-announcement.component.html"),
             styles: [__webpack_require__(/*! ./create-announcement.component.css */ "./src/app/create-announcement/create-announcement.component.css")]
         }),
-        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_3__["CourseService"], _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"], _connected_service__WEBPACK_IMPORTED_MODULE_5__["ConnectedService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
+        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_3__["CourseService"], _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]])
     ], CreateAnnouncementComponent);
     return CreateAnnouncementComponent;
 }());
@@ -1328,7 +1288,9 @@ module.exports = ".form-container{\r\n  border: 0px solid #fff;\r\n  padding: 50
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\"><b>Username</b></label>\r\n          <input id=\"username\" type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label id=\"password\" for=\"password\"><b>Password</b></label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
+
+module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\"><b>Username</b></label>\r\n          <input id=\"username\" type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label id=\"password\" for=\"password\"><b>Password</b></label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
+
 
 /***/ }),
 
@@ -1384,6 +1346,7 @@ var LoginComponent = /** @class */ (function () {
         //alert(this._login + ' ' + this._password);
         this.authService.login(this._login, this._password).subscribe(function (token) {
             _this._token = token;
+            console.log(_this._token);
             if (_this._isStudent) {
                 _this._subGet = _this.studentService.getAccount(_this.login, _this.password).subscribe(function (student) {
                     _this.tmpStudent = new _user_student__WEBPACK_IMPORTED_MODULE_3__["Student"]().deserializable(student);
@@ -1400,6 +1363,7 @@ var LoginComponent = /** @class */ (function () {
                     _this.tmpTutor.token = _this._token;
                     _this._subUpdate = _this.tutorService.update(_this.tmpTutor).subscribe();
                     localStorage.setItem("account", JSON.stringify(_this.tmpTutor.toJson()));
+                    console.log(localStorage.getItem("account"));
                     localStorage.setItem("type", "tutor");
                     _this.router.navigate(['/Home']);
                 });
@@ -2842,6 +2806,7 @@ var Tutor = /** @class */ (function () {
             //  evaluation: this._evaluation,
             description: this._description,
             token: this._token
+<<<<<<< HEAD
             /*   isWarned: this._isWarned,
       
       
@@ -2853,7 +2818,8 @@ var Tutor = /** @class */ (function () {
                isModerator: this._isModerator,
                year: this._year,
                section:this._section*/
-            //  evaluation: this._evaluation,
+=======
+>>>>>>> refs/remotes/origin/master
         };
     };
     return Tutor;
@@ -2924,7 +2890,11 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+<<<<<<< HEAD
+module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+=======
+module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+>>>>>>> refs/remotes/origin/master
 
 
 /***/ })
