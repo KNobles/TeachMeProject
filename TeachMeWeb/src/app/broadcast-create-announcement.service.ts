@@ -9,7 +9,7 @@ import {filter} from "rxjs/operators";
 export class BroadcastCreateAnnouncementService {
 
   private subjectAnnouncementCreated: BehaviorSubject<Announcement> = new BehaviorSubject(null);
-  public  AnnouncementCreated:Observable<Announcement> = this.subjectAnnouncementCreated.asObservable().pipe(filter(announcement => !!announcement));
+  public  AnnouncementCreated$:Observable<Announcement> = this.subjectAnnouncementCreated.asObservable().pipe(filter(announcement => !!announcement));
 
   constructor() { }
 

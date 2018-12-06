@@ -198,7 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user/create-user/create-user.component */ "./src/app/user/create-user/create-user.component.ts");
 /* harmony import */ var _profil_profile_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profil/profile.component */ "./src/app/profil/profile.component.ts");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
+/* harmony import */ var _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./smart-create-announcement/smart-create-announcement.component */ "./src/app/smart-create-announcement/smart-create-announcement.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -226,7 +226,7 @@ var routes = [
         path: "Home", component: _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
     },
     {
-        path: "Announcement", component: _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__["CreateAnnouncementComponent"]
+        path: "Announcement", component: _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_6__["SmartCreateAnnouncementComponent"]
     },
     {
         path: "", redirectTo: "/Login", pathMatch: "full"
@@ -335,12 +335,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./filter-announcement.pipe */ "./src/app/filter-announcement.pipe.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./token-interceptor */ "./src/app/token-interceptor.ts");
+/* harmony import */ var _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./smart-create-announcement/smart-create-announcement.component */ "./src/app/smart-create-announcement/smart-create-announcement.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -377,7 +379,8 @@ var AppModule = /** @class */ (function () {
                 _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_11__["CreateAnnouncementComponent"],
                 _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_10__["ListAnnouncementComponent"],
                 _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_15__["NavbarheaderComponent"],
-                _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_16__["FilterAnnouncementPipe"]
+                _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_16__["FilterAnnouncementPipe"],
+                _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_19__["SmartCreateAnnouncementComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -429,7 +432,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var BroadcastCreateAnnouncementService = /** @class */ (function () {
     function BroadcastCreateAnnouncementService() {
         this.subjectAnnouncementCreated = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
-        this.AnnouncementCreated = this.subjectAnnouncementCreated.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (announcement) { return !!announcement; }));
+        this.AnnouncementCreated$ = this.subjectAnnouncementCreated.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (announcement) { return !!announcement; }));
     }
     BroadcastCreateAnnouncementService.prototype.broadcastAnnouncement = function (announcement) {
         this.subjectAnnouncementCreated.next(announcement);
@@ -580,7 +583,7 @@ var ConnectedService = /** @class */ (function () {
         var accountTmp = localStorage.getItem("account");
         if (accountTmp != null) {
             if (localStorage.getItem("type") === "student") {
-                this._studentConnected = new _user_student__WEBPACK_IMPORTED_MODULE_1__["Student"]().deserializable(localStorage.getItem("account"));
+                this._studentConnected = new _user_student__WEBPACK_IMPORTED_MODULE_1__["Student"]().deserializable(JSON.parse(localStorage.getItem("account")));
                 this.accountConnected = this.studentConnected;
             }
             else {
@@ -785,12 +788,10 @@ module.exports = "<div class=\"col-md-2\">\r\n  <form #formAnnouncement=\"ngForm
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateAnnouncementComponent", function() { return CreateAnnouncementComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../announcement/announcement.service */ "./src/app/announcement/announcement.service.ts");
-/* harmony import */ var src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/announcement/announcement */ "./src/app/announcement/announcement.ts");
-/* harmony import */ var _course_course_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../course/course.service */ "./src/app/course/course.service.ts");
-/* harmony import */ var _course_course__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../course/course */ "./src/app/course/course.ts");
-/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connected.service */ "./src/app/connected.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/announcement/announcement */ "./src/app/announcement/announcement.ts");
+/* harmony import */ var _course_course_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../course/course.service */ "./src/app/course/course.service.ts");
+/* harmony import */ var _course_course__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../course/course */ "./src/app/course/course.ts");
+/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../connected.service */ "./src/app/connected.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -805,15 +806,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
 var CreateAnnouncementComponent = /** @class */ (function () {
-    function CreateAnnouncementComponent(courseService, announcementService, connectedService, router) {
+    function CreateAnnouncementComponent(courseService, connectedService) {
         this.courseService = courseService;
-        this.announcementService = announcementService;
         this.connectedService = connectedService;
-        this.router = router;
-        this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"];
+        this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_1__["Announcement"];
         this._announcementCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this._courses = [];
     }
@@ -822,7 +819,7 @@ var CreateAnnouncementComponent = /** @class */ (function () {
     };
     CreateAnnouncementComponent.prototype.getCourses = function () {
         var _this = this;
-        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_4__["Course"]().deserializable(course); }); });
+        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_3__["Course"]().deserializable(course); }); });
     };
     Object.defineProperty(CreateAnnouncementComponent.prototype, "courses", {
         get: function () {
@@ -838,51 +835,16 @@ var CreateAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "title", {
-        get: function () {
-            return this.announcementTmp.title;
-        },
-        set: function (value) {
-            this.announcementTmp.title = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "description", {
-        get: function () {
-            return this.announcementTmp.description;
-        },
-        set: function (value) {
-            this.announcementTmp.description = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "fee", {
-        get: function () {
-            return this.announcementTmp.fee;
-        },
-        set: function (value) {
-            this.announcementTmp.fee = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     CreateAnnouncementComponent.prototype.createAnnouncement = function () {
         if (localStorage.getItem("type") === "tutor") {
             this.connectedService.connecting();
             this.announcementTmp.idTutor = this.connectedService.tutorConnected.idTutor;
-            this.announcementService.create(this.announcementTmp).subscribe();
-            alert("Votre annonce a bien été créée");
-            this.router.navigate(['/Home']);
-        }
-        else {
-            alert("Veuillez-vous connecter avant de créer une annonce");
-            this.router.navigate(['/Login']);
+            this._announcementCreated.next(this.announcementTmp);
+            this.reset();
         }
     };
     CreateAnnouncementComponent.prototype.reset = function () {
-        this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"];
+        this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_1__["Announcement"];
     };
     Object.defineProperty(CreateAnnouncementComponent.prototype, "announcementCreated", {
         get: function () {
@@ -902,7 +864,7 @@ var CreateAnnouncementComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./create-announcement.component.html */ "./src/app/create-announcement/create-announcement.component.html"),
             styles: [__webpack_require__(/*! ./create-announcement.component.css */ "./src/app/create-announcement/create-announcement.component.css")]
         }),
-        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_3__["CourseService"], _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"], _connected_service__WEBPACK_IMPORTED_MODULE_5__["ConnectedService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
+        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_2__["CourseService"], _connected_service__WEBPACK_IMPORTED_MODULE_4__["ConnectedService"]])
     ], CreateAnnouncementComponent);
     return CreateAnnouncementComponent;
 }());
@@ -1085,7 +1047,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pos-f-t\">\r\n\r\n  <div class=\"collapse\" id=\"navbarToggleExternalContent\">\r\n\r\n    <div class=\"bg-dark p-4\">\r\n\r\n      <div class=\"form-row\">\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Class</h5>\r\n          <select [(ngModel)]=\"currentCourse\" class=\"form-control form-control-sm col-md-6\" >\r\n            <option [value]=-1 selected=\"selected\">All</option>\r\n            <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" >{{c?.label}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Price</h5>\r\n          <select name=\"filterOption\" [(ngModel)]=\"optionSelected\" class=\"form-control form-control-sm col-md-6\">\r\n            <option *ngFor=\"let o of OPTIONS\" [ngValue]=\"o\">\r\n              {{intToOrderOption(o)}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n  <nav class=\"navbar navbar-dark bg-dark\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span>Filter</span>\r\n    </button>\r\n  </nav>\r\n</div>\r\n\r\n<div  class=\"container-fluid\" *ngFor=\"let announcement of announcements|filterAnnouncement:optionSelected:currentCourse\" style=\"padding: 30px;\">\r\n  <div class=\"row align-items-center justify-content-center\">\r\n\r\n    <div class=\"card text-center\" style=\"width: 40rem;\">\r\n      <div class=\"card-header\">\r\n        {{getTutorById(announcement.idTutor)?.username}}\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n        <p class=\"card-text\">{{announcement.description}}</p>\r\n      </div>\r\n        <div class=\"blockquote-footer text-left\">{{getCoursesById(announcement.idCourse)?.label}}</div>\r\n      <div class=\"card-footer text-muted\">\r\n        {{announcement.fee}} €\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"pos-f-t\">\r\n\r\n  <div class=\"collapse\" id=\"navbarToggleExternalContent\">\r\n\r\n    <div class=\"bg-dark p-4\">\r\n\r\n      <div class=\"form-row\">\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Class</h5>\r\n          <select [(ngModel)]=\"currentCourse\" class=\"form-control form-control-sm col-md-6\" >\r\n            <option [value]=-1 selected=\"selected\">All</option>\r\n            <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" >{{c?.label}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Price</h5>\r\n          <select name=\"filterOption\" [(ngModel)]=\"optionSelected\" class=\"form-control form-control-sm col-md-6\">\r\n            <option *ngFor=\"let o of options\" [ngValue]=\"o\">\r\n              {{intToOrderOption(o)}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n  <nav class=\"navbar navbar-dark bg-dark\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span>Filter</span>\r\n    </button>\r\n  </nav>\r\n</div>\r\n\r\n<div  class=\"container-fluid\" *ngFor=\"let announcement of announcements|filterAnnouncement:optionSelected:currentCourse\" style=\"padding: 30px;\">\r\n  <div class=\"row align-items-center justify-content-center\">\r\n\r\n    <div class=\"card text-center\" style=\"width: 40rem;\">\r\n      <div class=\"card-header\">\r\n        {{getTutorById(announcement.idTutor)?.username}}\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n        <p class=\"card-text\">{{announcement.description}}</p>\r\n      </div>\r\n        <div class=\"blockquote-footer text-left\">{{getCoursesById(announcement.idCourse)?.label}}</div>\r\n      <div class=\"card-footer text-muted\">\r\n        {{announcement.fee}} €\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1101,13 +1063,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListAnnouncementComponent", function() { return ListAnnouncementComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../announcement/announcement.service */ "./src/app/announcement/announcement.service.ts");
-/* harmony import */ var _broadcast_create_announcement_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../broadcast-create-announcement.service */ "./src/app/broadcast-create-announcement.service.ts");
-/* harmony import */ var _announcement_announcement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../announcement/announcement */ "./src/app/announcement/announcement.ts");
-/* harmony import */ var _user_tutor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../user/tutor */ "./src/app/user/tutor.ts");
-/* harmony import */ var _user_tutor_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../user/tutor.service */ "./src/app/user/tutor.service.ts");
-/* harmony import */ var _course_course__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../course/course */ "./src/app/course/course.ts");
-/* harmony import */ var _course_course_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../course/course.service */ "./src/app/course/course.service.ts");
-/* harmony import */ var _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filter-announcement.pipe */ "./src/app/filter-announcement.pipe.ts");
+/* harmony import */ var _announcement_announcement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../announcement/announcement */ "./src/app/announcement/announcement.ts");
+/* harmony import */ var _user_tutor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../user/tutor */ "./src/app/user/tutor.ts");
+/* harmony import */ var _user_tutor_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../user/tutor.service */ "./src/app/user/tutor.service.ts");
+/* harmony import */ var _course_course__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../course/course */ "./src/app/course/course.ts");
+/* harmony import */ var _course_course_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../course/course.service */ "./src/app/course/course.service.ts");
+/* harmony import */ var _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filter-announcement.pipe */ "./src/app/filter-announcement.pipe.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1125,19 +1086,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var ListAnnouncementComponent = /** @class */ (function () {
-    function ListAnnouncementComponent(courseService, tutorService, announcementService, broadcastCreateAnnouncement) {
+    function ListAnnouncementComponent(courseService, tutorService, announcementService) {
         this.courseService = courseService;
         this.tutorService = tutorService;
         this.announcementService = announcementService;
-        this.broadcastCreateAnnouncement = broadcastCreateAnnouncement;
         this._announcements = [];
         this._tutors = [];
         this._courses = [];
         this._currentCourse = -1;
-        this._OPTIONS = [_filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_8__["FilterAnnouncementPipe"].ORDER_DEFAULT, _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_8__["FilterAnnouncementPipe"].ORDER_ASCENDING, _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_8__["FilterAnnouncementPipe"].ORDER_DESCENDING];
-        this.optionSelected = _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_8__["FilterAnnouncementPipe"].ORDER_DEFAULT;
+        this._options = [_filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].ORDER_DEFAULT, _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].ORDER_ASCENDING, _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].ORDER_DESCENDING];
+        this.optionSelected = _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].ORDER_DEFAULT;
     }
     Object.defineProperty(ListAnnouncementComponent.prototype, "currentCourse", {
         get: function () {
@@ -1150,14 +1109,15 @@ var ListAnnouncementComponent = /** @class */ (function () {
         this._announcements.push(announcement);
     };
     ListAnnouncementComponent.prototype.intToOrderOption = function (num) {
-        return _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_8__["FilterAnnouncementPipe"].intToOrderOption(num);
+        return _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].intToOrderOption(num);
     };
-    ListAnnouncementComponent.prototype.listAnnouncementCreated = function () {
-        var _this = this;
-        this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated.subscribe(function (announcementFromServer) { return _this._announcements.push(announcementFromServer); });
-    };
+    /*
+      listAnnouncementCreated() {
+        this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated$.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
+      }
+    */
     ListAnnouncementComponent.prototype.ngOnInit = function () {
-        this.listAnnouncementCreated();
+        // this.listAnnouncementCreated();
         this.getAnnouncements();
         this.getTutors();
         this.getCourses();
@@ -1186,7 +1146,7 @@ var ListAnnouncementComponent = /** @class */ (function () {
         var _this = this;
         this.subQuery = this.announcementService
             .query()
-            .subscribe(function (announcements) { return _this._announcements = announcements.map(function (a) { return new _announcement_announcement__WEBPACK_IMPORTED_MODULE_3__["Announcement"]().deserializable(a); }); });
+            .subscribe(function (announcements) { return _this._announcements = announcements.map(function (a) { return new _announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"]().deserializable(a); }); });
     };
     Object.defineProperty(ListAnnouncementComponent.prototype, "announcements", {
         get: function () {
@@ -1198,19 +1158,19 @@ var ListAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ListAnnouncementComponent.prototype, "OPTIONS", {
+    Object.defineProperty(ListAnnouncementComponent.prototype, "options", {
         get: function () {
-            return this._OPTIONS;
+            return this._options;
         },
         set: function (value) {
-            this._OPTIONS = value;
+            this._options = value;
         },
         enumerable: true,
         configurable: true
     });
     ListAnnouncementComponent.prototype.getTutors = function () {
         var _this = this;
-        this.tutorService.query().subscribe(function (t) { return _this._tutors = t.map(function (tutor) { return new _user_tutor__WEBPACK_IMPORTED_MODULE_4__["Tutor"]().deserializable(tutor); }); });
+        this.tutorService.query().subscribe(function (t) { return _this._tutors = t.map(function (tutor) { return new _user_tutor__WEBPACK_IMPORTED_MODULE_3__["Tutor"]().deserializable(tutor); }); });
     };
     Object.defineProperty(ListAnnouncementComponent.prototype, "tutors", {
         get: function () {
@@ -1229,7 +1189,7 @@ var ListAnnouncementComponent = /** @class */ (function () {
     };
     ListAnnouncementComponent.prototype.getCourses = function () {
         var _this = this;
-        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_6__["Course"]().deserializable(course); }); });
+        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_5__["Course"]().deserializable(course); }); });
     };
     Object.defineProperty(ListAnnouncementComponent.prototype, "courses", {
         get: function () {
@@ -1255,7 +1215,7 @@ var ListAnnouncementComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./list-announcement.component.html */ "./src/app/list-announcement/list-announcement.component.html"),
             styles: [__webpack_require__(/*! ./list-announcement.component.css */ "./src/app/list-announcement/list-announcement.component.css")]
         }),
-        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_7__["CourseService"], _user_tutor_service__WEBPACK_IMPORTED_MODULE_5__["TutorService"], _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"], _broadcast_create_announcement_service__WEBPACK_IMPORTED_MODULE_2__["BroadcastCreateAnnouncementService"]])
+        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_6__["CourseService"], _user_tutor_service__WEBPACK_IMPORTED_MODULE_4__["TutorService"], _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]])
     ], ListAnnouncementComponent);
     return ListAnnouncementComponent;
 }());
@@ -1376,12 +1336,15 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.ngOnInit = function () {
     };
     LoginComponent.prototype.ngOnDestroy = function () {
-        this._subGet.unsubscribe();
-        this._subUpdate.unsubscribe();
+        if (this._subGet) {
+            this._subGet.unsubscribe();
+        }
+        if (this._subUpdate) {
+            this._subUpdate.unsubscribe();
+        }
     };
     LoginComponent.prototype.connection = function () {
         var _this = this;
-        //alert(this._login + ' ' + this._password);
         this.authService.login(this._login, this._password).subscribe(function (token) {
             _this._token = token;
             if (_this._isStudent) {
@@ -1389,7 +1352,7 @@ var LoginComponent = /** @class */ (function () {
                     _this.tmpStudent = new _user_student__WEBPACK_IMPORTED_MODULE_3__["Student"]().deserializable(student);
                     _this.tmpStudent.token = _this._token;
                     _this._subUpdate = _this.studentService.update(_this.tmpStudent).subscribe();
-                    localStorage.setItem("account", JSON.stringify(_this.tmpStudent));
+                    localStorage.setItem("account", JSON.stringify(_this.tmpStudent.toJson()));
                     localStorage.setItem("type", "student");
                     _this.router.navigate(['/Home']);
                 });
@@ -1553,7 +1516,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navbarheader></app-navbarheader>\r\n<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"username\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"password\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"tel\" [(ngModel)]=\"tel\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   disabled required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   disabled required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button><Button (click)=\"Sending()\" routerLink=\"/Profile\" [disabled]=\"!modify\">Send</Button>\r\n</div>\r\n"
+module.exports = "<app-navbarheader></app-navbarheader>\r\n<div>\r\n  <form #formProfil=\"ngForm\" class=\"container\" name=\"formProfile\">\r\n    Nom d'utilisateur : <br>\r\n    <input type=\"text\" name=\"username\" [(ngModel)]=\"username\" [disabled]=\"modify\" required > <br>\r\n    Mot de passe : <br>\r\n    <input type=\"text\" name=\"password\" [(ngModel)]=\"password\"  [disabled]=\"modify\" required > <br>\r\n    Email : <br>\r\n    <input type=\" text\" name=\"mail\" [(ngModel)]=\"mail\"  [disabled]=\"modify\" required> <br>\r\n    Numéro de téléphone : <br>\r\n    <input type=\"text\" name=\"phone\" [(ngModel)]=\"phone\"  [disabled]=\"modify\" required > <br>\r\n    Evaluation : <br>\r\n    <input type=\"text\" name=\"evaluation\" [(ngModel)]=\"evaluation\"   disabled required > <br>\r\n    Description : <br>\r\n    <input type=\"text\" name=\"description\" [(ngModel)]=\"description\"  [disabled]=\"modify\" required > <br>\r\n    Avertissement : <br>\r\n    <input type=\"text\" name=\"warning\" [(ngModel)]=\"isWarned\"   disabled required > <br>\r\n    Année: <br>\r\n    <input type=\"text\" name=\"year\" [(ngModel)]=\"year\"   [disabled]=\"modify\" required > <br>\r\n    Section : <br>\r\n    <input type=\"text\" name=\"section\" [(ngModel)]=\"section\"  [disabled]=\"modify\" required > <br>\r\n  </form>\r\n  <Button (click)=\"Modification()\" class=\"btn btn-success\">Modify</Button><Button (click)=\"Sending()\" routerLink=\"/Profile\" [disabled]=\"!modify\">Send</Button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1594,6 +1557,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.ngOnInit = function () {
         if (localStorage.getItem("type") === "tutor") {
             this.getTutor();
+            console.log(this.tmpTutor);
         }
     };
     Object.defineProperty(ProfileComponent.prototype, "tmpTutor", {
@@ -1642,7 +1606,7 @@ var ProfileComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(ProfileComponent.prototype, "tel", {
+    Object.defineProperty(ProfileComponent.prototype, "phone", {
         get: function () {
             return this.tmpTutor.phone;
         },
@@ -1728,6 +1692,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.Sending = function () {
         console.log(this.tmpTutor);
         this._subUpdate = this.tutor.update(this.tmpTutor).subscribe();
+        localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
         alert("Modification done");
     };
     ProfileComponent = __decorate([
@@ -1739,6 +1704,86 @@ var ProfileComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_user_tutor_service__WEBPACK_IMPORTED_MODULE_2__["TutorService"], _connected_service__WEBPACK_IMPORTED_MODULE_3__["ConnectedService"]])
     ], ProfileComponent);
     return ProfileComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/smart-create-announcement/smart-create-announcement.component.css":
+/*!***********************************************************************************!*\
+  !*** ./src/app/smart-create-announcement/smart-create-announcement.component.css ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/smart-create-announcement/smart-create-announcement.component.html":
+/*!************************************************************************************!*\
+  !*** ./src/app/smart-create-announcement/smart-create-announcement.component.html ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<app-create-announcement (announcementCreated)=\"sendAnnouncement($event)\"></app-create-announcement>\n"
+
+/***/ }),
+
+/***/ "./src/app/smart-create-announcement/smart-create-announcement.component.ts":
+/*!**********************************************************************************!*\
+  !*** ./src/app/smart-create-announcement/smart-create-announcement.component.ts ***!
+  \**********************************************************************************/
+/*! exports provided: SmartCreateAnnouncementComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmartCreateAnnouncementComponent", function() { return SmartCreateAnnouncementComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../announcement/announcement.service */ "./src/app/announcement/announcement.service.ts");
+/* harmony import */ var _broadcast_create_announcement_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../broadcast-create-announcement.service */ "./src/app/broadcast-create-announcement.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var SmartCreateAnnouncementComponent = /** @class */ (function () {
+    function SmartCreateAnnouncementComponent(announcementService, broadCastAnnouncementCreated, router) {
+        this.announcementService = announcementService;
+        this.broadCastAnnouncementCreated = broadCastAnnouncementCreated;
+        this.router = router;
+    }
+    SmartCreateAnnouncementComponent.prototype.ngOnInit = function () {
+    };
+    SmartCreateAnnouncementComponent.prototype.sendAnnouncement = function (announcement) {
+        var _this = this;
+        this.announcementService.create(announcement).subscribe(function (announcement) { return _this.broadCastAnnouncement(announcement); });
+        this.router.navigate(['/Home']);
+    };
+    SmartCreateAnnouncementComponent.prototype.broadCastAnnouncement = function (announcement) {
+        this.broadCastAnnouncementCreated.broadcastAnnouncement(announcement);
+    };
+    SmartCreateAnnouncementComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-smart-create-announcement',
+            template: __webpack_require__(/*! ./smart-create-announcement.component.html */ "./src/app/smart-create-announcement/smart-create-announcement.component.html"),
+            styles: [__webpack_require__(/*! ./smart-create-announcement.component.css */ "./src/app/smart-create-announcement/smart-create-announcement.component.css")]
+        }),
+        __metadata("design:paramtypes", [_announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"], _broadcast_create_announcement_service__WEBPACK_IMPORTED_MODULE_2__["BroadcastCreateAnnouncementService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    ], SmartCreateAnnouncementComponent);
+    return SmartCreateAnnouncementComponent;
 }());
 
 
@@ -1836,7 +1881,9 @@ var TokenInterceptor = /** @class */ (function () {
         this.connectedService = connectedService;
     }
     TokenInterceptor.prototype.intercept = function (req, next) {
+        this.connectedService.connecting();
         if (this.connectedService.connected) {
+            console.log(this.connectedService.connected);
             req = req.clone({
                 setHeaders: {
                     Authorization: "Bearer " + this.connectedService.accountConnected.token
@@ -1975,16 +2022,16 @@ var CreatePersonneComponent = /** @class */ (function () {
         configurable: true
     });
     CreatePersonneComponent.prototype.tmpStudentCreate = function () {
-        if (this._formStudent.form.valid) {
-            this.tmpStudent.name = this._userName;
-            this.tmpStudent.password = this._password;
-            this.tmpStudent.mail = this._mail;
-            this.tmpStudent.phone = this._telNumber;
-            return this.tmpStudent;
-        }
-        else {
-            return;
-        }
+        // if(this._formStudent.form.valid){
+        this.tmpStudent.name = this._userName;
+        this.tmpStudent.password = this._password;
+        this.tmpStudent.mail = this._mail;
+        this.tmpStudent.phone = this._telNumber;
+        return this.tmpStudent;
+        /*}
+        else{
+          return ;
+        }*/
     };
     CreatePersonneComponent.prototype.createStudent = function () {
         this._studentCreated.next(this.tmpStudent);
@@ -2226,7 +2273,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div align=\"center\">\r\n\r\n  <div class=\"col-sm-5\">\r\n    <form class=\"btn-group btn-group-toggle\">\r\n      <label ngClass=\"{{isStudentActive ? 'btn btn-secondary active' : 'btn btn-secondary '}}\" >\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent();switchState()\"  autocomplete=\"off\" checked>Student\r\n      </label>\r\n      <label ngClass=\"{{isStudentActive ? 'btn btn-secondary ' : 'btn btn-secondary active'}}\">\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent();switchState()\"  autocomplete=\"off\" >Tutor\r\n      </label>\r\n    </form>\r\n  </div>\r\n\r\n  <app-create-personne (studentCreated)=\"receiveStudent($event)\"></app-create-personne>\r\n\r\n  <div *ngIf=\"isHidden\">\r\n    <app-create-tutor  [tmpStudent]=\"tmpStudent\" (tutorCreated)=\"receiveTutor($event)\"></app-create-tutor>\r\n  </div>\r\n  <br>\r\n\r\n  <button class=\"btn btn-outline-secondary col-md-2\" routerLink=\"/Login\" style=\"margin-right: 10px\">Retour</button>\r\n  <button (click)=\"Validation()\" [disabled]=\"!formValid()\" class=\"btn btn-success col-md-2\">Sign me up!</button>\r\n</div>\r\n"
+module.exports = "<div align=\"center\">\r\n\r\n  <div class=\"col-sm-5\">\r\n    <form class=\"btn-group btn-group-toggle\">\r\n      <label ngClass=\"{{isStudentActive ? 'btn btn-secondary active' : 'btn btn-secondary '}}\" >\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent();switchState()\"  autocomplete=\"off\" checked>Student\r\n      </label>\r\n      <label ngClass=\"{{isStudentActive ? 'btn btn-secondary ' : 'btn btn-secondary active'}}\">\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent();switchState()\"  autocomplete=\"off\" >Tutor\r\n      </label>\r\n    </form>\r\n  </div>\r\n\r\n  <app-create-personne (studentCreated)=\"receiveStudent($event)\"></app-create-personne>\r\n\r\n  <div *ngIf=\"isHidden\">\r\n    <app-create-tutor  [tmpStudent]=\"tmpStudent\" (tutorCreated)=\"receiveTutor($event)\"></app-create-tutor>\r\n  </div>\r\n  <br>\r\n\r\n  <button class=\"btn btn-outline-secondary col-md-2\" routerLink=\"/Login\" style=\"margin-right: 10px\">Retour</button>\r\n  <button (click)=\"validation()\" class=\"btn btn-success col-md-2\">Sign me up!</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2320,15 +2367,17 @@ var CreateUserComponent = /** @class */ (function () {
             return;
         setTimeout(function () { return _this.formvalidation[form.name] = form.valid; }, 0);
     };
-    CreateUserComponent.prototype.formValid = function () {
-        for (var name_1 in this.formvalidation) {
-            if (!this.formvalidation[name_1]) {
-                return false;
-            }
+    /*
+      formValid(){
+        for(let name in this.formvalidation){
+          if(!this.formvalidation[name]){
+            return false;
+          }
         }
         return true;
-    };
-    CreateUserComponent.prototype.Validation = function () {
+      }
+    */
+    CreateUserComponent.prototype.validation = function () {
         if (!this.isHidden) {
             this.studentService.create(this._tmpStudent).subscribe();
             console.log(this._tmpStudent);
@@ -2342,10 +2391,12 @@ var CreateUserComponent = /** @class */ (function () {
         this.broadcastStudentCreated.broadcastStudent(student);
     };
     CreateUserComponent.prototype.receiveStudent = function (value) {
+        console.log(this._tmpStudent);
         this._tmpStudent = value;
     };
     CreateUserComponent.prototype.receiveTutor = function (value) {
-        this._tmpTutor = value;
+        console.log("tuteur");
+        console.log(this._tmpTutor);
     };
     CreateUserComponent.prototype.ngOnDestroy = function () {
         if (this._subBroad) {
@@ -2411,7 +2462,7 @@ var StudentService = /** @class */ (function () {
         return this.http.delete(StudentService_1.URL_API_STUDENT + '/' + student.idStudent);
     };
     StudentService.prototype.update = function (student) {
-        return this.http.put(StudentService_1.URL_API_STUDENT + '/' + student.idStudent, student.serializeUpdate());
+        return this.http.put(StudentService_1.URL_API_STUDENT, student.toJson());
     };
     var StudentService_1;
     StudentService.URL_API_STUDENT = '/api/eleve';
@@ -2558,17 +2609,28 @@ var Student = /** @class */ (function () {
     };
     Student.prototype.serializeUpdate = function () {
         return {
-            idTutor: this._idStudent,
-            username: this._name,
+            idEleve: this._idStudent,
+            name: this._name,
             password: this._password,
             mail: this._mail,
-            phone: this._phone,
-            //  evaluation: this._evaluation,
+            tel: this._phone,
             token: this._token
             /*   isWarned: this._isWarned,
                isModerator: this._isModerator,
                year: this._year,
                section:this._section*/
+        };
+    };
+    Student.prototype.toJson = function () {
+        return {
+            idEleve: this._idStudent,
+            name: this._name,
+            password: this._password,
+            mail: this._mail,
+            tel: this._phone,
+            avertissement: this._avertissement,
+            isModerateur: this._isModerateur,
+            token: this._token
         };
     };
     __decorate([

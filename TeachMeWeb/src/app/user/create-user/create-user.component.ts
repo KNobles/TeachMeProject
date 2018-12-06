@@ -71,7 +71,7 @@ export class CreateUserComponent implements OnInit ,OnDestroy{
     if (!form)return;
     setTimeout(() => this.formvalidation[form.name] = form.valid, 0);
   }
-
+/*
   formValid(){
     for(let name in this.formvalidation){
       if(!this.formvalidation[name]){
@@ -80,8 +80,8 @@ export class CreateUserComponent implements OnInit ,OnDestroy{
     }
     return true;
   }
-
-  Validation(){
+*/
+  validation(){
     if(!this.isHidden){
       this.studentService.create(this._tmpStudent).subscribe();
       console.log(this._tmpStudent);
@@ -98,11 +98,13 @@ export class CreateUserComponent implements OnInit ,OnDestroy{
     this.broadcastStudentCreated.broadcastStudent(student);
   }
   receiveStudent(value:Student) {
+    console.log(this._tmpStudent);
     this._tmpStudent = value;
 
   }
   receiveTutor(value:Tutor){
-    this._tmpTutor=value;
+    console.log("tuteur");
+    console.log(this._tmpTutor);
   }
 
   ngOnDestroy(): void {

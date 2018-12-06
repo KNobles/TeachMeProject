@@ -5,6 +5,7 @@ import {CreateUserComponent} from './user/create-user/create-user.component';
 import {ProfileComponent} from './profil/profile.component';
 import {HomeComponent} from "./home/home.component";
 import {CreateAnnouncementComponent} from "./create-announcement/create-announcement.component";
+import {SmartCreateAnnouncementComponent} from "./smart-create-announcement/smart-create-announcement.component";
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
     path: "Home", component: HomeComponent
   },
   {
-    path : "Announcement", component : CreateAnnouncementComponent
+    path : "Announcement", component : SmartCreateAnnouncementComponent
   },
   {
     path : "" , redirectTo: "/Login" , pathMatch: "full"

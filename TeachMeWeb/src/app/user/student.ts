@@ -100,12 +100,12 @@ export class Student {
 
   public serializeUpdate(): any {
     return {
-      idTutor: this._idStudent,
-      username: this._name,
+      idEleve: this._idStudent,
+      name: this._name,
       password: this._password,
       mail: this._mail,
-      phone: this._phone,
-      //  evaluation: this._evaluation,
+      tel: this._phone,
+
       token: this._token
       /*   isWarned: this._isWarned,
          isModerator: this._isModerator,
@@ -114,4 +114,17 @@ export class Student {
     };
   }
 
+  toJson() {
+    return {
+      idEleve: this._idStudent,
+      name: this._name,
+      password: this._password,
+      mail: this._mail,
+      tel: this._phone,
+      avertissement: this._avertissement,
+      isModerateur: this._isModerateur,
+      token: this._token
+
+    }
+  }
 }

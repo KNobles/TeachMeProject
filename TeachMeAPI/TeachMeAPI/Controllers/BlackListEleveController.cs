@@ -18,7 +18,7 @@ namespace TeachMeAPI.Controllers
             return BlackListEleveDAO.Query();
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public BlackListEleve Post(BlackListEleve black)
         {
             return BlackListEleveDAO.Insert(black);
@@ -30,7 +30,7 @@ namespace TeachMeAPI.Controllers
             return BlackListEleveDAO.Get(id);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public IHttpActionResult Delete(int id)
         {
             if (BlackListEleveDAO.Delete(id))
@@ -40,7 +40,7 @@ namespace TeachMeAPI.Controllers
             return BadRequest();
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public IHttpActionResult Put(BlackListEleve black)
         {
             if (BlackListEleveDAO.Update(black))

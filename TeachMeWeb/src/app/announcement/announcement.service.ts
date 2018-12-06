@@ -22,7 +22,7 @@ export class AnnouncementService {
   }
 
   public delete(announcement: Announcement): Observable<any> {
-    return this.http.delete<any>(AnnouncementService.URL_API_ANNOUNCEMENT + '/' + announcement.id);
+    return this.http.delete<any>(AnnouncementService.URL_API_ANNOUNCEMENT + '/' + announcement.idAnnouncement);
   }
 
   public update(announcement: Announcement): Observable<any> {

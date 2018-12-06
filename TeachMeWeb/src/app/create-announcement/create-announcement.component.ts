@@ -19,7 +19,7 @@ export class CreateAnnouncementComponent implements OnInit {
   private _announcementCreated:EventEmitter<Announcement> = new EventEmitter();
   private _courses: Course[] = [];
 
-  constructor(public courseService: CourseService, public announcementService: AnnouncementService, public connectedService: ConnectedService, public router: Router) { }
+  constructor(public courseService: CourseService, public connectedService: ConnectedService) { }
 
   ngOnInit() {
     this.getCourses();
@@ -37,42 +37,12 @@ export class CreateAnnouncementComponent implements OnInit {
     return this._announcementTmp;
   }
 
-  get title(): string{
-    return this.announcementTmp.title;
-  }
-
-  set title(value: string) {
-    this.announcementTmp.title = value;
-  }
-
-  get description(): string{
-    return this.announcementTmp.description;
-  }
-
-  set description(value: string) {
-    this.announcementTmp.description = value;
-  }
-
-  get fee(): number{
-    return this.announcementTmp.fee;
-  }
-
-  set fee(value: number){
-    this.announcementTmp.fee = value;
-  }
-
   createAnnouncement(){
     if(localStorage.getItem("type") === "tutor"){
       this.connectedService.connecting();
       this.announcementTmp.idTutor = this.connectedService.tutorConnected.idTutor;
-      this.announcementService.create(this.announcementTmp).subscribe();
-      alert("Votre annonce a bien été créée")
-      this.router.navigate(['/Home']);
-    }
-    else
-    {
-      alert("Veuillez-vous connecter avant de créer une annonce");
-      this.router.navigate(['/Login']);
+      this._announcementCreated.next(this.announcementTmp)
+      this.reset();
     }
   }
 

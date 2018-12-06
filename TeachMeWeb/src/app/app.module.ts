@@ -19,6 +19,7 @@ import { NavbarheaderComponent } from './navbarheader/navbarheader.component';
 import { FilterAnnouncementPipe } from './filter-announcement.pipe';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TokenInterceptor} from "./token-interceptor";
+import { SmartCreateAnnouncementComponent } from './smart-create-announcement/smart-create-announcement.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {TokenInterceptor} from "./token-interceptor";
     CreateAnnouncementComponent,
     ListAnnouncementComponent,
     NavbarheaderComponent,
-    FilterAnnouncementPipe
+    FilterAnnouncementPipe,
+    SmartCreateAnnouncementComponent
   ],
   imports: [
     BrowserModule,
