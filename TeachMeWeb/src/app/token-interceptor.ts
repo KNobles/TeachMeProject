@@ -12,7 +12,7 @@ export class TokenInterceptor implements HttpInterceptor{
     if(this.connectedService.connected){
       req = req.clone({
         setHeaders: {
-          Authorization: this.connectedService.accountConnected.token
+          Authorization: "Bearer " + this.connectedService.accountConnected.token
         }
       });
 

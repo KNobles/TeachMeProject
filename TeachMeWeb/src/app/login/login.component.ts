@@ -38,11 +38,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  Connection() {
+  connection() {
     //alert(this._login + ' ' + this._password);
     this.authService.login(this._login, this._password).subscribe(
       token => {
-        this._token = token.substr(1, token.length-1);
+        this._token = token;
         console.log(this._token);
         if(this._isStudent)
         {
@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
             this.tmpStudent = new Student().deserializable(student);
             this.tmpStudent.token = this._token;
             this._subUpdate = this.studentService.update(this.tmpStudent).subscribe();
-            this.router.navigate(['/Home']);
             localStorage.setItem("account", JSON.stringify(this.tmpStudent));
             localStorage.setItem("type", "student");
+            this.router.navigate(['/Home']);
           });
 
         }
@@ -62,9 +62,10 @@ export class LoginComponent implements OnInit {
             this.tmpTutor = new Tutor().deserializable(tutor);
             this.tmpTutor.token = this._token;
             this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
-            this.router.navigate(['/Home']);
-            localStorage.setItem("account", JSON.stringify(this.tmpTutor));
+            localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
+            console.log(localStorage.getItem("account"));
             localStorage.setItem("type", "tutor");
+            this.router.navigate(['/Home']);
           });
 
         }

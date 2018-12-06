@@ -33,7 +33,7 @@ export class TutorService {
   }
 
   public update(tutor: Tutor): Observable<any> {
-    return this.http.put<any>(TutorService.URL_API_TUTOR + '/' + tutor.idTutor, tutor.serializeUpdate());
+    return this.http.put<any>(TutorService.URL_API_TUTOR, tutor.serializeUpdate());
   }
 
 }

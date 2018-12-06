@@ -42,7 +42,7 @@ namespace TeachMeAPI.Controllers
             return BadRequest();
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize]
         public IHttpActionResult Put(Tutor tutor)
         {
             if (DAO.TutorDAO.Update(tutor))

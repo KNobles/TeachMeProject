@@ -11,7 +11,12 @@ export class NavbarheaderComponent implements OnInit {
   constructor(public connectedService: ConnectedService) { }
 
   ngOnInit() {
+  }
+
+  logout(){
     this.connectedService.connecting();
+    this.connectedService.disconnecting();
+    console.log("logged out");
   }
 
 }

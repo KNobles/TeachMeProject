@@ -19,7 +19,7 @@ export class Tutor {
 
   constructor(username: string="tutor", password: string="password", mail: string="tutor@hotmail.com",
               tel: string="0987654321", evaluation: number=0, description: string="", isWarned: boolean=false, isModerator: boolean=false
-  ,year: number = 1,section:string="undifined") {
+  ,year: number = 1,section:string="undifined",  token: string ="undefined") {
     this._username = username;
     this._password = password;
     this._mail = mail;
@@ -30,6 +30,7 @@ export class Tutor {
     this._isModerator = isModerator;
     this._year=year;
     this._section=section;
+    this._token=token;
   }
 
 
@@ -150,6 +151,21 @@ export class Tutor {
     };
   }
 
+  public toJson() : any {
+    return {
+      idTutor: this._idTutor,
+      username: this._username,
+      password: this._password,
+      mail: this._mail,
+      phone: this._phone,
+      description: this._description,
+      evaluation: this._evaluation,
+      isWarned: this._isWarned,
+      token: this._token,
+      isModerator: this._isModerator
+    }
+  }
+
   public serializeUpdate() : any {
     return {
       idTutor: this._idTutor,
@@ -157,9 +173,27 @@ export class Tutor {
       password: this._password,
       mail: this._mail,
       phone: this._phone,
+<<<<<<< HEAD
+
       //  evaluation: this._evaluation,
       description: this._description,
       token: this._token
+      /*   isWarned: this._isWarned,
+
+
+      description: this._description
+      /*
+         evaluation: this._evaluation,
+         isWarned: this._isWarned,
+
+         isModerator: this._isModerator,
+         year: this._year,
+         section:this._section*/
+=======
+      //  evaluation: this._evaluation,
+      description: this._description,
+      token: this._token
+>>>>>>> refs/remotes/origin/master
     };
   }
 }

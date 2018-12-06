@@ -7,10 +7,15 @@ import {Tutor} from "./user/tutor";
 })
 export class ConnectedService {
 
-  private _connected: boolean = false;
-  private _accountConnected : Tutor | Student;
 
-  constructor() { }
+
+  private _connected: boolean = false;
+  private _tutorConnected : Tutor;
+  private _studentConnected : Student;
+  private _accountConnected: Tutor | Student;
+
+  constructor() {
+  }
 
 
   get connected(): boolean {
@@ -24,15 +29,23 @@ export class ConnectedService {
   public connecting(){
 
     let accountTmp : string = localStorage.getItem("account");
+    console.log("let accountTmp fonctionne");
 
     if(accountTmp != null){
-
-      if(localStorage.getItem("type") === "student"){
-        this._accountConnected = new Student().deserializable(JSON.parse(accountTmp));
+      if(localStorage.getItem("type") === "student")
+      {
+        this._studentConnected =  new Student().deserializable(localStorage.getItem("account"));
+        this.accountConnected = this.studentConnected;
       }
       else{
-        this._accountConnected = new Tutor().deserializable(JSON.parse(accountTmp));
+        console.log("on rentre bien dans le else");
+        console.log(localStorage.getItem("account"));
+        let tutor: Tutor;
+        this._tutorConnected = new Tutor().deserializable(JSON.parse(localStorage.getItem("account")));
+        console.log(this._tutorConnected.username);
+        this.accountConnected = this.tutorConnected;
       }
+
 
 
       this._connected = true;
@@ -46,7 +59,8 @@ export class ConnectedService {
     if(this.connected){
 
       this._connected = false;
-      this._accountConnected = null;
+      this._studentConnected = null;
+      this._tutorConnected = null;
       localStorage.removeItem("account");
       localStorage.removeItem("type");
 
@@ -54,16 +68,27 @@ export class ConnectedService {
 
   }
 
-
-  get accountConnected(): Student | Tutor {
-
-    if(this.connected){
-
-      return this._accountConnected;
-
-    }
-
-    return null;
-
+  get studentConnected(): Student {
+    return this._studentConnected;
   }
+
+  set studentConnected(value: Student) {
+    this._studentConnected = value;
+  }
+  get tutorConnected(): Tutor {
+    return this._tutorConnected;
+  }
+
+  set tutorConnected(value: Tutor) {
+    this._tutorConnected = value;
+  }
+
+  get accountConnected(): Tutor | Student {
+    return this._accountConnected;
+  }
+
+  set accountConnected(value: Tutor | Student) {
+    this._accountConnected = value;
+  }
+
 }
