@@ -8,7 +8,7 @@
 
         <div class="form-group col-md-6">
           <h5 class="text-white">Class</h5>
-          <select [(ngModel)]="currentCourse" class="form-control form-control-sm col-md-6" >
+          <select [(ngModel)]="currentCourse" class="form-control form-control-sm col-md-6" (change)="onChange($event.target.value)">
             <option [value]=-1 selected="selected">All</option>
             <option *ngFor="let c of courses" [value]="c?.idCourse" >{{c?.label}}</option>
           </select>

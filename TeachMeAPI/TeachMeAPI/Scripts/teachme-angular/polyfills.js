@@ -5473,11 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\polyfills.ts */"./src/polyfills.ts");
-=======
-module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\polyfills.ts */"./src/polyfills.ts");
->>>>>>> 6ba1129ed65f4d3aa3d606dca0ff9e51d5cec129
 
 
 /***/ })

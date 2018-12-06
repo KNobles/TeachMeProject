@@ -2,13 +2,9 @@
   <form #formAnnouncement="ngForm" class="container" name="formAnnouncement" (submit)="createAnnouncement()">
     Title : <br>
     <input name="title" [(ngModel)]="announcementTmp.title" type="text" required> <br>
-<<<<<<< HEAD
+
     <select class="form-control form-control-sm" name="list" [(ngModel)]="announcementTmp.idCourse" required>
         <option *ngFor="let c of courses" name = "c?.label" [value]="c?.idCourse">{{c?.label}}</option>
-=======
-    <select class="form-control form-control-sm" name="list" [(ngModel)]="announcementTmp.idCourse">
-        <option *ngFor="let c of courses" name = "course" [value]="c?.idCourse">{{c?.label}}</option>
->>>>>>> 6ba1129ed65f4d3aa3d606dca0ff9e51d5cec129
     </select>
     Description : <br>
     <textarea name="description" [(ngModel)]="announcementTmp.description" rows="5" cols="50" required></textarea> <br>
