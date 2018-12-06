@@ -34,6 +34,27 @@
   </nav>
 </div>
 
+
+<div class="blog-card spring-fever" *ngFor="let announcement of announcements|filterAnnouncement:optionSelected:currentCourse" style="margin-top:100px;margin-bottom: 100px">
+  <div class="title-content">
+    <h3>{{announcement.title}}</h3>
+    <div class="intro"> {{getCoursesById(announcement.idCourse)?.label}}</div>
+  </div>
+  <div class="card-info">
+    {{announcement.description}}
+    <!--<a href="#">Read Article<span class="licon icon-arr icon-black"></span></a>-->
+  </div>
+  <div class="utility-info">
+    <ul class="utility-list">
+      <li><span class="licon icon-dat"></span>{{announcement.fee}} €</li>
+      <li><span class="licon icon-tag"></span>{{getTutorById(announcement.idTutor)?.username}}</li>
+    </ul>
+  </div>
+  <div class="gradient-overlay"></div>
+  <div class="color-overlay"></div>
+</div><!-- /.blog-card -->
+
+<!--
 <div  class="container-fluid" *ngFor="let announcement of announcements|filterAnnouncement:optionSelected:currentCourse" style="padding: 30px;">
   <div class="row align-items-center justify-content-center">
 
@@ -52,3 +73,4 @@
     </div>
   </div>
 </div>
+-->
