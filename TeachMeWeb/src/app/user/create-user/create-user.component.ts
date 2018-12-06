@@ -9,9 +9,6 @@ import {StudentService} from '../student.service';
 import {Subscription} from 'rxjs';
 
 import {BroadcastStudentCreatedService} from "../../broadcast-student-created.service";
-import {animate, group, style, transition, trigger} from "@angular/animations";
-
-
 
 @Component({
   selector: 'app-create-user',
@@ -33,6 +30,24 @@ export class CreateUserComponent implements OnInit ,OnDestroy{
   private _tmpStudent : Student;
   private _tmpTutor : Tutor;
   private _subBroad:Subscription;
+  private _isStudentActive: boolean = true;
+
+
+  get isStudentActive(): boolean {
+    return this._isStudentActive;
+  }
+
+  set isStudentActive(value: boolean) {
+    this._isStudentActive = value;
+  }
+
+  switchState(){
+    if(this.isStudentActive){
+      this.isStudentActive = !this.isStudentActive;
+    } else {
+      this.isStudentActive = true;
+    }
+  }
 
   constructor(public BroadcastStudentForm: BroadcastStudentFormService,
              public  tutorService :TutorService,

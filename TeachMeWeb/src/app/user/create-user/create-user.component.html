@@ -2,11 +2,11 @@
 
   <div class="col-sm-5">
     <form class="btn-group btn-group-toggle">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent()" autocomplete="off" checked>Student
+      <label ngClass="{{isStudentActive ? 'btn btn-secondary active' : 'btn btn-secondary '}}" >
+        <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent();switchState()"  autocomplete="off" checked>Student
       </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent()"  autocomplete="off" >Tutor
+      <label ngClass="{{isStudentActive ? 'btn btn-secondary ' : 'btn btn-secondary active'}}">
+        <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent();switchState()"  autocomplete="off" >Tutor
       </label>
     </form>
   </div>

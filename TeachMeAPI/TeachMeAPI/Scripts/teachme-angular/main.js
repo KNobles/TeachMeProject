@@ -658,7 +658,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div class=\"col-md-2\">\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    <select class=\"form-control form-control-sm\" (change)=\"setCourseId($event.target.value)\">\r\n      <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" name=\"op\">{{c?.label}}</option>\r\n    </select>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input name=\"sumbitButton\" type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -675,6 +675,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../announcement/announcement.service */ "./src/app/announcement/announcement.service.ts");
 /* harmony import */ var src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/announcement/announcement */ "./src/app/announcement/announcement.ts");
+/* harmony import */ var _course_course_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../course/course.service */ "./src/app/course/course.service.ts");
+/* harmony import */ var _course_course__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../course/course */ "./src/app/course/course.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -687,14 +689,30 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var CreateAnnouncementComponent = /** @class */ (function () {
-    function CreateAnnouncementComponent(announcementService) {
+    function CreateAnnouncementComponent(courseService, announcementService) {
+        this.courseService = courseService;
         this.announcementService = announcementService;
         this._announcementTmp = new src_app_announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"];
         this._announcementCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this._courses = [];
     }
     CreateAnnouncementComponent.prototype.ngOnInit = function () {
+        this.getCourses();
     };
+    CreateAnnouncementComponent.prototype.getCourses = function () {
+        var _this = this;
+        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_4__["Course"]().deserializable(course); }); });
+    };
+    Object.defineProperty(CreateAnnouncementComponent.prototype, "courses", {
+        get: function () {
+            return this._courses;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(CreateAnnouncementComponent.prototype, "announcementTmp", {
         get: function () {
             return this._announcementTmp;
@@ -703,8 +721,8 @@ var CreateAnnouncementComponent = /** @class */ (function () {
         configurable: true
     });
     CreateAnnouncementComponent.prototype.createAnnouncement = function () {
-        this._announcementCreated.next(this.announcementTmp);
         console.log(this._announcementTmp);
+        this._announcementCreated.next(this.announcementTmp);
         this.reset();
     };
     CreateAnnouncementComponent.prototype.reset = function () {
@@ -717,6 +735,13 @@ var CreateAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    /*
+    ça marche mais je pense que c'est pas bon
+     */
+    CreateAnnouncementComponent.prototype.setCourseId = function (id) {
+        this.announcementTmp.idCourse = id;
+        console.log(this.announcementTmp);
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]),
@@ -728,7 +753,7 @@ var CreateAnnouncementComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./create-announcement.component.html */ "./src/app/create-announcement/create-announcement.component.html"),
             styles: [__webpack_require__(/*! ./create-announcement.component.css */ "./src/app/create-announcement/create-announcement.component.css")]
         }),
-        __metadata("design:paramtypes", [_announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]])
+        __metadata("design:paramtypes", [_course_course_service__WEBPACK_IMPORTED_MODULE_3__["CourseService"], _announcement_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"]])
     ], CreateAnnouncementComponent);
     return CreateAnnouncementComponent;
 }());
@@ -911,7 +936,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"pos-f-t\">\r\n\r\n  <div class=\"collapse\" id=\"navbarToggleExternalContent\">\r\n\r\n    <div class=\"bg-dark p-4\">\r\n\r\n      <div class=\"form-row\">\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Class</h5>\r\n          <select [(ngModel)]=\"currentCourse\" (change)=\"onChange($event.target.value)\" class=\"form-control form-control-sm col-md-6\" >\r\n            <option [value]=-1 selected=\"selected\">All</option>\r\n            <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" >{{c?.label}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Price</h5>\r\n          <select name=\"filterOption\" [(ngModel)]=\"optionSelected\" class=\"form-control form-control-sm col-md-6\">\r\n            <option *ngFor=\"let o of OPTIONS\" [ngValue]=\"o\">\r\n              {{intToOrderOption(o)}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n  <nav class=\"navbar navbar-dark bg-dark\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span>Filter</span>\r\n    </button>\r\n  </nav>\r\n</div>\r\n\r\n<div  class=\"container-fluid\" *ngFor=\"let announcement of announcements|filterAnnouncement:optionSelected:currentCourse\" style=\"padding: 30px;\">\r\n  <div class=\"row align-items-center justify-content-center\">\r\n\r\n    <div class=\"card text-center\" style=\"width: 40rem;\">\r\n      <div class=\"card-header\">\r\n        {{getTutorById(announcement.idTutor)?.username}}\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n        <p class=\"card-text\">{{announcement.description}}</p>\r\n      </div>\r\n        <div class=\"blockquote-footer text-left\">{{getCoursesById(announcement.idCourse)?.label}}</div>\r\n      <div class=\"card-footer text-muted\">\r\n        {{announcement.fee}} €\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"pos-f-t\">\r\n\r\n  <div class=\"collapse\" id=\"navbarToggleExternalContent\">\r\n\r\n    <div class=\"bg-dark p-4\">\r\n\r\n      <div class=\"form-row\">\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Class</h5>\r\n          <select [(ngModel)]=\"currentCourse\" class=\"form-control form-control-sm col-md-6\" >\r\n            <option [value]=-1 selected=\"selected\">All</option>\r\n            <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" >{{c?.label}}</option>\r\n          </select>\r\n        </div>\r\n\r\n        <div class=\"form-group col-md-6\">\r\n          <h5 class=\"text-white\">Price</h5>\r\n          <select name=\"filterOption\" [(ngModel)]=\"optionSelected\" class=\"form-control form-control-sm col-md-6\">\r\n            <option *ngFor=\"let o of OPTIONS\" [ngValue]=\"o\">\r\n              {{intToOrderOption(o)}}\r\n            </option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n\r\n  </div>\r\n  <nav class=\"navbar navbar-dark bg-dark\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarToggleExternalContent\" aria-controls=\"navbarToggleExternalContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span>Filter</span>\r\n    </button>\r\n  </nav>\r\n</div>\r\n\r\n<div  class=\"container-fluid\" *ngFor=\"let announcement of announcements|filterAnnouncement:optionSelected:currentCourse\" style=\"padding: 30px;\">\r\n  <div class=\"row align-items-center justify-content-center\">\r\n\r\n    <div class=\"card text-center\" style=\"width: 40rem;\">\r\n      <div class=\"card-header\">\r\n        {{getTutorById(announcement.idTutor)?.username}}\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <h5 class=\"card-title\">{{announcement.title}}</h5>\r\n        <p class=\"card-text\">{{announcement.description}}</p>\r\n      </div>\r\n        <div class=\"blockquote-footer text-left\">{{getCoursesById(announcement.idCourse)?.label}}</div>\r\n      <div class=\"card-footer text-muted\">\r\n        {{announcement.fee}} €\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1512,7 +1537,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  test-component works!\n</p>\n"
+module.exports = "<p>\r\n  test-component works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -1746,7 +1771,7 @@ module.exports = "\r\nbody {\r\n  font-family: 'Roboto', sans-serif;\r\n  font-s
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-5\">\r\n    <div class=\"form-bottom\">\r\n  <form #formTutor=\"ngForm\" class=\"container\" name=\"formTutor\" (change)=\"Send($event)\">\r\n  <div class=\"form-group \">\r\n    <label class=\"sr-only\" for=\"form-about-yourself\">About yourself</label>\r\n    <textarea name=\"form-about-yourself\" placeholder=\"About yourself...\"\r\n              class=\"form-about-yourself form-control\" id=\"form-about-yourself\" [(ngModel)]=\"description\" rows=\"10\" required></textarea>\r\n  </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label class=\"sr-only\" for=\"form-year\">Year</label>\r\n      <input type=\"text\" name=\"form-year\" placeholder=\"Year...\" class=\"form-year form-control\" id=\"form-year\" [(ngModel)]=\"year\"  required>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label class=\"sr-only\" for=\"form-section\">Section</label>\r\n      <input type=\"text\" name=\"form-section\" placeholder=\"Section...\" class=\"form-section form-control\" id=\"form-section\" [(ngModel)]=\"section\"  required>\r\n    </div>\r\n  </form>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"col-sm-5\">\r\n  <div class=\"form-box\">\r\n    <div class=\"form-top\">\r\n      <div class=\"form-top-left\">\r\n        <p>Fill in more details if you want to become a tutor:</p>\r\n      </div>\r\n      <div class=\"form-top-right\">\r\n        <i class=\"fa fa-pencil\"></i>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-bottom\">\r\n  <form #formTutor=\"ngForm\" class=\"container\" name=\"formTutor\" (change)=\"Send($event)\">\r\n  <div class=\"form-group \">\r\n    <label class=\"sr-only\" for=\"form-about-yourself\">About yourself</label>\r\n    <textarea name=\"form-about-yourself\" placeholder=\"About yourself...\"\r\n              class=\"form-about-yourself form-control\" id=\"form-about-yourself\" [(ngModel)]=\"description\" rows=\"10\" required></textarea>\r\n  </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label class=\"sr-only\" for=\"form-year\">Year</label>\r\n      <input type=\"text\" name=\"form-year\" placeholder=\"Year...\" class=\"form-year form-control\" id=\"form-year\" [(ngModel)]=\"year\"  required>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label class=\"sr-only\" for=\"form-section\">Section</label>\r\n      <input type=\"text\" name=\"form-section\" placeholder=\"Section...\" class=\"form-section form-control\" id=\"form-section\" [(ngModel)]=\"section\"  required>\r\n    </div>\r\n  </form>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1927,7 +1952,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div align=\"center\">\r\n\r\n  <div class=\"col-sm-5\">\r\n    <form class=\"btn-group btn-group-toggle\">\r\n      <label class=\"btn btn-secondary active\">\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent()\" autocomplete=\"off\" checked>Student\r\n      </label>\r\n      <label class=\"btn btn-secondary\">\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent()\"  autocomplete=\"off\" >Tutor\r\n      </label>\r\n    </form>\r\n  </div>\r\n\r\n  <app-create-personne (studentCreated)=\"receiveStudent($event)\"></app-create-personne>\r\n\r\n  <div *ngIf=\"isHidden\">\r\n    <app-create-tutor  [tmpStudent]=\"tmpStudent\" (tutorCreated)=\"receiveTutor($event)\"></app-create-tutor>\r\n  </div>\r\n  <br>\r\n\r\n  <button class=\"btn btn-outline-secondary col-md-2\" routerLink=\"/Login\" style=\"margin-right: 10px\">Retour</button>\r\n  <button (click)=\"Validation()\" [disabled]=\"!formValid()\" class=\"btn btn-success col-md-2\">Sign me up!</button>\r\n</div>\r\n"
+module.exports = "<div align=\"center\">\r\n\r\n  <div class=\"col-sm-5\">\r\n    <form class=\"btn-group btn-group-toggle\">\r\n      <label ngClass=\"{{isStudentActive ? 'btn btn-secondary active' : 'btn btn-secondary '}}\" >\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent();switchState()\"  autocomplete=\"off\" checked>Student\r\n      </label>\r\n      <label ngClass=\"{{isStudentActive ? 'btn btn-secondary ' : 'btn btn-secondary active'}}\">\r\n        <input type=\"radio\" name=\"typeuser\" (change)=\"TypeFormulaire();InitFormStudent();switchState()\"  autocomplete=\"off\" >Tutor\r\n      </label>\r\n    </form>\r\n  </div>\r\n\r\n  <app-create-personne (studentCreated)=\"receiveStudent($event)\"></app-create-personne>\r\n\r\n  <div *ngIf=\"isHidden\">\r\n    <app-create-tutor  [tmpStudent]=\"tmpStudent\" (tutorCreated)=\"receiveTutor($event)\"></app-create-tutor>\r\n  </div>\r\n  <br>\r\n\r\n  <button class=\"btn btn-outline-secondary col-md-2\" routerLink=\"/Login\" style=\"margin-right: 10px\">Retour</button>\r\n  <button (click)=\"Validation()\" [disabled]=\"!formValid()\" class=\"btn btn-success col-md-2\">Sign me up!</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1968,6 +1993,7 @@ var CreateUserComponent = /** @class */ (function () {
         this.broadcastStudentCreated = broadcastStudentCreated;
         this._isHidden = false;
         this.formvalidation = {};
+        this._isStudentActive = true;
     }
     Object.defineProperty(CreateUserComponent.prototype, "tmpStudent", {
         get: function () {
@@ -1979,6 +2005,24 @@ var CreateUserComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(CreateUserComponent.prototype, "isStudentActive", {
+        get: function () {
+            return this._isStudentActive;
+        },
+        set: function (value) {
+            this._isStudentActive = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    CreateUserComponent.prototype.switchState = function () {
+        if (this.isStudentActive) {
+            this.isStudentActive = !this.isStudentActive;
+        }
+        else {
+            this.isStudentActive = true;
+        }
+    };
     CreateUserComponent.prototype.ngOnInit = function () {
         this.InitFormStudent();
     };
@@ -2541,7 +2585,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\axoul\Desktop\TeachMe\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
 
 
 /***/ })
