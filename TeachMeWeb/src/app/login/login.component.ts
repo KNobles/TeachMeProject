@@ -30,8 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this._subGet.unsubscribe();
-    this._subUpdate.unsubscribe();
+    if(this._subGet){
+      this._subGet.unsubscribe();
+    }
+    if(this._subUpdate) {
+      this._subUpdate.unsubscribe();
+    }
   }
 
   Connection() {
