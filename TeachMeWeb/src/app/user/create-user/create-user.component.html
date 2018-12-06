@@ -1,12 +1,23 @@
-<form>
-  <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent()" checked>Créer un compte Eléve
-  <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent()"  >Créer un compte Tuteur
-</form>
-<app-create-personne (studentCreated)="receiveStudent($event)" ></app-create-personne>
-<div *ngIf="isHidden">
-  <app-create-tutor  [tmpStudent]="tmpStudent" (tutorCreated)="receiveTutor($event)"></app-create-tutor>
+<div align="center">
+
+  <div class="col-sm-5">
+    <form class="btn-group btn-group-toggle">
+      <label ngClass="{{isStudentActive ? 'btn btn-secondary active' : 'btn btn-secondary '}}" >
+        <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent();switchState()"  autocomplete="off" checked>Student
+      </label>
+      <label ngClass="{{isStudentActive ? 'btn btn-secondary ' : 'btn btn-secondary active'}}">
+        <input type="radio" name="typeuser" (change)="TypeFormulaire();InitFormStudent();switchState()"  autocomplete="off" >Tutor
+      </label>
+    </form>
+  </div>
+
+  <app-create-personne (studentCreated)="receiveStudent($event)"></app-create-personne>
+
+  <div *ngIf="isHidden">
+    <app-create-tutor  [tmpStudent]="tmpStudent" (tutorCreated)="receiveTutor($event)"></app-create-tutor>
+  </div>
+  <br>
+
+  <button class="btn btn-outline-secondary col-md-2" routerLink="/Login" style="margin-right: 10px">Retour</button>
+  <button (click)="Validation()" [disabled]="!formValid()" class="btn btn-success col-md-2">Sign me up!</button>
 </div>
-<br>
-<button routerLink="/Login">Retour</button> <Button (click)="Validation()" [disabled]="!formValid()" class="btn btn-success">Envoie</Button>
-
-

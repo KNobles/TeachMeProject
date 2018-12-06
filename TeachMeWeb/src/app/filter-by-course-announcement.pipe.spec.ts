@@ -1,8 +1,8 @@
-import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.pipe';
+import { FilterAnnouncementPipe } from './filter-announcement.pipe';
 
-describe('FilterByCourseAnnouncementPipe', () => {
+describe('FilterAnnouncementPipe', () => {
   it('create an instance', () => {
-    const pipe = new FilterByCourseAnnouncementPipe();
+    const pipe = new FilterAnnouncementPipe();
     expect(pipe).toBeTruthy();
   });
 });

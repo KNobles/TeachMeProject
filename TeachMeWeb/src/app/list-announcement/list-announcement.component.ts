@@ -3,11 +3,11 @@ import {Subscription} from "rxjs";
 import {AnnouncementService} from "../announcement/announcement.service";
 import {BroadcastCreateAnnouncementService} from "../broadcast-create-announcement.service";
 import {Announcement} from "../announcement/announcement";
-import {FilterByPriceAnnouncementPipe} from "../filter-by-price-announcement.pipe";
 import {Tutor} from "../user/tutor";
 import {TutorService} from "../user/tutor.service";
 import {Course} from "../course/course";
 import {CourseService} from "../course/course.service";
+import {FilterAnnouncementPipe} from "../filter-announcement.pipe";
 
 
 @Component({
@@ -27,8 +27,8 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
 
   private _currentCourse: number = -1;
 
-  private _OPTIONS = [FilterByPriceAnnouncementPipe.ORDER_DEFAULT, FilterByPriceAnnouncementPipe.ORDER_ASCENDING, FilterByPriceAnnouncementPipe.ORDER_DESCENDING];
-  optionSelected: number = FilterByPriceAnnouncementPipe.ORDER_DEFAULT;
+  private _OPTIONS = [FilterAnnouncementPipe.ORDER_DEFAULT, FilterAnnouncementPipe.ORDER_ASCENDING, FilterAnnouncementPipe.ORDER_DESCENDING];
+  optionSelected: number = FilterAnnouncementPipe.ORDER_DEFAULT;
 
   constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService, public broadcastCreateAnnouncement: BroadcastCreateAnnouncementService) {
   }
@@ -42,7 +42,7 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   }
 
   intToOrderOption(num: number) {
-    return FilterByPriceAnnouncementPipe.intToOrderOption(num);
+    return FilterAnnouncementPipe.intToOrderOption(num);
   }
 
   listAnnouncementCreated() {

@@ -3,20 +3,19 @@ import {Tutor} from "../user/tutor";
 
 export class Announcement{
 
-  private _id:number;
+  private _idAnnouncement:number;
   private _title:string;
   private _description:string;
   private _fee:number;
   private _idCourse: number
-  private _idTutor:number;
+    private _idTutor:number;
 
-  constructor(title: string="", description: string="", fee: number=0, course: number=-1, tutor: number=-1, id: number=-1){
+  constructor(title: string="", description: string="", fee: number=0, course: number=-1, tutor: number=-1){
     this._title=title;
     this._description=description;
     this._fee=fee;
     this._idCourse=course;
     this._idTutor=tutor;
-    this._id=id;
   }
 
   get idTutor(): number {
@@ -33,12 +32,12 @@ export class Announcement{
   set idCourse(value: number) {
     this._idCourse = value;
   }
-  get id(): number {
-    return this._id;
+  get idAnnouncement(): number {
+    return this._idAnnouncement;
   }
 
-  set id(value: number) {
-    this._id = value;
+  set idAnnouncement(value: number) {
+    this._idAnnouncement = value;
   }
 
   get fee(): number {
@@ -65,7 +64,7 @@ export class Announcement{
 
   public serialize() : any {
     return {
-      id: this._id,
+      idAnnouncement: this._idAnnouncement,
       idTutor: this._idTutor,
       idCourse: this._idCourse,
       title: this._title,
