@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Tutor} from '../user/tutor';
 import {TutorService} from '../user/tutor.service';
 import {Subscription} from 'rxjs';
+import {ConnectedService} from "../connected.service";
 
 
 @Component({
@@ -24,10 +25,14 @@ export class ProfileComponent implements OnInit,OnDestroy {
   private _section:string;*/
   private _modify:boolean=true;
 
-  constructor(public tutor :TutorService) { }
+  constructor(public tutor :TutorService, public connectedService: ConnectedService) { }
 
   ngOnInit() {
-    this.getTutor(2);
+    if(localStorage.getItem("type" ) === "tutor")
+    {
+      this.getTutor();
+    }
+
   }
   get tmpTutor(): Tutor {
     return this._tmpTutor;
@@ -35,8 +40,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
   set tmpTutor(value: Tutor) {
     this._tmpTutor = value;
   }
-  getTutor(id : number) {
-   this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));
+
+  getTutor() {
+    this.connectedService.connecting();
+    this.tmpTutor = this.connectedService.tutorConnected;/*
+    let id: number = this.tmpTutor.idTutor;
+    this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));*/
   }
   get username(): string {
     return this.tmpTutor.username;
@@ -131,6 +140,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     return this._modify;
   }
   Sending(){
+    console.log(this.tmpTutor);
     this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
     alert("Modification done");
 

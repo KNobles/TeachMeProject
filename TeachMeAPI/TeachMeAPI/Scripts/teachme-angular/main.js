@@ -580,12 +580,19 @@ var ConnectedService = /** @class */ (function () {
     };
     ConnectedService.prototype.connecting = function () {
         var accountTmp = localStorage.getItem("account");
+        console.log("let accountTmp fonctionne");
         if (accountTmp != null) {
             if (localStorage.getItem("type") === "student") {
-                this._accountConnected = new _user_student__WEBPACK_IMPORTED_MODULE_1__["Student"]().deserializable(JSON.parse(accountTmp));
+                this._studentConnected = new _user_student__WEBPACK_IMPORTED_MODULE_1__["Student"]().deserializable(localStorage.getItem("account"));
+                this.accountConnected = this.studentConnected;
             }
             else {
-                this._accountConnected = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(JSON.parse(accountTmp));
+                console.log("on rentre bien dans le else");
+                console.log(localStorage.getItem("account"));
+                var tutor = void 0;
+                this._tutorConnected = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(JSON.parse(localStorage.getItem("account")));
+                console.log(this._tutorConnected.username);
+                this.accountConnected = this.tutorConnected;
             }
             this._connected = true;
         }
@@ -593,17 +600,38 @@ var ConnectedService = /** @class */ (function () {
     ConnectedService.prototype.disconnecting = function () {
         if (this.connected) {
             this._connected = false;
-            this._accountConnected = null;
+            this._studentConnected = null;
+            this._tutorConnected = null;
             localStorage.removeItem("account");
             localStorage.removeItem("type");
         }
     };
+    Object.defineProperty(ConnectedService.prototype, "studentConnected", {
+        get: function () {
+            return this._studentConnected;
+        },
+        set: function (value) {
+            this._studentConnected = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ConnectedService.prototype, "tutorConnected", {
+        get: function () {
+            return this._tutorConnected;
+        },
+        set: function (value) {
+            this._tutorConnected = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ConnectedService.prototype, "accountConnected", {
         get: function () {
-            if (this.connected) {
-                return this._accountConnected;
-            }
-            return null;
+            return this._accountConnected;
+        },
+        set: function (value) {
+            this._accountConnected = value;
         },
         enumerable: true,
         configurable: true
@@ -1271,7 +1299,7 @@ module.exports = ".form-container{\r\n  border: 0px solid #fff;\r\n  padding: 50
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\">Username</label>\r\n          <input type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label for=\"password\">Password</label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\">Username</label>\r\n          <input type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label for=\"password\">Password</label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1322,20 +1350,20 @@ var LoginComponent = /** @class */ (function () {
         this._subGet.unsubscribe();
         this._subUpdate.unsubscribe();
     };
-    LoginComponent.prototype.Connection = function () {
+    LoginComponent.prototype.connection = function () {
         var _this = this;
         //alert(this._login + ' ' + this._password);
         this.authService.login(this._login, this._password).subscribe(function (token) {
-            _this._token = token.substr(1, token.length - 1);
+            _this._token = token;
             console.log(_this._token);
             if (_this._isStudent) {
                 _this._subGet = _this.studentService.getAccount(_this.login, _this.password).subscribe(function (student) {
                     _this.tmpStudent = new _user_student__WEBPACK_IMPORTED_MODULE_3__["Student"]().deserializable(student);
                     _this.tmpStudent.token = _this._token;
                     _this._subUpdate = _this.studentService.update(_this.tmpStudent).subscribe();
-                    _this.router.navigate(['/Home']);
                     localStorage.setItem("account", JSON.stringify(_this.tmpStudent));
                     localStorage.setItem("type", "student");
+                    _this.router.navigate(['/Home']);
                 });
             }
             else {
@@ -1343,9 +1371,10 @@ var LoginComponent = /** @class */ (function () {
                     _this.tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(tutor);
                     _this.tmpTutor.token = _this._token;
                     _this._subUpdate = _this.tutorService.update(_this.tmpTutor).subscribe();
-                    _this.router.navigate(['/Home']);
-                    localStorage.setItem("account", JSON.stringify(_this.tmpTutor));
+                    localStorage.setItem("account", JSON.stringify(_this.tmpTutor.toJson()));
+                    console.log(localStorage.getItem("account"));
                     localStorage.setItem("type", "tutor");
+                    _this.router.navigate(['/Home']);
                 });
             }
         });
@@ -1426,7 +1455,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen\">\r\n  <a class=\"navbar-brand text-white\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Login\">Logout</a>\r\n      </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n    <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\" routerLink=\"/Announcement\">Create Announcement</button>\r\n    </form>\r\n  </div>\r\n\r\n</nav>\r\n\r\n"
+module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen\">\r\n  <a class=\"navbar-brand text-white\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Login\" (click)=\"logout()\">Logout</a>\r\n      </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n    <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\" routerLink=\"/Announcement\">Create Announcement</button>\r\n    </form>\r\n  </div>\r\n\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
@@ -1458,7 +1487,11 @@ var NavbarheaderComponent = /** @class */ (function () {
         this.connectedService = connectedService;
     }
     NavbarheaderComponent.prototype.ngOnInit = function () {
+    };
+    NavbarheaderComponent.prototype.logout = function () {
         this.connectedService.connecting();
+        this.connectedService.disconnecting();
+        console.log("logged out");
     };
     NavbarheaderComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1510,6 +1543,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _user_tutor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../user/tutor */ "./src/app/user/tutor.ts");
 /* harmony import */ var _user_tutor_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../user/tutor.service */ "./src/app/user/tutor.service.ts");
+/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connected.service */ "./src/app/connected.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1522,14 +1556,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(tutor) {
+    function ProfileComponent(tutor, connectedService) {
         this.tutor = tutor;
+        this.connectedService = connectedService;
         this._tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_1__["Tutor"];
         this._modify = true;
     }
     ProfileComponent.prototype.ngOnInit = function () {
-        this.getTutor(2);
+        if (localStorage.getItem("type") === "tutor") {
+            this.getTutor();
+        }
     };
     Object.defineProperty(ProfileComponent.prototype, "tmpTutor", {
         get: function () {
@@ -1541,9 +1579,11 @@ var ProfileComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ProfileComponent.prototype.getTutor = function (id) {
-        var _this = this;
-        this._subGet = this.tutor.get(id).subscribe(function (tutor) { return _this.tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_1__["Tutor"]().deserializable(tutor); });
+    ProfileComponent.prototype.getTutor = function () {
+        this.connectedService.connecting();
+        this.tmpTutor = this.connectedService.tutorConnected; /*
+        let id: number = this.tmpTutor.idTutor;
+        this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));*/
     };
     Object.defineProperty(ProfileComponent.prototype, "username", {
         get: function () {
@@ -1659,6 +1699,7 @@ var ProfileComponent = /** @class */ (function () {
         configurable: true
     });
     ProfileComponent.prototype.Sending = function () {
+        console.log(this.tmpTutor);
         this._subUpdate = this.tutor.update(this.tmpTutor).subscribe();
         alert("Modification done");
     };
@@ -1668,7 +1709,7 @@ var ProfileComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./profile.component.html */ "./src/app/profil/profile.component.html"),
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/profil/profile.component.css")]
         }),
-        __metadata("design:paramtypes", [_user_tutor_service__WEBPACK_IMPORTED_MODULE_2__["TutorService"]])
+        __metadata("design:paramtypes", [_user_tutor_service__WEBPACK_IMPORTED_MODULE_2__["TutorService"], _connected_service__WEBPACK_IMPORTED_MODULE_3__["ConnectedService"]])
     ], ProfileComponent);
     return ProfileComponent;
 }());
@@ -1695,7 +1736,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  test-component works!\n</p>\n"
+module.exports = "<p>\r\n  test-component works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -1771,7 +1812,7 @@ var TokenInterceptor = /** @class */ (function () {
         if (this.connectedService.connected) {
             req = req.clone({
                 setHeaders: {
-                    Authorization: this.connectedService.accountConnected.token
+                    Authorization: "Bearer " + this.connectedService.accountConnected.token
                 }
             });
         }
@@ -2540,7 +2581,7 @@ var TutorService = /** @class */ (function () {
         return this.http.delete(TutorService_1.URL_API_TUTOR + '/' + tutor.idTutor);
     };
     TutorService.prototype.update = function (tutor) {
-        return this.http.put(TutorService_1.URL_API_TUTOR + '/' + tutor.idTutor, tutor.serializeUpdate());
+        return this.http.put(TutorService_1.URL_API_TUTOR, tutor.serializeUpdate());
     };
     var TutorService_1;
     TutorService.URL_API_TUTOR = '/api/tutor';
@@ -2568,7 +2609,7 @@ var TutorService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tutor", function() { return Tutor; });
 var Tutor = /** @class */ (function () {
-    function Tutor(username, password, mail, tel, evaluation, description, isWarned, isModerator, year, section) {
+    function Tutor(username, password, mail, tel, evaluation, description, isWarned, isModerator, year, section, token) {
         if (username === void 0) { username = "tutor"; }
         if (password === void 0) { password = "password"; }
         if (mail === void 0) { mail = "tutor@hotmail.com"; }
@@ -2579,6 +2620,7 @@ var Tutor = /** @class */ (function () {
         if (isModerator === void 0) { isModerator = false; }
         if (year === void 0) { year = 1; }
         if (section === void 0) { section = "undifined"; }
+        if (token === void 0) { token = "undefined"; }
         this._username = username;
         this._password = password;
         this._mail = mail;
@@ -2589,6 +2631,7 @@ var Tutor = /** @class */ (function () {
         this._isModerator = isModerator;
         this._year = year;
         this._section = section;
+        this._token = token;
     }
     Object.defineProperty(Tutor.prototype, "year", {
         get: function () {
@@ -2729,6 +2772,20 @@ var Tutor = /** @class */ (function () {
                section:this._section*/
         };
     };
+    Tutor.prototype.toJson = function () {
+        return {
+            idTutor: this._idTutor,
+            username: this._username,
+            password: this._password,
+            mail: this._mail,
+            phone: this._phone,
+            description: this._description,
+            evaluation: this._evaluation,
+            isWarned: this._isWarned,
+            token: this._token,
+            isModerator: this._isModerator
+        };
+    };
     Tutor.prototype.serializeUpdate = function () {
         return {
             idTutor: this._idTutor,
@@ -2736,17 +2793,17 @@ var Tutor = /** @class */ (function () {
             password: this._password,
             mail: this._mail,
             phone: this._phone,
-<<<<<<< HEAD
             //  evaluation: this._evaluation,
             description: this._description,
             token: this._token
             /*   isWarned: this._isWarned,
-=======
+      
+      
             description: this._description
             /*
                evaluation: this._evaluation,
                isWarned: this._isWarned,
->>>>>>> refs/remotes/origin/master
+      
                isModerator: this._isModerator,
                year: this._year,
                section:this._section*/
@@ -2820,11 +2877,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
-=======
-module.exports = __webpack_require__(/*! C:\Users\axoul\Desktop\TeachMe\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
->>>>>>> refs/remotes/origin/master
 
 
 /***/ })
