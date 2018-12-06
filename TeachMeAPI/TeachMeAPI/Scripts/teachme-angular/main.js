@@ -1288,15 +1288,7 @@ module.exports = "/*.form-container{\r\n  border: 0px solid #fff;\r\n  padding: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
-module.exports = "<div align=\"center\">\r\n\r\n <div class=\"col-sm-5\">\r\n\r\n    <div class=\"form-box\">\r\n      <div class=\"form-top\">\r\n        <div class=\"form-top-left\">\r\n          <h3>Login to our site</h3>\r\n          <p>Enter username and password to log on:</p>\r\n        </div>\r\n        <div class=\"form-top-right\">\r\n          <i class=\"fa fa-lock\"></i>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-bottom\">\r\n        <form role=\"form\" action=\"\" method=\"post\" class=\"login-form\">\r\n          <div class=\"form-group\">\r\n            <label class=\"sr-only\" for=\"form-username\">Username</label>\r\n            <input type=\"text\" name=\"form-username\" placeholder=\"Username...\" class=\"form-username form-control\" id=\"form-username\" [(ngModel)]=\"login\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label class=\"sr-only\" for=\"form-password\">Password</label>\r\n            <input type=\"password\" name=\"form-password\" placeholder=\"Password...\" class=\"form-password form-control\" id=\"form-password\" [(ngModel)]=\"password\">\r\n          </div>\r\n          <div class=\"form-group\" align=\"center\">\r\n            <label>\r\n            <input type=\"radio\" class=\"option-input radio\" name=\"typeuser\" (change)=\"onChange()\" checked>\r\n              Student\r\n            </label>\r\n            <label>\r\n            <input type=\"radio\" class=\"option-input radio\" name=\"typeuser\" (change)=\"onChange()\">\r\n              Tutor\r\n            </label>\r\n          </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in!</button>\r\n          <button class=\"btn btn-light btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--\r\n<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\"><b>Username</b></label>\r\n          <input id=\"username\" type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label id=\"password\" for=\"password\"><b>Password</b></label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n-->\r\n"
-=======
-<<<<<<< HEAD
-module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\">Username</label>\r\n          <input type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label for=\"password\">Password</label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
-=======
-module.exports = "<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\"><b>Username</b></label>\r\n          <input id=\"username\" type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label id=\"password\" for=\"password\"><b>Password</b></label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n\r\n"
->>>>>>> refs/remotes/origin/master
->>>>>>> df3083a0afb0e1a341acbbce03d357b0b6ff66db
+module.exports = "<div align=\"center\">\r\n\r\n <div class=\"col-sm-5\">\r\n\r\n    <div class=\"form-box\">\r\n      <div class=\"form-top\">\r\n        <div class=\"form-top-left\">\r\n          <h3>Login to our site</h3>\r\n          <p>Enter username and password to log on:</p>\r\n        </div>\r\n        <div class=\"form-top-right\">\r\n          <i class=\"fa fa-lock\"></i>\r\n        </div>\r\n      </div>\r\n      <div class=\"form-bottom\">\r\n        <form role=\"form\" action=\"\" method=\"post\" class=\"login-form\">\r\n          <div class=\"form-group\">\r\n            <label class=\"sr-only\" for=\"form-username\">Username</label>\r\n            <input type=\"text\" name=\"form-username\" placeholder=\"Username...\" class=\"form-username form-control\" id=\"form-username\" [(ngModel)]=\"login\">\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label class=\"sr-only\" for=\"form-password\">Password</label>\r\n            <input type=\"password\" name=\"form-password\" placeholder=\"Password...\" class=\"form-password form-control\" id=\"form-password\" [(ngModel)]=\"password\">\r\n          </div>\r\n          <div class=\"form-group\" align=\"center\">\r\n            <label>\r\n            <input type=\"radio\" class=\"option-input radio\" name=\"typeuser\" (change)=\"onChange()\" checked>\r\n              Student\r\n            </label>\r\n            <label>\r\n            <input type=\"radio\" class=\"option-input radio\" name=\"typeuser\" (change)=\"onChange()\">\r\n              Tutor\r\n            </label>\r\n          </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"Connection()\">Sign in!</button>\r\n          <button class=\"btn btn-light btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--\r\n<div class=\"container-fluid backgr\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n      <form class=\"form-container\">\r\n        <h1>Teach Me Login</h1>\r\n        <div class=\"form-group\">\r\n          <label for=\"username\"><b>Username</b></label>\r\n          <input id=\"username\" type=\"text\" class=\"form-control\" name=\"log\" [(ngModel)]=\"login\" placeholder=\"username\">\r\n        </div>\r\n          <label id=\"password\" for=\"password\"><b>Password</b></label>\r\n        <div class=\"form-group\">\r\n          <input type=\"password\" class=\"form-control\" name=\"passwd\"[(ngModel)]=\"password\" placeholder=\"password\">\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\" checked>Eleve\r\n          <input type=\"radio\" name=\"typeuser\" (change)=\"onChange()\"  >  Tuteur\r\n        </div>\r\n          <button class=\"btn btn-success btn-block\" (click)=\"connection()\">Sign in</button>\r\n          <button class=\"btn btn-default btn-block\" routerLink=\"/Signup\">Sign up</button>\r\n      </form>\r\n\r\n  </div>\r\n  <div class=\"col-md-4 col-sm-4 col-xs-12\"></div>\r\n</div>\r\n-->\r\n"
 
 /***/ }),
 
@@ -1456,11 +1448,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-<<<<<<< HEAD
-module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen; font-size:larger;\">\r\n  <a class=\"navbar-brand text-white\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Login\">Logout</a>\r\n      </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n    <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\" routerLink=\"/Announcement\">Create Announcement</button>\r\n    </form>\r\n  </div>\r\n\r\n</nav>\r\n\r\n"
-=======
-module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen\">\r\n  <a class=\"navbar-brand text-white\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Login\" (click)=\"logout()\">Logout</a>\r\n      </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n    <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\" routerLink=\"/Announcement\">Create Announcement</button>\r\n    </form>\r\n  </div>\r\n\r\n</nav>\r\n\r\n"
->>>>>>> df3083a0afb0e1a341acbbce03d357b0b6ff66db
+module.exports = "<nav class=\"navbar sticky-top navbar-expand-lg navbar navbar-light\" style=\"background-color: lightseagreen; font-size:larger;\">\r\n  <a class=\"navbar-brand text-white\">Teach Me</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Home\" routerLinkActive=\"active\">Home </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Profile\" routerLinkActive=\"active\">Profile </a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/Login\" (click)=\"logout()\">Logout</a>\r\n      </li>\r\n    </ul>\r\n    <form class=\"form-inline my-2 my-lg-0\">\r\n    <button class=\"btn btn-success my-2 my-sm-0\" type=\"submit\" routerLink=\"/Announcement\">Create Announcement</button>\r\n    </form>\r\n  </div>\r\n\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
@@ -1888,6 +1876,8 @@ var CreatePersonneComponent = /** @class */ (function () {
         this._tmpStudent = new _student__WEBPACK_IMPORTED_MODULE_2__["Student"];
         this._studentCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
+    CreatePersonneComponent.prototype.ngOnInit = function () {
+    };
     Object.defineProperty(CreatePersonneComponent.prototype, "formStudent", {
         get: function () {
             return this._formStudent;
@@ -1895,8 +1885,6 @@ var CreatePersonneComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    CreatePersonneComponent.prototype.ngOnInit = function () {
-    };
     Object.defineProperty(CreatePersonneComponent.prototype, "userName", {
         get: function () {
             return this._userName;
@@ -2820,20 +2808,6 @@ var Tutor = /** @class */ (function () {
             //  evaluation: this._evaluation,
             description: this._description,
             token: this._token
-<<<<<<< HEAD
-            /*   isWarned: this._isWarned,
-      
-      
-            description: this._description
-            /*
-               evaluation: this._evaluation,
-               isWarned: this._isWarned,
-      
-               isModerator: this._isModerator,
-               year: this._year,
-               section:this._section*/
-=======
->>>>>>> refs/remotes/origin/master
         };
     };
     return Tutor;
@@ -2904,11 +2878,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
-=======
 module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
->>>>>>> refs/remotes/origin/master
 
 
 /***/ })
