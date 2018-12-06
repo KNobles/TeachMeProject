@@ -14,19 +14,11 @@ import {ListAnnouncementComponent} from "./list-announcement/list-announcement.c
 import {CreateAnnouncementComponent} from "./create-announcement/create-announcement.component";
 import {HomeComponent} from "./home/home.component";
 import {ProfileComponent} from "./profil/profile.component";
-<<<<<<< HEAD
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NavbarheaderComponent } from './navbarheader/navbarheader.component';
 import { FilterAnnouncementPipe } from './filter-announcement.pipe';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-=======
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import { FilterByPriceAnnouncementPipe } from './filter-by-price-announcement.pipe';
-import { NavbarheaderComponent } from './navbarheader/navbarheader.component';
-import { FilterByCourseAnnouncementPipe } from './filter-by-course-announcement.pipe';
 import {TokenInterceptor} from "./token-interceptor";
-
->>>>>>> d9db4b09b090324eeea3e8d6d399a1d22258d286
 
 
 @NgModule({

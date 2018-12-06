@@ -334,12 +334,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./navbarheader/navbarheader.component */ "./src/app/navbarheader/navbarheader.component.ts");
 /* harmony import */ var _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./filter-announcement.pipe */ "./src/app/filter-announcement.pipe.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./token-interceptor */ "./src/app/token-interceptor.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -385,8 +387,8 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__["BrowserAnimationsModule"]
             ],
             providers: [{
-                    provide: HTTP_INTERCEPTORS,
-                    useClass: TokenInterceptor,
+                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HTTP_INTERCEPTORS"],
+                    useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_18__["TokenInterceptor"],
                     multi: true
                 }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
@@ -744,7 +746,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-2\">\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    <select class=\"form-control form-control-sm\" (change)=\"setCourseId($event.target.value)\">\r\n      <option *ngFor=\"let c of courses\" [value]=\"c?.idCourse\" name=\"op\">{{c?.label}}</option>\r\n    </select>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input name=\"sumbitButton\" type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div class=\"col-md-2\">\r\n  <form #formAnnouncement=\"ngForm\" class=\"container\" name=\"formAnnouncement\" (submit)=\"createAnnouncement()\">\r\n    Title : <br>\r\n    <input name=\"title\" [(ngModel)]=\"announcementTmp.title\" type=\"text\" required> <br>\r\n    <select class=\"form-control form-control-sm\" name=\"list\" [(ngModel)]=\"announcementTmp.idCourse\">\r\n        <option *ngFor=\"let c of courses\" name = \"c?.label\" [value]=\"c?.idCourse\">{{c?.label}}</option>\r\n    </select>\r\n    Description : <br>\r\n    <textarea name=\"description\" [(ngModel)]=\"announcementTmp.description\" rows=\"5\" cols=\"50\" required></textarea> <br>\r\n    Fee :<br>\r\n    <input name=\"fee\" [(ngModel)]=\"announcementTmp.fee\" type=\"text\" required> <br>\r\n    <input name=\"sumbitButton\" type=\"submit\" value=\"Create\">\r\n  </form>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -821,13 +823,6 @@ var CreateAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    /*
-    ça marche mais je pense que c'est pas bon
-     */
-    CreateAnnouncementComponent.prototype.setCourseId = function (id) {
-        this.announcementTmp.idCourse = id;
-        console.log(this.announcementTmp);
-    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]),
@@ -1728,6 +1723,54 @@ var TestComponentComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], TestComponentComponent);
     return TestComponentComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/token-interceptor.ts":
+/*!**************************************!*\
+  !*** ./src/app/token-interceptor.ts ***!
+  \**************************************/
+/*! exports provided: TokenInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
+/* harmony import */ var _connected_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./connected.service */ "./src/app/connected.service.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var TokenInterceptor = /** @class */ (function () {
+    function TokenInterceptor(connectedService) {
+        this.connectedService = connectedService;
+    }
+    TokenInterceptor.prototype.intercept = function (req, next) {
+        if (this.connectedService.connected) {
+            req = req.clone({
+                setHeaders: {
+                    Authorization: this.connectedService.accountConnected.token
+                }
+            });
+        }
+        return next.handle(req);
+    };
+    TokenInterceptor = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        __metadata("design:paramtypes", [_connected_service__WEBPACK_IMPORTED_MODULE_0__["ConnectedService"]])
+    ], TokenInterceptor);
+    return TokenInterceptor;
 }());
 
 
@@ -2701,19 +2744,9 @@ var Tutor = /** @class */ (function () {
             password: this._password,
             mail: this._mail,
             phone: this._phone,
+            //  evaluation: this._evaluation,
             description: this._description,
             token: this._token
-            /*   isWarned: this._isWarned,
-      =======
-      
-            description: this._description
-            /*
-               evaluation: this._evaluation,
-               isWarned: this._isWarned,
-      >>>>>>> refs/remotes/origin/master
-               isModerator: this._isModerator,
-               year: this._year,
-               section:this._section*/
         };
     };
     return Tutor;

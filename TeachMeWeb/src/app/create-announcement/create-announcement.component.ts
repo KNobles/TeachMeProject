@@ -49,12 +49,5 @@ export class CreateAnnouncementComponent implements OnInit {
   get announcementCreated():EventEmitter<Announcement>{
     return this._announcementCreated;
   }
-  /*
-  ça marche mais je pense que c'est pas bon
-   */
-  setCourseId(id: number){
-    this.announcementTmp.idCourse = id;
-    console.log(this.announcementTmp);
-  }
 
 }

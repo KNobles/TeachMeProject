@@ -157,21 +157,9 @@ export class Tutor {
       password: this._password,
       mail: this._mail,
       phone: this._phone,
-<<<<<<< HEAD
       //  evaluation: this._evaluation,
       description: this._description,
       token: this._token
-      /*   isWarned: this._isWarned,
-=======
-
-      description: this._description
-      /*
-         evaluation: this._evaluation,
-         isWarned: this._isWarned,
->>>>>>> refs/remotes/origin/master
-         isModerator: this._isModerator,
-         year: this._year,
-         section:this._section*/
     };
   }
 }

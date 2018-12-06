@@ -13,11 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-<<<<<<< HEAD
             "outputPath": "C:/Cours/ProjetTI/TeachMeProject/TeachMeAPI/TeachMeAPI/Scripts/teachme-angular",
-=======
-            "outputPath": "C:/Users/axoul/Desktop/TeachMe/TeachMeProject/TeachMeAPI/TeachMeAPI/Scripts/teachme-angular",
->>>>>>> refs/remotes/origin/master
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
