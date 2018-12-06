@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this._login, this._password).subscribe(
       token => {
         this._token = token;
-        console.log(this._token);
         if(this._isStudent)
         {
           this._subGet = this.studentService.getAccount(this.login, this.password).subscribe(student => {
@@ -63,7 +62,6 @@ export class LoginComponent implements OnInit {
             this.tmpTutor.token = this._token;
             this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
             localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
-            console.log(localStorage.getItem("account"));
             localStorage.setItem("type", "tutor");
             this.router.navigate(['/Home']);
           });

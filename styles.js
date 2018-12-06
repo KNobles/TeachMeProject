@@ -540,10 +540,10 @@ if(false) {}
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
-module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
 =======
-module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
->>>>>>> 6ba1129ed65f4d3aa3d606dca0ff9e51d5cec129
+module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+>>>>>>> refs/remotes/origin/master
 
 
 /***/ })

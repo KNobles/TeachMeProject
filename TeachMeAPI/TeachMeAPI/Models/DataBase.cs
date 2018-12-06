@@ -11,7 +11,11 @@ namespace TeachMeAPI.Models
 
         private static readonly string CONNECTION_STRING = @"Data Source=teachme.database.windows.net;Initial Catalog=teachme-api;User ID=TeachmeAdmin;Password=Azerty12;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
+<<<<<<< HEAD
         //private static readonly string CONNECTION_STRING = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=teachme-api;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+=======
+       // private static readonly string CONNECTION_STRING = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=teachme-api;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+>>>>>>> 6ba1129ed65f4d3aa3d606dca0ff9e51d5cec129
         public static SqlConnection GetConnection()
         {
             return new SqlConnection(DataBase.CONNECTION_STRING);
