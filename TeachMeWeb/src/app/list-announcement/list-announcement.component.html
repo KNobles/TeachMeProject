@@ -17,7 +17,7 @@
         <div class="form-group col-md-6">
           <h5 class="text-white">Price</h5>
           <select name="filterOption" [(ngModel)]="optionSelected" class="form-control form-control-sm col-md-6">
-            <option *ngFor="let o of OPTIONS" [ngValue]="o">
+            <option *ngFor="let o of options" [ngValue]="o">
               {{intToOrderOption(o)}}
             </option>
           </select>

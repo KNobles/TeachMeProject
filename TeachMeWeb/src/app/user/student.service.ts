@@ -30,7 +30,7 @@ export class StudentService {
   }
 
   public update(student: Student) : Observable<any>{
-    return this.http.put<any>(StudentService.URL_API_STUDENT + '/' + student.idStudent, student.serializeUpdate());
+    return this.http.put<any>(StudentService.URL_API_STUDENT, student.toJson());
   }
 
 }

@@ -27,10 +27,10 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
 
   private _currentCourse: number = -1;
 
-  private _OPTIONS = [FilterAnnouncementPipe.ORDER_DEFAULT, FilterAnnouncementPipe.ORDER_ASCENDING, FilterAnnouncementPipe.ORDER_DESCENDING];
+  private _options = [FilterAnnouncementPipe.ORDER_DEFAULT, FilterAnnouncementPipe.ORDER_ASCENDING, FilterAnnouncementPipe.ORDER_DESCENDING];
   optionSelected: number = FilterAnnouncementPipe.ORDER_DEFAULT;
 
-  constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService, public broadcastCreateAnnouncement: BroadcastCreateAnnouncementService) {
+  constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService) {
   }
 
   get currentCourse(): number {
@@ -44,13 +44,13 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   intToOrderOption(num: number) {
     return FilterAnnouncementPipe.intToOrderOption(num);
   }
-
+/*
   listAnnouncementCreated() {
-    this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
+    this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated$.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
   }
-
+*/
   ngOnInit() {
-    this.listAnnouncementCreated();
+   // this.listAnnouncementCreated();
     this.getAnnouncements();
     this.getTutors();
     this.getCourses();
@@ -96,12 +96,12 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
     return this._announcements;
   }
 
-  get OPTIONS(): number[] {
-    return this._OPTIONS;
+  get options(): number[] {
+    return this._options;
   }
 
-  set OPTIONS(value: number[]) {
-    this._OPTIONS = value;
+  set options(value: number[]) {
+    this._options = value;
   }
 
   getTutors(): void {

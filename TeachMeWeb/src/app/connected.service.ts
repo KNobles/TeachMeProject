@@ -33,7 +33,7 @@ export class ConnectedService {
     if(accountTmp != null){
       if(localStorage.getItem("type") === "student")
       {
-        this._studentConnected =  new Student().deserializable(localStorage.getItem("account"));
+        this._studentConnected =  new Student().deserializable(JSON.parse(localStorage.getItem("account")));
         this.accountConnected = this.studentConnected;
       }
       else{

@@ -10,7 +10,7 @@ namespace TeachMeAPI.Controllers
 {
     public class TutorController : ApiController
     {
-        //[Authorize]
+        [Authorize]
         public List<Tutor> GetAll()
         {
             return DAO.TutorDAO.Query();
@@ -20,19 +20,19 @@ namespace TeachMeAPI.Controllers
         {
             return DAO.TutorDAO.Insert(user);
         }
-        //[Authorize]
+        [Authorize]
         public Tutor Get(int id)
         {
             return DAO.TutorDAO.Get(id);
         }
 
-        //[Authorize(Roles = "Admin")]
+       // [Authorize]
         public Tutor Get(String username, String password)
         {
             return DAO.TutorDAO.Get(username, password);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize]
         public IHttpActionResult Delete(int idTutor)
         {
             if (DAO.TutorDAO.Delete(idTutor))

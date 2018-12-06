@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy(){
+
     if(this._subGet){
       this._subGet.unsubscribe();
     }
@@ -38,41 +39,36 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
   connection() {
-    //alert(this._login + ' ' + this._password);
-    this.authService.login(this._login, this._password).subscribe(
-      token => {
-        this._token = token;
-        if(this._isStudent)
-        {
-          this._subGet = this.studentService.getAccount(this.login, this.password).subscribe(student => {
-            this.tmpStudent = new Student().deserializable(student);
-            this.tmpStudent.token = this._token;
-            this._subUpdate = this.studentService.update(this.tmpStudent).subscribe();
-            localStorage.setItem("account", JSON.stringify(this.tmpStudent));
-            localStorage.setItem("type", "student");
-            this.router.navigate(['/Home']);
-          });
+      this.authService.login(this._login, this._password).subscribe(
+        token => {
+          this._token = token;
+          if(this._isStudent)
+          {
+            this._subGet = this.studentService.getAccount(this.login, this.password).subscribe(student => {
+              this.tmpStudent = new Student().deserializable(student);
+              this.tmpStudent.token = this._token;
+              this._subUpdate = this.studentService.update(this.tmpStudent).subscribe();
+              localStorage.setItem("account", JSON.stringify(this.tmpStudent.toJson()));
+              localStorage.setItem("type", "student");
+              this.router.navigate(['/Home']);
+            });
 
-        }
-        else
-        {
-          this._subGet = this.tutorService.getAccount(this.login, this.password).subscribe(tutor => {
-            this.tmpTutor = new Tutor().deserializable(tutor);
-            this.tmpTutor.token = this._token;
-            this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
-            localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
-            localStorage.setItem("type", "tutor");
-            this.router.navigate(['/Home']);
-          });
+          }
+          else
+          {
+            this._subGet = this.tutorService.getAccount(this.login, this.password).subscribe(tutor => {
+              this.tmpTutor = new Tutor().deserializable(tutor);
+              this.tmpTutor.token = this._token;
+              this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
+              localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
+              localStorage.setItem("type", "tutor");
+              this.router.navigate(['/Home']);
+            });
 
-        }
-      });
-
-
-
-
-
+          }
+        });
 
   }
 

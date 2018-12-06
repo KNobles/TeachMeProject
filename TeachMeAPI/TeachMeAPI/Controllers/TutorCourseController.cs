@@ -10,6 +10,7 @@ using TeachMeAPI.DAO;
 
 namespace TeachMeAPI.Controllers
 {
+    [Authorize]
     public class TutorCourseController : ApiController
     {
        // [Authorize]

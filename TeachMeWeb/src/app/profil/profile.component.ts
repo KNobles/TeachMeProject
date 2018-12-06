@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     if(localStorage.getItem("type" ) === "tutor")
     {
       this.getTutor();
+      console.log(this.tmpTutor);
     }
 
   }
@@ -71,11 +72,11 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this.tmpTutor.mail = value;
   }
 
-  get tel(): string {
+  get phone(): string {
     return this.tmpTutor.phone;
   }
 
-  set tel(value: string) {
+  set phone(value: string) {
     this.tmpTutor.phone = value;
   }
 
@@ -142,6 +143,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   Sending(){
     console.log(this.tmpTutor);
     this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
+    localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
     alert("Modification done");
 
   }
