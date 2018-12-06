@@ -28,13 +28,13 @@ namespace TeachMeAPI.Controllers
             return DAO.EleveDAO.Get(id);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public Eleve Get(String username, String password)
         {
             return DAO.EleveDAO.Get(username, password);
         }
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public IHttpActionResult Delete(int idEleve)
         {
             if (DAO.EleveDAO.Delete(idEleve))
@@ -44,7 +44,7 @@ namespace TeachMeAPI.Controllers
             return BadRequest();
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IHttpActionResult Put(Eleve eleve)
         {
             if (DAO.EleveDAO.Update(eleve))

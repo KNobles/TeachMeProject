@@ -20,6 +20,10 @@ export class TutorService {
     return this.http.get<Tutor>(TutorService.URL_API_TUTOR+"/" + id);
   }
 
+  public getAccount(username : string, password: string): Observable<Tutor>{
+    return this.http.get<Tutor>(TutorService.URL_API_TUTOR + "?username=" + username +"&password=" + password);
+  }
+
   public create(tutor: Tutor): Observable<Tutor> {
     return this.http.post<Tutor>(TutorService.URL_API_TUTOR, tutor.serialize());
   }
@@ -29,6 +33,7 @@ export class TutorService {
   }
 
   public update(tutor: Tutor): Observable<any> {
-    return this.http.put<any>(TutorService.URL_API_TUTOR, tutor.serializeUpdate());
+    return this.http.put<any>(TutorService.URL_API_TUTOR + '/' + tutor.idTutor, tutor.serializeUpdate());
   }
+
 }

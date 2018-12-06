@@ -1,6 +1,7 @@
 import {Course} from "../course/course";
 
 export class Tutor {
+
   private _idTutor: number;
   private _username: string;
   private _password: string;
@@ -12,6 +13,7 @@ export class Tutor {
   private _isModerator: boolean;
   private _year:number;
   private _section:string;
+  private _token:string;
 
 
 
@@ -119,6 +121,14 @@ export class Tutor {
     this._section = value;
   }
 
+  get token(): string {
+    return this._token;
+  }
+
+  set token(value: string) {
+    this._token = value;
+  }
+
   public deserializable(json: any) : Tutor {
     Object.assign(this, json);
     return this;
@@ -147,11 +157,18 @@ export class Tutor {
       password: this._password,
       mail: this._mail,
       phone: this._phone,
+<<<<<<< HEAD
+      //  evaluation: this._evaluation,
+      description: this._description,
+      token: this._token
+      /*   isWarned: this._isWarned,
+=======
 
       description: this._description
       /*
          evaluation: this._evaluation,
          isWarned: this._isWarned,
+>>>>>>> refs/remotes/origin/master
          isModerator: this._isModerator,
          year: this._year,
          section:this._section*/

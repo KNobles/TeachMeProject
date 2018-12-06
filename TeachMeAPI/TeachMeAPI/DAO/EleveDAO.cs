@@ -21,6 +21,7 @@ namespace TeachMeAPI.DAO
         public static readonly string COLUMN_AVERTISSEMENT = "Avertissement";
         public static readonly string COLUMN_IS_MODERATEUR = "IsModerateur";
         public static readonly string COLUMN_TEL = "Tel";
+        public static readonly string COLUMN_TOKEN = "Token";
 
         public static readonly string QUERY = "SELECT * FROM " + TABLE_NAME;
         public static readonly string GETID = QUERY + " WHERE " + COLUMN_ID + " = @idEleve";
@@ -30,8 +31,9 @@ namespace TeachMeAPI.DAO
             +") OUTPUT INSERTED.idEleve VALUES(@name, @password, @mail, @tel, 0, 0)";
         public static readonly string UPDATE = "UPDATE " + TABLE_NAME + " SET " + COLUMN_NAME + " = @name, " + COLUMN_TEL + " = @tel, " + 
             COLUMN_PASSWORD + " = @password, " + COLUMN_AVERTISSEMENT + " = @avertissement, " + COLUMN_IS_MODERATEUR + " = @isModerateur, " 
-            + COLUMN_MAIL + " = @mail WHERE " + COLUMN_ID + " = @idEleve";
+            + COLUMN_MAIL + " = @mail, " + COLUMN_TOKEN + " = @token WHERE " + COLUMN_ID + " = @idEleve";
         public static readonly string DELETE = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = @idEleve";
+
 
 
 
@@ -151,12 +153,14 @@ namespace TeachMeAPI.DAO
                 command.Parameters.AddWithValue("@password", eleve.Password);
                 command.Parameters.AddWithValue("@isModerateur", eleve.IsModerateur);
                 command.Parameters.AddWithValue("@mail", eleve.Mail);
+                command.Parameters.AddWithValue("@token", eleve.Token);
 
                 state = command.ExecuteNonQuery() != 0;
 
             }
             return state;
         }
+
 
     }
 }

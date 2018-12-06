@@ -1,6 +1,7 @@
 import {Output} from '@angular/core';
 
 export class Student {
+
   private _idStudent: number;
   private _name:string;
   private _mail:string;
@@ -8,6 +9,7 @@ export class Student {
   private _password:string;
   private _avertissement: boolean;
   private _isModerateur: boolean;
+  private _token: string;
 
   constructor(name: string="user", mail: string="user@hotmail.com", password: string="password", tel: string="0123456789", isWarned:boolean=false, isModerator:boolean=false) {
     this._name = name;
@@ -74,6 +76,14 @@ export class Student {
     this._isModerateur = value;
   }
 
+  get token(): string {
+    return this._token;
+  }
+
+  set token(value: string) {
+    this._token = value;
+  }
+
   public deserializable(json: any) : Student {
     Object.assign(this, json);
     return this;
@@ -85,6 +95,22 @@ export class Student {
       mail: this._mail,
       tel: this._phone,
       password: this._password,
+    };
+  }
+
+  public serializeUpdate(): any {
+    return {
+      idTutor: this._idStudent,
+      username: this._name,
+      password: this._password,
+      mail: this._mail,
+      phone: this._phone,
+      //  evaluation: this._evaluation,
+      token: this._token
+      /*   isWarned: this._isWarned,
+         isModerator: this._isModerator,
+         year: this._year,
+         section:this._section*/
     };
   }
 

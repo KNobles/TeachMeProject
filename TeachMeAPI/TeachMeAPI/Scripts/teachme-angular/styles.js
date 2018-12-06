@@ -539,7 +539,15 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+=======
+<<<<<<< HEAD
+module.exports = __webpack_require__(/*! C:\Cours\ProjetTI\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+=======
+module.exports = __webpack_require__(/*! C:\Users\axoul\Desktop\TeachMe\TeachMeProject\TeachMeWeb\src\styles.css */"./src/styles.css");
+>>>>>>> refs/remotes/origin/master
+>>>>>>> d9db4b09b090324eeea3e8d6d399a1d22258d286
 
 
 /***/ })

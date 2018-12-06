@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ConnectedService} from "../connected.service";
 
 @Component({
   selector: 'app-navbarheader',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarheaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public connectedService: ConnectedService) { }
 
   ngOnInit() {
+    this.connectedService.connecting();
   }
 
 }

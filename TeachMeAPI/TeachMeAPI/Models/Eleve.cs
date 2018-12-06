@@ -25,13 +25,15 @@ namespace TeachMeAPI.Models
         public string Tel { get; set; }
         [JsonProperty(PropertyName = "isModerateur")]
         public bool IsModerateur { get; set; }
+        [JsonProperty(PropertyName = "token")]
+        public string Token { get; set; }
 
 
 
         public Eleve()
         { }
 
-        public Eleve(int id, string name, string mail, string password, string tel, bool avertissement, bool isModerateur)
+        public Eleve(int id, string name, string mail, string password, string tel, bool avertissement, bool isModerateur, string token)
         {
             IdEleve = id;
             Name = name;
@@ -40,6 +42,7 @@ namespace TeachMeAPI.Models
             Tel = tel;
             Avertissement = avertissement;
             IsModerateur = isModerateur;
+            Token = token;
         }
 
         public Eleve(SqlDataReader reader)
@@ -51,6 +54,7 @@ namespace TeachMeAPI.Models
             Avertissement = Boolean.Parse(reader[EleveDAO.COLUMN_AVERTISSEMENT].ToString());
             Tel = reader[EleveDAO.COLUMN_TEL].ToString();
             IsModerateur = Boolean.Parse(reader[EleveDAO.COLUMN_IS_MODERATEUR].ToString());
+            Token= reader[EleveDAO.COLUMN_TOKEN].ToString();
         }
 
     }
