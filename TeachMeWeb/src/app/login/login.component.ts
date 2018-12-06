@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
     if(this._subGet){
       this._subGet.unsubscribe();
     }
-    if(this._subUpdate){
+    if(this._subUpdate) {
       this._subUpdate.unsubscribe();
     }
-
   }
+
 
   connection() {
       this.authService.login(this._login, this._password).subscribe(

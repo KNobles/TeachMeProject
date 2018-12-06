@@ -173,26 +173,9 @@ export class Tutor {
       password: this._password,
       mail: this._mail,
       phone: this._phone,
-
-
       //  evaluation: this._evaluation,
       description: this._description,
       token: this._token
-      /*   isWarned: this._isWarned,
-
-
-      description: this._description
-      /*
-         evaluation: this._evaluation,
-         isWarned: this._isWarned,
-
-         isModerator: this._isModerator,
-         year: this._year,
-         section:this._section*/
-
-      //  evaluation: this._evaluation,
-
-
     };
   }
 }

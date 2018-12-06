@@ -19,13 +19,13 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
     private _formStudent;
     private _studentCreated : EventEmitter<Student> = new EventEmitter();
 
-  get formStudent() {
-    return this._formStudent;
-  }
-
   constructor(public BroadcastStudentForm: BroadcastStudentFormService) { }
 
   ngOnInit() {
+  }
+
+  get formStudent() {
+    return this._formStudent;
   }
   get userName(): string {
     return this._userName;
