@@ -28,7 +28,7 @@ namespace TeachMeAPI.Controllers
             return DAO.EleveDAO.Get(id);
         }
 
-        [Authorize]
+      //  [Authorize]
         public Eleve Get(String username, String password)
         {
             return DAO.EleveDAO.Get(username, password);

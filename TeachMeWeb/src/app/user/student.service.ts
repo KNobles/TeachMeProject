@@ -16,8 +16,8 @@ export class StudentService {
     return this.http.get<Student[]>(StudentService.URL_API_STUDENT);
   }
 
-  public getAccount(username : string, password: string): Observable<Student>{
-    return this.http.get<Student>(StudentService.URL_API_STUDENT + "?name=" + username +"&password=" + password);
+  public getAccount(name : string, password: string): Observable<Student>{
+    return this.http.get<Student>(StudentService.URL_API_STUDENT + "?name=" + name +"&password=" + password);
   }
 
   public create(student: Student) : Observable<Student> {

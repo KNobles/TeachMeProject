@@ -1359,6 +1359,7 @@ var LoginComponent = /** @class */ (function () {
         this.authService.login(this._login, this._password).subscribe(function (token) {
             _this._token = token;
             if (_this._isStudent) {
+                console.log("student connect");
                 _this._subGet = _this.studentService.getAccount(_this.login, _this.password).subscribe(function (student) {
                     _this.tmpStudent = new _user_student__WEBPACK_IMPORTED_MODULE_3__["Student"]().deserializable(student);
                     _this.tmpStudent.token = _this._token;
@@ -1369,13 +1370,19 @@ var LoginComponent = /** @class */ (function () {
                 });
             }
             else {
+                console.log("tutor connect");
                 _this._subGet = _this.tutorService.getAccount(_this.login, _this.password).subscribe(function (tutor) {
                     _this.tmpTutor = new _user_tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"]().deserializable(tutor);
-                    _this.tmpTutor.token = _this._token;
-                    _this._subUpdate = _this.tutorService.update(_this.tmpTutor).subscribe();
-                    localStorage.setItem("account", JSON.stringify(_this.tmpTutor.toJson()));
-                    localStorage.setItem("type", "tutor");
-                    _this.router.navigate(['/Home']);
+                    if (_this.tmpTutor.username === _this.login) {
+                        _this.tmpTutor.token = _this._token;
+                        _this._subUpdate = _this.tutorService.update(_this.tmpTutor).subscribe();
+                        localStorage.setItem("account", JSON.stringify(_this.tmpTutor.toJson()));
+                        localStorage.setItem("type", "tutor");
+                        _this.router.navigate(['/Home']);
+                    }
+                    else {
+                        _this.tmpTutor = null;
+                    }
                 });
             }
         });
@@ -2467,8 +2474,8 @@ var StudentService = /** @class */ (function () {
     StudentService.prototype.query = function () {
         return this.http.get(StudentService_1.URL_API_STUDENT);
     };
-    StudentService.prototype.getAccount = function (username, password) {
-        return this.http.get(StudentService_1.URL_API_STUDENT + "?name=" + username + "&password=" + password);
+    StudentService.prototype.getAccount = function (name, password) {
+        return this.http.get(StudentService_1.URL_API_STUDENT + "?name=" + name + "&password=" + password);
     };
     StudentService.prototype.create = function (student) {
         console.log(StudentService_1.URL_API_STUDENT);
@@ -2990,7 +2997,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
 
 
 /***/ })
