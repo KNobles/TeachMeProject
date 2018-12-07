@@ -1380,6 +1380,7 @@ var LoginComponent = /** @class */ (function () {
         this.authService.login(this._login, this._password).subscribe(function (token) {
             _this._token = token;
             if (_this._isStudent) {
+                localStorage.setItem("token", _this._token);
                 console.log("student connect");
                 _this._subGet = _this.studentService.getAccount(_this.login, _this.password).subscribe(function (student) {
                     _this.tmpStudent = new _user_student__WEBPACK_IMPORTED_MODULE_3__["Student"]().deserializable(student);
@@ -2504,7 +2505,7 @@ var StudentService = /** @class */ (function () {
         return this.http.get(StudentService_1.URL_API_STUDENT);
     };
     StudentService.prototype.getAccount = function (name, password) {
-        return this.http.get(StudentService_1.URL_API_STUDENT + "?name=" + name + "&password=" + password);
+        return this.http.get(StudentService_1.URL_API_STUDENT + "?username=" + name + "&password=" + password);
     };
     StudentService.prototype.create = function (student) {
         console.log(StudentService_1.URL_API_STUDENT);

@@ -11,7 +11,7 @@ namespace TeachMeAPI.Controllers
     
     public class EleveController : ApiController
     {
-        [Authorize]
+       [Authorize]
         public List<Eleve> GetAll()
         {
             return DAO.EleveDAO.Query();

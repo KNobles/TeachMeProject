@@ -46,10 +46,12 @@ export class LoginComponent implements OnInit {
           this._token = token;
           if(this._isStudent)
           {
+            localStorage.setItem("token", this._token);
             console.log("student connect");
             this._subGet = this.studentService.getAccount(this.login, this.password).subscribe(student => {
               this.tmpStudent = new Student().deserializable(student);
               this.tmpStudent.token = this._token;
+
               this._subUpdate = this.studentService.update(this.tmpStudent).subscribe();
               localStorage.setItem("account", JSON.stringify(this.tmpStudent.toJson()));
               localStorage.setItem("type", "student");
