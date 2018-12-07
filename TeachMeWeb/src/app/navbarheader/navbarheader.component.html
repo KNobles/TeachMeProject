@@ -16,11 +16,11 @@
       </li>
       </span>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/Login" (click)="logout()">Logout</a>
+        <a class="nav-link" routerLink="/Login" (click)="logout()">Logout ({{getCurrentPersonName()}})</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-    <button [disabled]="isStudent()" class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/Announcement">Create Announcement</button>
+      <button [disabled]="isStudent()" class="btn btn-success my-2 my-sm-0" type="submit" routerLink="/Announcement">Create Announcement</button>
     </form>
   </div>
 

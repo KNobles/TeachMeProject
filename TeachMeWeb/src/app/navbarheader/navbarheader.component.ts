@@ -24,5 +24,13 @@ export class NavbarheaderComponent implements OnInit {
     return localStorage.getItem("type") === "student";
   }
 
+  getCurrentPersonName(): string {
+    if(localStorage.getItem("type") == "student"){
+      return this.connectedService.studentConnected.name;
+    } else {
+      return this.connectedService.tutorConnected.username;
+    }
+  }
+
 
 }

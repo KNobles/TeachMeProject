@@ -8,6 +8,8 @@ import {TutorService} from "../user/tutor.service";
 import {Course} from "../course/course";
 import {CourseService} from "../course/course.service";
 import {FilterAnnouncementPipe} from "../filter-announcement.pipe";
+import {Student} from "../user/student";
+import {ConnectedService} from "../connected.service";
 
 
 @Component({
@@ -24,6 +26,7 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   private subUpdate: Subscription;
   private subQuery: Subscription;
   private subBroadcast: Subscription;
+  private _textMail: string;
 
   private _currentCourse: number = -1;
   private _currentAnnouncement: Announcement;
@@ -31,7 +34,7 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   private _options = [FilterAnnouncementPipe.ORDER_DEFAULT, FilterAnnouncementPipe.ORDER_ASCENDING, FilterAnnouncementPipe.ORDER_DESCENDING];
   optionSelected: number = FilterAnnouncementPipe.ORDER_DEFAULT;
 
-  constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService) {
+  constructor(public connectedService: ConnectedService, public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService) {
   }
 
   ngOnInit() {
@@ -150,6 +153,22 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   setCurrentAnnouncement(id: number) {
     this._currentAnnouncement = this.announcements[id];
     console.log(this.currentAnnouncement);
+  }
+
+  getCurrentPersonMail(): string {
+    if(localStorage.getItem("type") == "student"){
+      return this.connectedService.studentConnected.mail;
+    } else {
+      return this.connectedService.tutorConnected.mail;
+    }
+  }
+
+  get textMail(): string {
+    return this._textMail;
+  }
+
+  set textMail(value: string) {
+    this._textMail = value;
   }
 }
 
