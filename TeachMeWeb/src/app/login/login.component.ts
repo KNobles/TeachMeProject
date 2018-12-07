@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           this._token = token;
           if(this._isStudent)
           {
+            console.log("student connect");
             this._subGet = this.studentService.getAccount(this.login, this.password).subscribe(student => {
               this.tmpStudent = new Student().deserializable(student);
               this.tmpStudent.token = this._token;
@@ -58,13 +59,20 @@ export class LoginComponent implements OnInit {
           }
           else
           {
+            console.log("tutor connect");
             this._subGet = this.tutorService.getAccount(this.login, this.password).subscribe(tutor => {
               this.tmpTutor = new Tutor().deserializable(tutor);
-              this.tmpTutor.token = this._token;
-              this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
-              localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
-              localStorage.setItem("type", "tutor");
-              this.router.navigate(['/Home']);
+              if(this.tmpTutor.username === this.login){
+                this.tmpTutor.token = this._token;
+                this._subUpdate = this.tutorService.update(this.tmpTutor).subscribe();
+                localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
+                localStorage.setItem("type", "tutor");
+                this.router.navigate(['/Home']);
+              }
+              else{
+                this.tmpTutor=null;
+              }
+
             });
 
           }
