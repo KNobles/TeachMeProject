@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   private _year:number;
   private _section:string;*/
   private _modify:boolean=true;
+  private _stars: number[] = [];
 
   constructor(public tutor :TutorService, public connectedService: ConnectedService) { }
 
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
     if(localStorage.getItem("type" ) === "tutor")
     {
       this.getTutor();
+      this.setRatingStars();
       console.log(this.tmpTutor);
     }
 
@@ -148,4 +150,17 @@ export class ProfileComponent implements OnInit,OnDestroy {
 
   }
 
+  get stars(): number[] {
+    return this._stars;
+  }
+
+  set stars(value: number[]) {
+    this._stars = value;
+  }
+
+  setRatingStars(){
+    for(var i = 0; i < this.connectedService.tutorConnected.evaluation; i++){
+      this.stars[i] = i;
+    }
+  }
 }

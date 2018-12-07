@@ -1,24 +1,56 @@
 <app-navbarheader></app-navbarheader>
-<div>
-  <form #formProfil="ngForm" class="container" name="formProfile">
-    Nom d'utilisateur : <br>
-    <input type="text" name="username" [(ngModel)]="username" [disabled]="modify" required > <br>
-    Mot de passe : <br>
-    <input type="text" name="password" [(ngModel)]="password"  [disabled]="modify" required > <br>
-    Email : <br>
-    <input type=" text" name="mail" [(ngModel)]="mail"  [disabled]="modify" required> <br>
-    Numéro de téléphone : <br>
-    <input type="text" name="phone" [(ngModel)]="phone"  [disabled]="modify" required > <br>
-    Evaluation : <br>
-    <input type="text" name="evaluation" [(ngModel)]="evaluation"   disabled required > <br>
-    Description : <br>
-    <input type="text" name="description" [(ngModel)]="description"  [disabled]="modify" required > <br>
-    Avertissement : <br>
-    <input type="text" name="warning" [(ngModel)]="isWarned"   disabled required > <br>
-    Année: <br>
-    <input type="text" name="year" [(ngModel)]="year"   [disabled]="modify" required > <br>
-    Section : <br>
-    <input type="text" name="section" [(ngModel)]="section"  [disabled]="modify" required > <br>
-  </form>
-  <Button (click)="Modification()" class="btn btn-success">Modify</Button><Button (click)="Sending()" routerLink="/Profile" [disabled]="!modify">Send</Button>
+  <div class="col-sm-5">
+
+  <div class="form-box">
+    <div class="form-top">
+      <div class="form-top-left">
+        <h3>Profile</h3>
+        <p>You can edit your information:</p>
+      </div>
+      <div class="form-top-right">
+        <i class="fa fa-pencil"></i>
+      </div>
+    </div>
+    <div class="form-bottom">
+      <form  #formStudent="ngForm" name="formStudent" class="registration-form">
+        <div class="form-group">
+          <label class="sr-only" for="form-first-name">Username</label>
+          <input type="text" name="form-first-name" placeholder="Username..." class="form-first-name form-control" id="form-first-name" [(ngModel)]="username"  [disabled]="modify" required [minlength]="6" [maxlength]="15">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="form-last-name">Password</label>
+          <input type="text" name="form-last-name" placeholder="Password..." class="form-last-name form-control" id="form-last-name" [(ngModel)]="password"  [disabled]="modify" required pattern="^[A-Z][a-z\s+0-9]{8,}$">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="form-email">Email</label>
+          <input type="email" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email" [(ngModel)]="mail"  [disabled]="modify" required>
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="form-phone">Phone</label>
+          <input type="tel" name="form-phone" placeholder="Phone..." class="form-phone form-control" id="form-phone" [(ngModel)]="phone"  [disabled]="modify" required >
+        </div>
+
+        <div class="form-group ">
+          <label class="sr-only" for="form-about-yourself">About yourself</label>
+          <textarea name="form-about-yourself" placeholder="About yourself..."
+                    class="form-about-yourself form-control" id="form-about-yourself" [(ngModel)]="description" rows="10" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="form-year">Year</label>
+          <input type="text" name="form-year" placeholder="Year..." class="form-year form-control" id="form-year" [(ngModel)]="year"  required>
+        </div>
+
+        <div class="form-group">
+          <label class="sr-only" for="form-section">Section</label>
+          <input type="text" name="form-section" placeholder="Section..." class="form-section form-control" id="form-section" [(ngModel)]="section"  required>
+        </div>
+
+      </form>
+
+      <Button (click)="Modification()" class="btn btn-warning">Edit</Button><Button class="btn btn-success" (click)="Sending()" routerLink="/Profile" [disabled]="!modify">Send</Button>
+
+    </div>
+  </div>
+
 </div>
