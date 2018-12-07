@@ -18,6 +18,22 @@ export class Announcement{
     this._idTutor=tutor;
   }
 
+  public serialize() : any {
+    return {
+      idAnnouncement: this._idAnnouncement,
+      idTutor: this._idTutor,
+      idCourse: this._idCourse,
+      title: this._title,
+      description: this._description,
+      fee: this._fee
+    };
+  }
+
+  public deserializable(json: any) : Announcement {
+    Object.assign(this, json);
+    return this;
+  }
+
   get idTutor(): number {
     return this._idTutor;
   }
@@ -62,21 +78,7 @@ export class Announcement{
     this._title = value;
   }
 
-  public serialize() : any {
-    return {
-      idAnnouncement: this._idAnnouncement,
-      idTutor: this._idTutor,
-      idCourse: this._idCourse,
-      title: this._title,
-      description: this._description,
-      fee: this._fee
-    };
-  }
 
-  public deserializable(json: any) : Announcement {
-    Object.assign(this, json);
-    return this;
-  }
 
 
 }

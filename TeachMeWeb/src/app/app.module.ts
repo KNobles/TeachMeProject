@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
-import { TestComponentComponent } from './test-component/test-component.component';
 import {AppRoutingModule} from './app-routing.module';
 
 import {CreateTutorComponent} from './user/create-tutor/create-tutor.component';
@@ -26,7 +25,6 @@ import { SmartCreateAnnouncementComponent } from './smart-create-announcement/sm
   declarations: [
     AppComponent,
     LoginComponent,
-    TestComponentComponent,
     CreateUserComponent,
     CreatePersonneComponent,
     CreateTutorComponent,

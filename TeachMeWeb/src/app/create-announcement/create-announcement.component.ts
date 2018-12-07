@@ -29,14 +29,6 @@ export class CreateAnnouncementComponent implements OnInit {
     this.courseService.query().subscribe(c => this._courses = c.map(course => new Course().deserializable(course)));
   }
 
-  get courses(): Course[] {
-    return this._courses;
-  }
-
-  get announcementTmp(): Announcement {
-    return this._announcementTmp;
-  }
-
   createAnnouncement(){
     if(localStorage.getItem("type") === "tutor"){
       this.connectedService.connecting();
@@ -54,5 +46,16 @@ export class CreateAnnouncementComponent implements OnInit {
   get announcementCreated():EventEmitter<Announcement>{
     return this._announcementCreated;
   }
+
+
+  get courses(): Course[] {
+    return this._courses;
+  }
+
+  get announcementTmp(): Announcement {
+    return this._announcementTmp;
+  }
+
+
 
 }

@@ -11,7 +11,6 @@ export class TokenInterceptor implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.connectedService.connecting();
     if(this.connectedService.connected){
-      console.log(this.connectedService.connected);
        req = req.clone({
         setHeaders: {
           Authorization: "Bearer " + this.connectedService.accountConnected.token

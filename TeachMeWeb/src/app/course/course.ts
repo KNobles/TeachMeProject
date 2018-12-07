@@ -7,6 +7,17 @@ export class Course {
     this._label = courseName;
   }
 
+  public deserializable(json: any) : Course {
+    Object.assign(this, json);
+    return this;
+  }
+
+  public serialize() : any {
+    return {
+      label: this._label
+    };
+  }
+
   get idCourse(): number {
     return this._idCourse;
   }
@@ -23,15 +34,6 @@ export class Course {
     this._label = value;
   }
 
-  public deserializable(json: any) : Course {
-    Object.assign(this, json);
-    return this;
-  }
 
-  public serialize() : any {
-    return {
-      label: this._label
-    };
-  }
 
 }

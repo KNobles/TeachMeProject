@@ -101,6 +101,20 @@ var Announcement = /** @class */ (function () {
         this._idCourse = course;
         this._idTutor = tutor;
     }
+    Announcement.prototype.serialize = function () {
+        return {
+            idAnnouncement: this._idAnnouncement,
+            idTutor: this._idTutor,
+            idCourse: this._idCourse,
+            title: this._title,
+            description: this._description,
+            fee: this._fee
+        };
+    };
+    Announcement.prototype.deserializable = function (json) {
+        Object.assign(this, json);
+        return this;
+    };
     Object.defineProperty(Announcement.prototype, "idTutor", {
         get: function () {
             return this._idTutor;
@@ -161,20 +175,6 @@ var Announcement = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Announcement.prototype.serialize = function () {
-        return {
-            idAnnouncement: this._idAnnouncement,
-            idTutor: this._idTutor,
-            idCourse: this._idCourse,
-            title: this._title,
-            description: this._description,
-            fee: this._fee
-        };
-    };
-    Announcement.prototype.deserializable = function (json) {
-        Object.assign(this, json);
-        return this;
-    };
     return Announcement;
 }());
 
@@ -321,28 +321,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _test_component_test_component_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./test-component/test-component.component */ "./src/app/test-component/test-component.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _user_create_tutor_create_tutor_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./user/create-tutor/create-tutor.component */ "./src/app/user/create-tutor/create-tutor.component.ts");
-/* harmony import */ var _user_create_personne_create_personne_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user/create-personne/create-personne.component */ "./src/app/user/create-personne/create-personne.component.ts");
-/* harmony import */ var _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./user/create-user/create-user.component */ "./src/app/user/create-user/create-user.component.ts");
-/* harmony import */ var _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./list-announcement/list-announcement.component */ "./src/app/list-announcement/list-announcement.component.ts");
-/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
-/* harmony import */ var _profil_profile_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./profil/profile.component */ "./src/app/profil/profile.component.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./navbarheader/navbarheader.component */ "./src/app/navbarheader/navbarheader.component.ts");
-/* harmony import */ var _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./filter-announcement.pipe */ "./src/app/filter-announcement.pipe.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./token-interceptor */ "./src/app/token-interceptor.ts");
-/* harmony import */ var _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./smart-create-announcement/smart-create-announcement.component */ "./src/app/smart-create-announcement/smart-create-announcement.component.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _user_create_tutor_create_tutor_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./user/create-tutor/create-tutor.component */ "./src/app/user/create-tutor/create-tutor.component.ts");
+/* harmony import */ var _user_create_personne_create_personne_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./user/create-personne/create-personne.component */ "./src/app/user/create-personne/create-personne.component.ts");
+/* harmony import */ var _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./user/create-user/create-user.component */ "./src/app/user/create-user/create-user.component.ts");
+/* harmony import */ var _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./list-announcement/list-announcement.component */ "./src/app/list-announcement/list-announcement.component.ts");
+/* harmony import */ var _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./create-announcement/create-announcement.component */ "./src/app/create-announcement/create-announcement.component.ts");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _profil_profile_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./profil/profile.component */ "./src/app/profil/profile.component.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./navbarheader/navbarheader.component */ "./src/app/navbarheader/navbarheader.component.ts");
+/* harmony import */ var _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./filter-announcement.pipe */ "./src/app/filter-announcement.pipe.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./token-interceptor */ "./src/app/token-interceptor.ts");
+/* harmony import */ var _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./smart-create-announcement/smart-create-announcement.component */ "./src/app/smart-create-announcement/smart-create-announcement.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -370,28 +368,27 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"],
-                _test_component_test_component_component__WEBPACK_IMPORTED_MODULE_5__["TestComponentComponent"],
-                _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_9__["CreateUserComponent"],
-                _user_create_personne_create_personne_component__WEBPACK_IMPORTED_MODULE_8__["CreatePersonneComponent"],
-                _user_create_tutor_create_tutor_component__WEBPACK_IMPORTED_MODULE_7__["CreateTutorComponent"],
-                _profil_profile_component__WEBPACK_IMPORTED_MODULE_13__["ProfileComponent"],
-                _home_home_component__WEBPACK_IMPORTED_MODULE_12__["HomeComponent"],
-                _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_11__["CreateAnnouncementComponent"],
-                _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_10__["ListAnnouncementComponent"],
-                _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_15__["NavbarheaderComponent"],
-                _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_16__["FilterAnnouncementPipe"],
-                _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_19__["SmartCreateAnnouncementComponent"]
+                _user_create_user_create_user_component__WEBPACK_IMPORTED_MODULE_8__["CreateUserComponent"],
+                _user_create_personne_create_personne_component__WEBPACK_IMPORTED_MODULE_7__["CreatePersonneComponent"],
+                _user_create_tutor_create_tutor_component__WEBPACK_IMPORTED_MODULE_6__["CreateTutorComponent"],
+                _profil_profile_component__WEBPACK_IMPORTED_MODULE_12__["ProfileComponent"],
+                _home_home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"],
+                _create_announcement_create_announcement_component__WEBPACK_IMPORTED_MODULE_10__["CreateAnnouncementComponent"],
+                _list_announcement_list_announcement_component__WEBPACK_IMPORTED_MODULE_9__["ListAnnouncementComponent"],
+                _navbarheader_navbarheader_component__WEBPACK_IMPORTED_MODULE_14__["NavbarheaderComponent"],
+                _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_15__["FilterAnnouncementPipe"],
+                _smart_create_announcement_smart_create_announcement_component__WEBPACK_IMPORTED_MODULE_18__["SmartCreateAnnouncementComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _app_routing_module__WEBPACK_IMPORTED_MODULE_6__["AppRoutingModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__["BrowserAnimationsModule"]
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_5__["AppRoutingModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_13__["HttpClientModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"]
             ],
             providers: [{
-                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HTTP_INTERCEPTORS"],
-                    useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_18__["TokenInterceptor"],
+                    provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_13__["HTTP_INTERCEPTORS"],
+                    useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_17__["TokenInterceptor"],
                     multi: true
                 }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
@@ -569,16 +566,6 @@ var ConnectedService = /** @class */ (function () {
     function ConnectedService() {
         this._connected = false;
     }
-    Object.defineProperty(ConnectedService.prototype, "connected", {
-        get: function () {
-            return this._connected;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ConnectedService.prototype.disconnected = function () {
-        return !this.connected;
-    };
     ConnectedService.prototype.connecting = function () {
         var accountTmp = localStorage.getItem("account");
         if (accountTmp != null) {
@@ -629,6 +616,13 @@ var ConnectedService = /** @class */ (function () {
         },
         set: function (value) {
             this._accountConnected = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ConnectedService.prototype, "connected", {
+        get: function () {
+            return this._connected;
         },
         enumerable: true,
         configurable: true
@@ -719,6 +713,15 @@ var Course = /** @class */ (function () {
         if (courseName === void 0) { courseName = "course"; }
         this._label = courseName;
     }
+    Course.prototype.deserializable = function (json) {
+        Object.assign(this, json);
+        return this;
+    };
+    Course.prototype.serialize = function () {
+        return {
+            label: this._label
+        };
+    };
     Object.defineProperty(Course.prototype, "idCourse", {
         get: function () {
             return this._idCourse;
@@ -739,15 +742,6 @@ var Course = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Course.prototype.deserializable = function (json) {
-        Object.assign(this, json);
-        return this;
-    };
-    Course.prototype.serialize = function () {
-        return {
-            label: this._label
-        };
-    };
     return Course;
 }());
 
@@ -821,20 +815,6 @@ var CreateAnnouncementComponent = /** @class */ (function () {
         var _this = this;
         this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_3__["Course"]().deserializable(course); }); });
     };
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "courses", {
-        get: function () {
-            return this._courses;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(CreateAnnouncementComponent.prototype, "announcementTmp", {
-        get: function () {
-            return this._announcementTmp;
-        },
-        enumerable: true,
-        configurable: true
-    });
     CreateAnnouncementComponent.prototype.createAnnouncement = function () {
         if (localStorage.getItem("type") === "tutor") {
             this.connectedService.connecting();
@@ -849,6 +829,20 @@ var CreateAnnouncementComponent = /** @class */ (function () {
     Object.defineProperty(CreateAnnouncementComponent.prototype, "announcementCreated", {
         get: function () {
             return this._announcementCreated;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CreateAnnouncementComponent.prototype, "courses", {
+        get: function () {
+            return this._courses;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CreateAnnouncementComponent.prototype, "announcementTmp", {
+        get: function () {
+            return this._announcementTmp;
         },
         enumerable: true,
         configurable: true
@@ -1102,7 +1096,6 @@ var ListAnnouncementComponent = /** @class */ (function () {
         this.optionSelected = _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].ORDER_DEFAULT;
     }
     ListAnnouncementComponent.prototype.ngOnInit = function () {
-        // this.listAnnouncementCreated();
         this.getAnnouncements();
         this.getTutors();
         this.getCourses();
@@ -1121,24 +1114,10 @@ var ListAnnouncementComponent = /** @class */ (function () {
             this.subBroadcast.unsubscribe();
         }
     };
-    Object.defineProperty(ListAnnouncementComponent.prototype, "currentCourse", {
-        get: function () {
-            return this._currentCourse;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ListAnnouncementComponent.prototype.receiveAnnouncement = function (announcement) {
-        this._announcements.push(announcement);
-    };
     ListAnnouncementComponent.prototype.intToOrderOption = function (num) {
         return _filter_announcement_pipe__WEBPACK_IMPORTED_MODULE_7__["FilterAnnouncementPipe"].intToOrderOption(num);
     };
-    /*
-      listAnnouncementCreated() {
-        this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated$.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
-      }
-    */
+    //Fonctions delete et update en préivsion de fonctionnalités finalement non présentes.
     ListAnnouncementComponent.prototype.deleteAnnouncement = function (announcement) {
         this.subDelete = this.announcementService.delete(announcement).subscribe();
     };
@@ -1150,6 +1129,45 @@ var ListAnnouncementComponent = /** @class */ (function () {
         this.subQuery = this.announcementService
             .query()
             .subscribe(function (announcements) { return _this._announcements = announcements.map(function (a) { return new _announcement_announcement__WEBPACK_IMPORTED_MODULE_2__["Announcement"]().deserializable(a); }); });
+    };
+    ListAnnouncementComponent.prototype.onChange = function (ev) {
+        this._currentCourse = ev;
+    };
+    ListAnnouncementComponent.prototype.setCurrentAnnouncement = function (id) {
+        this._currentAnnouncement = this.announcements[id];
+        console.log(this.currentAnnouncement);
+    };
+    ListAnnouncementComponent.prototype.getTutors = function () {
+        var _this = this;
+        this.tutorService.query().subscribe(function (t) { return _this._tutors = t.map(function (tutor) { return new _user_tutor__WEBPACK_IMPORTED_MODULE_3__["Tutor"]().deserializable(tutor); }); });
+    };
+    ListAnnouncementComponent.prototype.getTutorById = function (id) {
+        for (var _i = 0, _a = this.tutors; _i < _a.length; _i++) {
+            var t = _a[_i];
+            if (t.idTutor == id) {
+                return t;
+            }
+        }
+    };
+    ListAnnouncementComponent.prototype.getCourses = function () {
+        var _this = this;
+        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_5__["Course"]().deserializable(course); }); });
+    };
+    ListAnnouncementComponent.prototype.getCoursesById = function (id) {
+        for (var _i = 0, _a = this.courses; _i < _a.length; _i++) {
+            var c = _a[_i];
+            if (c.idCourse == id) {
+                return c;
+            }
+        }
+    };
+    ListAnnouncementComponent.prototype.getCurrentPersonMail = function () {
+        if (localStorage.getItem("type") == "student") {
+            return this.connectedService.studentConnected.mail;
+        }
+        else {
+            return this.connectedService.tutorConnected.mail;
+        }
     };
     Object.defineProperty(ListAnnouncementComponent.prototype, "announcements", {
         get: function () {
@@ -1171,29 +1189,6 @@ var ListAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ListAnnouncementComponent.prototype.getTutors = function () {
-        var _this = this;
-        this.tutorService.query().subscribe(function (t) { return _this._tutors = t.map(function (tutor) { return new _user_tutor__WEBPACK_IMPORTED_MODULE_3__["Tutor"]().deserializable(tutor); }); });
-    };
-    Object.defineProperty(ListAnnouncementComponent.prototype, "tutors", {
-        get: function () {
-            return this._tutors;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ListAnnouncementComponent.prototype.getTutorById = function (id) {
-        for (var _i = 0, _a = this.tutors; _i < _a.length; _i++) {
-            var t = _a[_i];
-            if (t.idTutor == id) {
-                return t;
-            }
-        }
-    };
-    ListAnnouncementComponent.prototype.getCourses = function () {
-        var _this = this;
-        this.courseService.query().subscribe(function (c) { return _this._courses = c.map(function (course) { return new _course_course__WEBPACK_IMPORTED_MODULE_5__["Course"]().deserializable(course); }); });
-    };
     Object.defineProperty(ListAnnouncementComponent.prototype, "courses", {
         get: function () {
             return this._courses;
@@ -1201,17 +1196,13 @@ var ListAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ListAnnouncementComponent.prototype.getCoursesById = function (id) {
-        for (var _i = 0, _a = this.courses; _i < _a.length; _i++) {
-            var c = _a[_i];
-            if (c.idCourse == id) {
-                return c;
-            }
-        }
-    };
-    ListAnnouncementComponent.prototype.onChange = function (ev) {
-        this._currentCourse = ev;
-    };
+    Object.defineProperty(ListAnnouncementComponent.prototype, "tutors", {
+        get: function () {
+            return this._tutors;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ListAnnouncementComponent.prototype, "currentAnnouncement", {
         get: function () {
             return this._currentAnnouncement;
@@ -1219,24 +1210,19 @@ var ListAnnouncementComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ListAnnouncementComponent.prototype.setCurrentAnnouncement = function (id) {
-        this._currentAnnouncement = this.announcements[id];
-        console.log(this.currentAnnouncement);
-    };
-    ListAnnouncementComponent.prototype.getCurrentPersonMail = function () {
-        if (localStorage.getItem("type") == "student") {
-            return this.connectedService.studentConnected.mail;
-        }
-        else {
-            return this.connectedService.tutorConnected.mail;
-        }
-    };
     Object.defineProperty(ListAnnouncementComponent.prototype, "textMail", {
         get: function () {
             return this._textMail;
         },
         set: function (value) {
             this._textMail = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ListAnnouncementComponent.prototype, "currentCourse", {
+        get: function () {
+            return this._currentCourse;
         },
         enumerable: true,
         configurable: true
@@ -1517,7 +1503,6 @@ var NavbarheaderComponent = /** @class */ (function () {
         this.connectedService = connectedService;
     }
     NavbarheaderComponent.prototype.ngOnInit = function () {
-        console.log(localStorage.getItem("type") === "student", "TOOOOOOO");
     };
     NavbarheaderComponent.prototype.logout = function () {
         this.connectedService.connecting();
@@ -1614,6 +1599,39 @@ var ProfileComponent = /** @class */ (function () {
             console.log(this.tmpTutor);
         }
     };
+    ProfileComponent.prototype.ngOnDestroy = function () {
+        if (this._subGet) {
+            this._subGet.unsubscribe();
+        }
+        if (this._subUpdate) {
+            this._subUpdate.unsubscribe();
+        }
+    };
+    ProfileComponent.prototype.Modification = function () {
+        if (this._modify) {
+            this._modify = false;
+        }
+        else {
+            this._modify = true;
+        }
+    };
+    ProfileComponent.prototype.Sending = function () {
+        console.log(this.tmpTutor);
+        this._subUpdate = this.tutor.update(this.tmpTutor).subscribe();
+        localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
+        alert("Modification done");
+    };
+    ProfileComponent.prototype.setRatingStars = function () {
+        for (var i = 0; i < this.connectedService.tutorConnected.evaluation; i++) {
+            this.stars[i] = i;
+        }
+    };
+    ProfileComponent.prototype.getTutor = function () {
+        this.connectedService.connecting();
+        this.tmpTutor = this.connectedService.tutorConnected; /*
+        let id: number = this.tmpTutor.idTutor;
+        this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));*/
+    };
     Object.defineProperty(ProfileComponent.prototype, "tmpTutor", {
         get: function () {
             return this._tmpTutor;
@@ -1624,12 +1642,6 @@ var ProfileComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ProfileComponent.prototype.getTutor = function () {
-        this.connectedService.connecting();
-        this.tmpTutor = this.connectedService.tutorConnected; /*
-        let id: number = this.tmpTutor.idTutor;
-        this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));*/
-    };
     Object.defineProperty(ProfileComponent.prototype, "username", {
         get: function () {
             return this.tmpTutor.username;
@@ -1674,9 +1686,6 @@ var ProfileComponent = /** @class */ (function () {
         get: function () {
             return this.tmpTutor.evaluation;
         },
-        set: function (value) {
-            this.tmpTutor.evaluation = value;
-        },
         enumerable: true,
         configurable: true
     });
@@ -1720,22 +1729,6 @@ var ProfileComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ProfileComponent.prototype.ngOnDestroy = function () {
-        if (this._subGet) {
-            this._subGet.unsubscribe();
-        }
-        if (this._subUpdate) {
-            this._subUpdate.unsubscribe();
-        }
-    };
-    ProfileComponent.prototype.Modification = function () {
-        if (this._modify) {
-            this._modify = false;
-        }
-        else {
-            this._modify = true;
-        }
-    };
     Object.defineProperty(ProfileComponent.prototype, "modify", {
         get: function () {
             return this._modify;
@@ -1743,12 +1736,6 @@ var ProfileComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ProfileComponent.prototype.Sending = function () {
-        console.log(this.tmpTutor);
-        this._subUpdate = this.tutor.update(this.tmpTutor).subscribe();
-        localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
-        alert("Modification done");
-    };
     Object.defineProperty(ProfileComponent.prototype, "stars", {
         get: function () {
             return this._stars;
@@ -1759,11 +1746,6 @@ var ProfileComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    ProfileComponent.prototype.setRatingStars = function () {
-        for (var i = 0; i < this.connectedService.tutorConnected.evaluation; i++) {
-            this.stars[i] = i;
-        }
-    };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-profile-component',
@@ -1859,69 +1841,6 @@ var SmartCreateAnnouncementComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/test-component/test-component.component.css":
-/*!*************************************************************!*\
-  !*** ./src/app/test-component/test-component.component.css ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/test-component/test-component.component.html":
-/*!**************************************************************!*\
-  !*** ./src/app/test-component/test-component.component.html ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\r\n  test-component works!\r\n</p>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/test-component/test-component.component.ts":
-/*!************************************************************!*\
-  !*** ./src/app/test-component/test-component.component.ts ***!
-  \************************************************************/
-/*! exports provided: TestComponentComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponentComponent", function() { return TestComponentComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var TestComponentComponent = /** @class */ (function () {
-    function TestComponentComponent() {
-    }
-    TestComponentComponent.prototype.ngOnInit = function () {
-    };
-    TestComponentComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-test-component',
-            template: __webpack_require__(/*! ./test-component.component.html */ "./src/app/test-component/test-component.component.html"),
-            styles: [__webpack_require__(/*! ./test-component.component.css */ "./src/app/test-component/test-component.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], TestComponentComponent);
-    return TestComponentComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/token-interceptor.ts":
 /*!**************************************!*\
   !*** ./src/app/token-interceptor.ts ***!
@@ -1952,7 +1871,6 @@ var TokenInterceptor = /** @class */ (function () {
     TokenInterceptor.prototype.intercept = function (req, next) {
         this.connectedService.connecting();
         if (this.connectedService.connected) {
-            console.log(this.connectedService.connected);
             req = req.clone({
                 setHeaders: {
                     Authorization: "Bearer " + this.connectedService.accountConnected.token
@@ -2028,13 +1946,38 @@ var CreatePersonneComponent = /** @class */ (function () {
     }
     CreatePersonneComponent.prototype.ngOnInit = function () {
     };
-    Object.defineProperty(CreatePersonneComponent.prototype, "formStudent", {
+    CreatePersonneComponent.prototype.broadcastForm = function (form) {
+        this.BroadcastStudentForm.broadcastStudent({ "name": "personneForm", "valid": form.form.valid });
+    };
+    CreatePersonneComponent.prototype.Send = function (form) {
+        this.broadcastForm(this._formStudent);
+        this.tmpStudentCreate();
+        this.createStudent();
+    };
+    CreatePersonneComponent.prototype.tmpStudentCreate = function () {
+        this.tmpStudent.name = this._userName;
+        this.tmpStudent.password = this._password;
+        this.tmpStudent.mail = this._mail;
+        this.tmpStudent.phone = this._telNumber;
+        return this.tmpStudent;
+    };
+    CreatePersonneComponent.prototype.createStudent = function () {
+        this._studentCreated.next(this.tmpStudent);
+        this.reset();
+    };
+    CreatePersonneComponent.prototype.reset = function () {
+        this._tmpStudent = new _student__WEBPACK_IMPORTED_MODULE_2__["Student"];
+    };
+    Object.defineProperty(CreatePersonneComponent.prototype, "studentCreated", {
         get: function () {
-            return this._formStudent;
+            return this._studentCreated;
         },
         enumerable: true,
         configurable: true
     });
+    CreatePersonneComponent.prototype.ngAfterViewChecked = function () {
+        this.broadcastForm(this._formStudent);
+    };
     Object.defineProperty(CreatePersonneComponent.prototype, "userName", {
         get: function () {
             return this._userName;
@@ -2075,14 +2018,6 @@ var CreatePersonneComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    CreatePersonneComponent.prototype.broadcastForm = function (form) {
-        this.BroadcastStudentForm.broadcastStudent({ "name": "personneForm", "valid": form.form.valid });
-    };
-    CreatePersonneComponent.prototype.Send = function (form) {
-        this.broadcastForm(this._formStudent);
-        this.tmpStudentCreate();
-        this.createStudent();
-    };
     Object.defineProperty(CreatePersonneComponent.prototype, "tmpStudent", {
         get: function () {
             return this._tmpStudent;
@@ -2090,35 +2025,6 @@ var CreatePersonneComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    CreatePersonneComponent.prototype.tmpStudentCreate = function () {
-        // if(this._formStudent.form.valid){
-        this.tmpStudent.name = this._userName;
-        this.tmpStudent.password = this._password;
-        this.tmpStudent.mail = this._mail;
-        this.tmpStudent.phone = this._telNumber;
-        return this.tmpStudent;
-        /*}
-        else{
-          return ;
-        }*/
-    };
-    CreatePersonneComponent.prototype.createStudent = function () {
-        this._studentCreated.next(this.tmpStudent);
-        this.reset();
-    };
-    CreatePersonneComponent.prototype.reset = function () {
-        this._tmpStudent = new _student__WEBPACK_IMPORTED_MODULE_2__["Student"];
-    };
-    Object.defineProperty(CreatePersonneComponent.prototype, "studentCreated", {
-        get: function () {
-            return this._studentCreated;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    CreatePersonneComponent.prototype.ngAfterViewChecked = function () {
-        this.broadcastForm(this._formStudent);
-    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('formStudent'),
         __metadata("design:type", Object)
@@ -2201,6 +2107,36 @@ var CreateTutorComponent = /** @class */ (function () {
     }
     CreateTutorComponent.prototype.ngOnInit = function () {
     };
+    CreateTutorComponent.prototype.broadcastForm = function (form) {
+        this.BroadcastTutorForm.broadcastStudent({ "name": "tutorForm", "valid": form.form.valid });
+    };
+    CreateTutorComponent.prototype.Send = function (form) {
+        this.broadcastForm(this._formTutor);
+        this.tmpTutorCreate();
+        this.createTutor();
+    };
+    CreateTutorComponent.prototype.tmpTutorCreate = function () {
+        if (this._formTutor.form.valid) {
+            this.tmpTutor.username = this.tmpStudent.name;
+            this.tmpTutor.password = this.tmpStudent.password;
+            this.tmpTutor.mail = this.tmpStudent.mail;
+            this.tmpTutor.phone = this.tmpStudent.phone;
+            this.tmpTutor.description = this._description;
+            this.tmpTutor.year = this._year;
+            this.tmpTutor.section = this.section;
+            return this.tmpTutor;
+        }
+        else {
+            return;
+        }
+    };
+    CreateTutorComponent.prototype.createTutor = function () {
+        this._tutorCreated.next(this.tmpTutor);
+        this.reset();
+    };
+    CreateTutorComponent.prototype.reset = function () {
+        this._tmpTutor = new _tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"];
+    };
     Object.defineProperty(CreateTutorComponent.prototype, "description", {
         get: function () {
             return this._description;
@@ -2231,14 +2167,6 @@ var CreateTutorComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    CreateTutorComponent.prototype.broadcastForm = function (form) {
-        this.BroadcastTutorForm.broadcastStudent({ "name": "tutorForm", "valid": form.form.valid });
-    };
-    CreateTutorComponent.prototype.Send = function (form) {
-        this.broadcastForm(this._formTutor);
-        this.tmpTutorCreate();
-        this.createTutor();
-    };
     Object.defineProperty(CreateTutorComponent.prototype, "formTutor", {
         get: function () {
             return this._formTutor;
@@ -2259,25 +2187,6 @@ var CreateTutorComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    CreateTutorComponent.prototype.tmpTutorCreate = function () {
-        if (this._formTutor.form.valid) {
-            this.tmpTutor.username = this.tmpStudent.name;
-            this.tmpTutor.password = this.tmpStudent.password;
-            this.tmpTutor.mail = this.tmpStudent.mail;
-            this.tmpTutor.phone = this.tmpStudent.phone;
-            this.tmpTutor.description = this._description;
-            this.tmpTutor.year = this._year;
-            this.tmpTutor.section = this.section;
-            return this.tmpTutor;
-        }
-        else {
-            return;
-        }
-    };
-    CreateTutorComponent.prototype.createTutor = function () {
-        this._tutorCreated.next(this.tmpTutor);
-        this.reset();
-    };
     Object.defineProperty(CreateTutorComponent.prototype, "tmpTutor", {
         get: function () {
             return this._tmpTutor;
@@ -2285,9 +2194,6 @@ var CreateTutorComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    CreateTutorComponent.prototype.reset = function () {
-        this._tmpTutor = new _tutor__WEBPACK_IMPORTED_MODULE_2__["Tutor"];
-    };
     Object.defineProperty(CreateTutorComponent.prototype, "tutorCreated", {
         get: function () {
             return this._tutorCreated;
@@ -2361,6 +2267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tutor_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tutor.service */ "./src/app/user/tutor.service.ts");
 /* harmony import */ var _student_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../student.service */ "./src/app/user/student.service.ts");
 /* harmony import */ var _broadcast_student_created_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../broadcast-student-created.service */ "./src/app/broadcast-student-created.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2375,12 +2282,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var CreateUserComponent = /** @class */ (function () {
-    function CreateUserComponent(BroadcastStudentForm, tutorService, studentService, broadcastStudentCreated) {
+    function CreateUserComponent(BroadcastStudentForm, tutorService, studentService, broadcastStudentCreated, router) {
         this.BroadcastStudentForm = BroadcastStudentForm;
         this.tutorService = tutorService;
         this.studentService = studentService;
         this.broadcastStudentCreated = broadcastStudentCreated;
+        this.router = router;
         this._isHidden = false;
         this.formvalidation = {};
         this._isStudentActive = true;
@@ -2395,37 +2304,14 @@ var CreateUserComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(CreateUserComponent.prototype, "isStudentActive", {
-        get: function () {
-            return this._isStudentActive;
-        },
-        set: function (value) {
-            this._isStudentActive = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    CreateUserComponent.prototype.switchState = function () {
-        if (this.isStudentActive) {
-            this.isStudentActive = !this.isStudentActive;
-        }
-        else {
-            this.isStudentActive = true;
-        }
-    };
     CreateUserComponent.prototype.ngOnInit = function () {
         this.InitFormStudent();
     };
-    CreateUserComponent.prototype.TypeFormulaire = function () {
-        this._isHidden = !this._isHidden;
+    CreateUserComponent.prototype.ngOnDestroy = function () {
+        if (this._subBroad) {
+            this._subBroad.unsubscribe();
+        }
     };
-    Object.defineProperty(CreateUserComponent.prototype, "isHidden", {
-        get: function () {
-            return this._isHidden;
-        },
-        enumerable: true,
-        configurable: true
-    });
     CreateUserComponent.prototype.InitFormStudent = function () {
         var _this = this;
         this._subBroad = this.BroadcastStudentForm.formCreated$.subscribe(function (form) { return _this.saveForm(form); });
@@ -2436,43 +2322,52 @@ var CreateUserComponent = /** @class */ (function () {
             return;
         setTimeout(function () { return _this.formvalidation[form.name] = form.valid; }, 0);
     };
-    /*
-      formValid(){
-        for(let name in this.formvalidation){
-          if(!this.formvalidation[name]){
-            return false;
-          }
+    CreateUserComponent.prototype.switchState = function () {
+        if (this.isStudentActive) {
+            this.isStudentActive = !this.isStudentActive;
         }
-        return true;
-      }
-    */
+        else {
+            this.isStudentActive = true;
+        }
+    };
+    CreateUserComponent.prototype.TypeFormulaire = function () {
+        this._isHidden = !this._isHidden;
+    };
     CreateUserComponent.prototype.validation = function () {
         if (!this.isHidden) {
             this.studentService.create(this._tmpStudent).subscribe();
-            console.log(this._tmpStudent);
         }
         else {
             this.tutorService.create(this._tmpTutor).subscribe();
-            console.log(this._tmpTutor);
         }
+        this.router.navigate(['/Login']);
     };
     CreateUserComponent.prototype.broadcastStudent = function (student) {
         this.broadcastStudentCreated.broadcastStudent(student);
     };
     CreateUserComponent.prototype.receiveStudent = function (value) {
-        console.log(this._tmpStudent);
         this._tmpStudent = value;
     };
     CreateUserComponent.prototype.receiveTutor = function (value) {
         this._tmpTutor = value;
-        console.log("tuteur");
-        console.log(this._tmpTutor);
     };
-    CreateUserComponent.prototype.ngOnDestroy = function () {
-        if (this._subBroad) {
-            this._subBroad.unsubscribe();
-        }
-    };
+    Object.defineProperty(CreateUserComponent.prototype, "isStudentActive", {
+        get: function () {
+            return this._isStudentActive;
+        },
+        set: function (value) {
+            this._isStudentActive = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CreateUserComponent.prototype, "isHidden", {
+        get: function () {
+            return this._isHidden;
+        },
+        enumerable: true,
+        configurable: true
+    });
     CreateUserComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-create-user',
@@ -2481,7 +2376,7 @@ var CreateUserComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_broadcast_student_form_service__WEBPACK_IMPORTED_MODULE_1__["BroadcastStudentFormService"],
             _tutor_service__WEBPACK_IMPORTED_MODULE_2__["TutorService"],
-            _student_service__WEBPACK_IMPORTED_MODULE_3__["StudentService"], _broadcast_student_created_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastStudentCreatedService"]])
+            _student_service__WEBPACK_IMPORTED_MODULE_3__["StudentService"], _broadcast_student_created_service__WEBPACK_IMPORTED_MODULE_4__["BroadcastStudentCreatedService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], CreateUserComponent);
     return CreateUserComponent;
 }());
@@ -2585,6 +2480,44 @@ var Student = /** @class */ (function () {
         this._avertissement = isWarned;
         this._isModerateur = isModerator;
     }
+    Student.prototype.deserializable = function (json) {
+        Object.assign(this, json);
+        return this;
+    };
+    Student.prototype.serialize = function () {
+        return {
+            name: this._name,
+            mail: this._mail,
+            tel: this._phone,
+            password: this._password,
+        };
+    };
+    Student.prototype.serializeUpdate = function () {
+        return {
+            idEleve: this._idStudent,
+            name: this._name,
+            password: this._password,
+            mail: this._mail,
+            tel: this._phone,
+            token: this._token
+            /*   isWarned: this._isWarned,
+               isModerator: this._isModerator,
+               year: this._year,
+               section:this._section*/
+        };
+    };
+    Student.prototype.toJson = function () {
+        return {
+            idEleve: this._idStudent,
+            name: this._name,
+            password: this._password,
+            mail: this._mail,
+            tel: this._phone,
+            avertissement: this._avertissement,
+            isModerateur: this._isModerateur,
+            token: this._token
+        };
+    };
     Object.defineProperty(Student.prototype, "idStudent", {
         get: function () {
             return this._idStudent;
@@ -2665,44 +2598,6 @@ var Student = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Student.prototype.deserializable = function (json) {
-        Object.assign(this, json);
-        return this;
-    };
-    Student.prototype.serialize = function () {
-        return {
-            name: this._name,
-            mail: this._mail,
-            tel: this._phone,
-            password: this._password,
-        };
-    };
-    Student.prototype.serializeUpdate = function () {
-        return {
-            idEleve: this._idStudent,
-            name: this._name,
-            password: this._password,
-            mail: this._mail,
-            tel: this._phone,
-            token: this._token
-            /*   isWarned: this._isWarned,
-               isModerator: this._isModerator,
-               year: this._year,
-               section:this._section*/
-        };
-    };
-    Student.prototype.toJson = function () {
-        return {
-            idEleve: this._idStudent,
-            name: this._name,
-            password: this._password,
-            mail: this._mail,
-            tel: this._phone,
-            avertissement: this._avertissement,
-            isModerateur: this._isModerateur,
-            token: this._token
-        };
-    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", String),
@@ -2811,6 +2706,51 @@ var Tutor = /** @class */ (function () {
         this._section = section;
         this._token = token;
     }
+    Tutor.prototype.deserializable = function (json) {
+        Object.assign(this, json);
+        return this;
+    };
+    Tutor.prototype.serialize = function () {
+        return {
+            // idTutor: this._idTutor,
+            username: this._username,
+            password: this._password,
+            mail: this._mail,
+            phone: this._phone,
+            //  evaluation: this._evaluation,
+            description: this._description
+            /*   isWarned: this._isWarned,
+               isModerator: this._isModerator,
+               year: this._year,
+               section:this._section*/
+        };
+    };
+    Tutor.prototype.toJson = function () {
+        return {
+            idTutor: this._idTutor,
+            username: this._username,
+            password: this._password,
+            mail: this._mail,
+            phone: this._phone,
+            description: this._description,
+            evaluation: this._evaluation,
+            isWarned: this._isWarned,
+            token: this._token,
+            isModerator: this._isModerator
+        };
+    };
+    Tutor.prototype.serializeUpdate = function () {
+        return {
+            idTutor: this._idTutor,
+            username: this._username,
+            password: this._password,
+            mail: this._mail,
+            phone: this._phone,
+            //  evaluation: this._evaluation,
+            description: this._description,
+            token: this._token
+        };
+    };
     Object.defineProperty(Tutor.prototype, "year", {
         get: function () {
             return this._year;
@@ -2931,51 +2871,6 @@ var Tutor = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Tutor.prototype.deserializable = function (json) {
-        Object.assign(this, json);
-        return this;
-    };
-    Tutor.prototype.serialize = function () {
-        return {
-            // idTutor: this._idTutor,
-            username: this._username,
-            password: this._password,
-            mail: this._mail,
-            phone: this._phone,
-            //  evaluation: this._evaluation,
-            description: this._description
-            /*   isWarned: this._isWarned,
-               isModerator: this._isModerator,
-               year: this._year,
-               section:this._section*/
-        };
-    };
-    Tutor.prototype.toJson = function () {
-        return {
-            idTutor: this._idTutor,
-            username: this._username,
-            password: this._password,
-            mail: this._mail,
-            phone: this._phone,
-            description: this._description,
-            evaluation: this._evaluation,
-            isWarned: this._isWarned,
-            token: this._token,
-            isModerator: this._isModerator
-        };
-    };
-    Tutor.prototype.serializeUpdate = function () {
-        return {
-            idTutor: this._idTutor,
-            username: this._username,
-            password: this._password,
-            mail: this._mail,
-            phone: this._phone,
-            //  evaluation: this._evaluation,
-            description: this._description,
-            token: this._token
-        };
-    };
     return Tutor;
 }());
 
@@ -3044,7 +2939,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\3BI\TI\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\PROJETS\TeachMeProject\TeachMeWeb\src\main.ts */"./src/main.ts");
 
 
 /***/ })

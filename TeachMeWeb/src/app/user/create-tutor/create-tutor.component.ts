@@ -18,10 +18,47 @@ export class CreateTutorComponent implements OnInit {
   private _tmpStudent:Student = new Student;
   private _tmpTutor:Tutor = new Tutor;
   private _tutorCreated : EventEmitter<Tutor> = new EventEmitter();
+
   constructor(public BroadcastTutorForm: BroadcastStudentFormService) { }
 
   ngOnInit() {
   }
+
+  broadcastForm(form : any) {
+    this.BroadcastTutorForm.broadcastStudent({"name": "tutorForm", "valid": form.form.valid});
+  }
+
+  Send(form: any) {
+    this.broadcastForm(this._formTutor);
+    this.tmpTutorCreate();
+    this.createTutor();
+  }
+
+  tmpTutorCreate():Tutor{
+    if(this._formTutor.form.valid){
+      this.tmpTutor.username=this.tmpStudent.name;
+      this.tmpTutor.password=this.tmpStudent.password;
+      this.tmpTutor.mail=this.tmpStudent.mail;
+      this.tmpTutor.phone=this.tmpStudent.phone;
+      this.tmpTutor.description=this._description;
+      this.tmpTutor.year=this._year;
+      this.tmpTutor.section=this.section;
+      return this.tmpTutor;
+    }
+    else {
+      return;
+    }
+  }
+
+  createTutor(){
+    this._tutorCreated.next(this.tmpTutor);
+    this.reset();
+  }
+
+  reset() {
+    this._tmpTutor = new Tutor;
+  }
+
   get description(): string {
     return this._description;
   }
@@ -29,7 +66,6 @@ export class CreateTutorComponent implements OnInit {
   set description(value: string) {
     this._description = value;
   }
-
 
   get year(): number {
     return this._year;
@@ -46,14 +82,7 @@ export class CreateTutorComponent implements OnInit {
   set section(value: string) {
     this._section = value;
   }
-  broadcastForm(form : any) {
-    this.BroadcastTutorForm.broadcastStudent({"name": "tutorForm", "valid": form.form.valid});
-  }
-  Send(form: any) {
-      this.broadcastForm(this._formTutor);
-      this.tmpTutorCreate();
-      this.createTutor();
-  }
+
   get formTutor() {
     return this._formTutor;
   }
@@ -61,39 +90,18 @@ export class CreateTutorComponent implements OnInit {
   set formTutor(value) {
     this._formTutor = value;
   }
+
   get tmpStudent(): Student {
     return this._tmpStudent;
   }
+
   @Input()
   set tmpStudent(value: Student) {
     this._tmpStudent= value;
+  }
 
-  }
-  tmpTutorCreate():Tutor{
-    if(this._formTutor.form.valid){
-      this.tmpTutor.username=this.tmpStudent.name;
-      this.tmpTutor.password=this.tmpStudent.password;
-      this.tmpTutor.mail=this.tmpStudent.mail;
-      this.tmpTutor.phone=this.tmpStudent.phone;
-      this.tmpTutor.description=this._description;
-      this.tmpTutor.year=this._year;
-      this.tmpTutor.section=this.section;
-      return this.tmpTutor;
-    }
-    else {
-      return;
-    }
-  }
-  createTutor(){
-    this._tutorCreated.next(this.tmpTutor);
-    this.reset();
-  }
   get tmpTutor(): Tutor {
     return this._tmpTutor;
-  }
-
-  reset() {
-    this._tmpTutor = new Tutor;
   }
 
   @Output()

@@ -11,7 +11,7 @@ export class NavbarheaderComponent implements OnInit {
   constructor(public connectedService: ConnectedService) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem("type") === "student", "TOOOOOOO");
+
   }
 
   logout(){

@@ -38,7 +38,6 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   // this.listAnnouncementCreated();
     this.getAnnouncements();
     this.getTutors();
     this.getCourses();
@@ -62,24 +61,11 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
     }
   }
 
-  get currentCourse(): number {
-    return this._currentCourse;
-  }
-
-  receiveAnnouncement(announcement: Announcement) {
-    this._announcements.push(announcement);
-  }
-
   intToOrderOption(num: number) {
     return FilterAnnouncementPipe.intToOrderOption(num);
   }
-/*
-  listAnnouncementCreated() {
-    this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated$.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
-  }
-*/
 
-
+//Fonctions delete et update en préivsion de fonctionnalités finalement non présentes.
   deleteAnnouncement(announcement: Announcement) {
     this.subDelete = this.announcementService.delete(announcement).subscribe();
   }
@@ -92,6 +78,48 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
     this.subQuery = this.announcementService
       .query()
       .subscribe(announcements => this._announcements = announcements.map(a => new Announcement().deserializable(a)));
+  }
+
+
+  onChange(ev: any){
+    this._currentCourse = ev;
+  }
+
+  setCurrentAnnouncement(id: number) {
+    this._currentAnnouncement = this.announcements[id];
+    console.log(this.currentAnnouncement);
+  }
+
+  getTutors(): void {
+    this.tutorService.query().subscribe(t => this._tutors = t.map(tutor => new Tutor().deserializable(tutor)));
+  }
+
+  getTutorById(id: number): Tutor{
+    for(let t of this.tutors){
+      if(t.idTutor == id){
+        return t;
+      }
+    }
+  }
+
+  getCourses(): void {
+    this.courseService.query().subscribe(c => this._courses = c.map(course => new Course().deserializable(course)));
+  }
+
+  getCoursesById(id: number): Course {
+    for(let c of this.courses){
+      if(c.idCourse == id){
+        return c;
+      }
+    }
+  }
+
+  getCurrentPersonMail(): string {
+    if(localStorage.getItem("type") == "student"){
+      return this.connectedService.studentConnected.mail;
+    } else {
+      return this.connectedService.tutorConnected.mail;
+    }
   }
 
   set announcements(value: Announcement[]) {
@@ -110,57 +138,16 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
     this._options = value;
   }
 
-  getTutors(): void {
-    this.tutorService.query().subscribe(t => this._tutors = t.map(tutor => new Tutor().deserializable(tutor)));
+  get courses(): Course[] {
+    return this._courses;
   }
 
   get tutors(): Tutor[] {
     return this._tutors;
   }
 
-  getTutorById(id: number): Tutor{
-    for(let t of this.tutors){
-      if(t.idTutor == id){
-        return t;
-      }
-    }
-  }
-
-  getCourses(): void {
-    this.courseService.query().subscribe(c => this._courses = c.map(course => new Course().deserializable(course)));
-  }
-
-  get courses(): Course[] {
-    return this._courses;
-  }
-
-  getCoursesById(id: number): Course {
-    for(let c of this.courses){
-      if(c.idCourse == id){
-        return c;
-      }
-    }
-  }
-
-  onChange(ev: any){
-    this._currentCourse = ev;
-  }
-
   get currentAnnouncement(): Announcement {
     return this._currentAnnouncement;
-  }
-
-  setCurrentAnnouncement(id: number) {
-    this._currentAnnouncement = this.announcements[id];
-    console.log(this.currentAnnouncement);
-  }
-
-  getCurrentPersonMail(): string {
-    if(localStorage.getItem("type") == "student"){
-      return this.connectedService.studentConnected.mail;
-    } else {
-      return this.connectedService.tutorConnected.mail;
-    }
   }
 
   get textMail(): string {
@@ -169,6 +156,10 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
 
   set textMail(value: string) {
     this._textMail = value;
+  }
+
+  get currentCourse(): number {
+    return this._currentCourse;
   }
 }
 

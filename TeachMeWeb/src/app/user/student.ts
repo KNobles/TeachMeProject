@@ -20,6 +20,50 @@ export class Student {
     this._isModerateur = isModerator;
   }
 
+  public deserializable(json: any) : Student {
+    Object.assign(this, json);
+    return this;
+  }
+
+  public serialize() : any {
+    return {
+      name: this._name,
+      mail: this._mail,
+      tel: this._phone,
+      password: this._password,
+    };
+  }
+
+  public serializeUpdate(): any {
+    return {
+      idEleve: this._idStudent,
+      name: this._name,
+      password: this._password,
+      mail: this._mail,
+      tel: this._phone,
+
+      token: this._token
+      /*   isWarned: this._isWarned,
+         isModerator: this._isModerator,
+         year: this._year,
+         section:this._section*/
+    };
+  }
+
+  toJson() {
+    return {
+      idEleve: this._idStudent,
+      name: this._name,
+      password: this._password,
+      mail: this._mail,
+      tel: this._phone,
+      avertissement: this._avertissement,
+      isModerateur: this._isModerateur,
+      token: this._token
+
+    }
+  }
+
   get idStudent(): number {
     return this._idStudent;
   }
@@ -84,47 +128,5 @@ export class Student {
     this._token = value;
   }
 
-  public deserializable(json: any) : Student {
-    Object.assign(this, json);
-    return this;
-  }
 
-  public serialize() : any {
-    return {
-      name: this._name,
-      mail: this._mail,
-      tel: this._phone,
-      password: this._password,
-    };
-  }
-
-  public serializeUpdate(): any {
-    return {
-      idEleve: this._idStudent,
-      name: this._name,
-      password: this._password,
-      mail: this._mail,
-      tel: this._phone,
-
-      token: this._token
-      /*   isWarned: this._isWarned,
-         isModerator: this._isModerator,
-         year: this._year,
-         section:this._section*/
-    };
-  }
-
-  toJson() {
-    return {
-      idEleve: this._idStudent,
-      name: this._name,
-      password: this._password,
-      mail: this._mail,
-      tel: this._phone,
-      avertissement: this._avertissement,
-      isModerateur: this._isModerateur,
-      token: this._token
-
-    }
-  }
 }

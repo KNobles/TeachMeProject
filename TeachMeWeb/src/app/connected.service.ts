@@ -18,14 +18,6 @@ export class ConnectedService {
   }
 
 
-  get connected(): boolean {
-    return this._connected;
-  }
-
-  public disconnected(): boolean{
-    return !this.connected;
-  }
-
   public connecting(){
 
     let accountTmp : string = localStorage.getItem("account");
@@ -86,6 +78,10 @@ export class ConnectedService {
 
   set accountConnected(value: Tutor | Student) {
     this._accountConnected = value;
+  }
+
+  get connected(): boolean {
+    return this._connected;
   }
 
 }

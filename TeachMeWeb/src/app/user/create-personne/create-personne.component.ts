@@ -24,61 +24,25 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
   ngOnInit() {
   }
 
-  get formStudent() {
-    return this._formStudent;
-  }
-  get userName(): string {
-    return this._userName;
-  }
-  set userName(value: string) {
-    this._userName = value;
-  }
-  get password(): string {
-    return this._password;
-  }
-  set password(value: string) {
-    this._password = value;
-  }
-  get mail(): string {
-    return this._mail;
-  }
-  set mail(value: string) {
-    this._mail = value;
-  }
-  get telNumber(): string {
-    return this._telNumber;
-  }
-  set telNumber(value: string) {
-    this._telNumber = value;
-  }
   broadcastForm(form : any) {
     this.BroadcastStudentForm.broadcastStudent({"name": "personneForm", "valid": form.form.valid});
   }
+
   Send(form: any) {
 
-      this.broadcastForm(this._formStudent);
-      this.tmpStudentCreate();
-      this.createStudent();
+    this.broadcastForm(this._formStudent);
+    this.tmpStudentCreate();
+    this.createStudent();
 
   }
 
-
-  get tmpStudent(): Student {
-    return this._tmpStudent;
-  }
   tmpStudentCreate():Student{
-   // if(this._formStudent.form.valid){
-      this.tmpStudent.name=this._userName  ;
-      this.tmpStudent.password=this._password  ;
-      this.tmpStudent.mail=this._mail;
-      this.tmpStudent.phone=this._telNumber;
+    this.tmpStudent.name=this._userName  ;
+    this.tmpStudent.password=this._password  ;
+    this.tmpStudent.mail=this._mail;
+    this.tmpStudent.phone=this._telNumber;
 
-      return this.tmpStudent;
-    /*}
-    else{
-      return ;
-    }*/
-
+    return this.tmpStudent;
   }
 
   createStudent() {
@@ -95,8 +59,43 @@ export class CreatePersonneComponent implements OnInit, AfterViewChecked{
     return this._studentCreated;
   }
 
-
   ngAfterViewChecked(): void {
     this.broadcastForm(this._formStudent);
+  }
+
+  get userName(): string {
+    return this._userName;
+  }
+
+  set userName(value: string) {
+    this._userName = value;
+  }
+
+  get password(): string {
+    return this._password;
+  }
+
+  set password(value: string) {
+    this._password = value;
+  }
+
+  get mail(): string {
+    return this._mail;
+  }
+
+  set mail(value: string) {
+    this._mail = value;
+  }
+
+  get telNumber(): string {
+    return this._telNumber;
+  }
+
+  set telNumber(value: string) {
+    this._telNumber = value;
+  }
+
+  get tmpStudent(): Student {
+    return this._tmpStudent;
   }
 }

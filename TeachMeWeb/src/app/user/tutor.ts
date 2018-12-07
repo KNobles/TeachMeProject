@@ -33,6 +33,55 @@ export class Tutor {
     this._token=token;
   }
 
+  public deserializable(json: any) : Tutor {
+    Object.assign(this, json);
+    return this;
+  }
+
+  public serialize() : any {
+    return {
+      // idTutor: this._idTutor,
+      username: this._username,
+      password: this._password,
+      mail: this._mail,
+      phone: this._phone,
+      //  evaluation: this._evaluation,
+      description: this._description
+      /*   isWarned: this._isWarned,
+         isModerator: this._isModerator,
+         year: this._year,
+         section:this._section*/
+    };
+  }
+
+  public toJson() : any {
+    return {
+      idTutor: this._idTutor,
+      username: this._username,
+      password: this._password,
+      mail: this._mail,
+      phone: this._phone,
+      description: this._description,
+      evaluation: this._evaluation,
+      isWarned: this._isWarned,
+      token: this._token,
+      isModerator: this._isModerator
+    }
+  }
+
+  public serializeUpdate() : any {
+    return {
+      idTutor: this._idTutor,
+      username: this._username,
+      password: this._password,
+      mail: this._mail,
+      phone: this._phone,
+      //  evaluation: this._evaluation,
+      description: this._description,
+      token: this._token
+    };
+  }
+
 
   get year(): number {
     return this._year;
@@ -128,54 +177,5 @@ export class Tutor {
 
   set token(value: string) {
     this._token = value;
-  }
-
-  public deserializable(json: any) : Tutor {
-    Object.assign(this, json);
-    return this;
-  }
-
-  public serialize() : any {
-    return {
-     // idTutor: this._idTutor,
-      username: this._username,
-      password: this._password,
-      mail: this._mail,
-      phone: this._phone,
-    //  evaluation: this._evaluation,
-      description: this._description
-   /*   isWarned: this._isWarned,
-      isModerator: this._isModerator,
-      year: this._year,
-      section:this._section*/
-    };
-  }
-
-  public toJson() : any {
-    return {
-      idTutor: this._idTutor,
-      username: this._username,
-      password: this._password,
-      mail: this._mail,
-      phone: this._phone,
-      description: this._description,
-      evaluation: this._evaluation,
-      isWarned: this._isWarned,
-      token: this._token,
-      isModerator: this._isModerator
-    }
-  }
-
-  public serializeUpdate() : any {
-    return {
-      idTutor: this._idTutor,
-      username: this._username,
-      password: this._password,
-      mail: this._mail,
-      phone: this._phone,
-      //  evaluation: this._evaluation,
-      description: this._description,
-      token: this._token
-    };
   }
 }

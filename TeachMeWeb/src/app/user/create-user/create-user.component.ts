@@ -9,6 +9,7 @@ import {StudentService} from '../student.service';
 import {Subscription} from 'rxjs';
 
 import {BroadcastStudentCreatedService} from "../../broadcast-student-created.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-user',
@@ -32,13 +33,28 @@ export class CreateUserComponent implements OnInit ,OnDestroy{
   private _subBroad:Subscription;
   private _isStudentActive: boolean = true;
 
+  constructor(public BroadcastStudentForm: BroadcastStudentFormService,
+              public  tutorService :TutorService,
+              public  studentService :StudentService, public broadcastStudentCreated : BroadcastStudentCreatedService, public router: Router) { }
 
-  get isStudentActive(): boolean {
-    return this._isStudentActive;
+  ngOnInit() {
+    this.InitFormStudent();
   }
 
-  set isStudentActive(value: boolean) {
-    this._isStudentActive = value;
+  ngOnDestroy(): void {
+    if( this._subBroad){
+      this._subBroad.unsubscribe();
+    }
+  }
+
+  InitFormStudent() {
+    this._subBroad=this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
+
+  }
+
+  saveForm(form:any){
+    if (!form)return;
+    setTimeout(() => this.formvalidation[form.name] = form.valid, 0);
   }
 
   switchState(){
@@ -49,68 +65,45 @@ export class CreateUserComponent implements OnInit ,OnDestroy{
     }
   }
 
-  constructor(public BroadcastStudentForm: BroadcastStudentFormService,
-             public  tutorService :TutorService,
-             public  studentService :StudentService, public broadcastStudentCreated : BroadcastStudentCreatedService) { }
-
-  ngOnInit() {
-  this.InitFormStudent();
-  }
   TypeFormulaire () {
     this._isHidden = ! this._isHidden;
   }
 
-  get isHidden(): boolean {
-    return this._isHidden;
-  }
-  InitFormStudent() {
-    this._subBroad=this.BroadcastStudentForm.formCreated$.subscribe(form => this.saveForm(form));
-
-  }
-  saveForm(form:any){
-    if (!form)return;
-    setTimeout(() => this.formvalidation[form.name] = form.valid, 0);
-  }
-/*
-  formValid(){
-    for(let name in this.formvalidation){
-      if(!this.formvalidation[name]){
-        return false;
-      }
-    }
-    return true;
-  }
-*/
   validation(){
     if(!this.isHidden){
       this.studentService.create(this._tmpStudent).subscribe();
-      console.log(this._tmpStudent);
 
     }
     else{
       this.tutorService.create(this._tmpTutor).subscribe();
-      console.log(this._tmpTutor);
     }
+
+    this.router.navigate(['/Login']);
 
   }
 
   broadcastStudent(student : Student){
     this.broadcastStudentCreated.broadcastStudent(student);
   }
+
   receiveStudent(value:Student) {
-    console.log(this._tmpStudent);
     this._tmpStudent = value;
 
   }
   receiveTutor(value:Tutor){
     this._tmpTutor = value;
-    console.log("tuteur");
-    console.log(this._tmpTutor);
   }
 
-  ngOnDestroy(): void {
-    if( this._subBroad){
-      this._subBroad.unsubscribe();
-    }
+  get isStudentActive(): boolean {
+    return this._isStudentActive;
   }
+
+  set isStudentActive(value: boolean) {
+    this._isStudentActive = value;
+  }
+
+  get isHidden(): boolean {
+    return this._isHidden;
+  }
+
 }

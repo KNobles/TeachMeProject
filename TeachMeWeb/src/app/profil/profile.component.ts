@@ -13,16 +13,7 @@ import {ConnectedService} from "../connected.service";
 export class ProfileComponent implements OnInit,OnDestroy {
   private _tmpTutor:Tutor=new Tutor;
   private _subGet : Subscription;
-  private _subUpdate : Subscription;/*
-  private _username: string;
-  private _password: string;
-  private _mail: string;
-  private _tel: string;
-  private _evaluation: number;
-  private _description: string;
-  private _isWarned: boolean;
-  private _year:number;
-  private _section:string;*/
+  private _subUpdate : Subscription;
   private _modify:boolean=true;
   private _stars: number[] = [];
 
@@ -37,6 +28,45 @@ export class ProfileComponent implements OnInit,OnDestroy {
     }
 
   }
+
+  ngOnDestroy():void{
+    if(this._subGet) {
+      this._subGet.unsubscribe();
+    }
+    if(this._subUpdate) {
+      this._subUpdate.unsubscribe();
+    }
+  }
+
+  Modification(){
+    if(this._modify){
+      this._modify=false;
+    }
+    else{
+      this._modify=true;
+    }
+
+  }
+
+  Sending(){
+    console.log(this.tmpTutor);
+    this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
+    localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
+    alert("Modification done");
+  }
+
+  setRatingStars(){
+    for(var i = 0; i < this.connectedService.tutorConnected.evaluation; i++){
+      this.stars[i] = i;
+    }
+  }
+  getTutor() {
+    this.connectedService.connecting();
+    this.tmpTutor = this.connectedService.tutorConnected;/*
+    let id: number = this.tmpTutor.idTutor;
+    this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));*/
+  }
+
   get tmpTutor(): Tutor {
     return this._tmpTutor;
   }
@@ -44,12 +74,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this._tmpTutor = value;
   }
 
-  getTutor() {
-    this.connectedService.connecting();
-    this.tmpTutor = this.connectedService.tutorConnected;/*
-    let id: number = this.tmpTutor.idTutor;
-    this._subGet = this.tutor.get(id).subscribe(tutor => this.tmpTutor = new Tutor().deserializable(tutor));*/
-  }
   get username(): string {
     return this.tmpTutor.username;
   }
@@ -86,9 +110,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
     return this.tmpTutor.evaluation;
   }
 
-  set evaluation(value: number) {
-    this.tmpTutor.evaluation = value;
-  }
 
   get description(): string {
     return this.tmpTutor.description;
@@ -122,32 +143,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this.tmpTutor.section = value;
   }
 
-  ngOnDestroy():void{
-    if(this._subGet) {
-      this._subGet.unsubscribe();
-    }
-    if(this._subUpdate) {
-      this._subUpdate.unsubscribe();
-    }
-  }
-  Modification(){
-    if(this._modify){
-      this._modify=false;
-    }
-    else{
-      this._modify=true;
-    }
 
-  }
   get modify(): boolean {
     return this._modify;
-  }
-  Sending(){
-    console.log(this.tmpTutor);
-    this._subUpdate=this.tutor.update(this.tmpTutor).subscribe()
-    localStorage.setItem("account", JSON.stringify(this.tmpTutor.toJson()));
-    alert("Modification done");
-
   }
 
   get stars(): number[] {
@@ -158,9 +156,4 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this._stars = value;
   }
 
-  setRatingStars(){
-    for(var i = 0; i < this.connectedService.tutorConnected.evaluation; i++){
-      this.stars[i] = i;
-    }
-  }
 }

@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   private _isStudent: boolean = true;
 
   constructor(public authService: AuthService, public studentService: StudentService, public tutorService: TutorService, public router: Router) {}
+
   ngOnInit() {
   }
 
