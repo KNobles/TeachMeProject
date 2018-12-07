@@ -26,6 +26,7 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   private subBroadcast: Subscription;
 
   private _currentCourse: number = -1;
+  private _currentAnnouncement: Announcement;
 
   private _options = [FilterAnnouncementPipe.ORDER_DEFAULT, FilterAnnouncementPipe.ORDER_ASCENDING, FilterAnnouncementPipe.ORDER_DESCENDING];
   optionSelected: number = FilterAnnouncementPipe.ORDER_DEFAULT;
@@ -33,22 +34,6 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
   constructor(public courseService: CourseService, public tutorService: TutorService, public announcementService: AnnouncementService) {
   }
 
-  get currentCourse(): number {
-    return this._currentCourse;
-  }
-
-  receiveAnnouncement(announcement: Announcement) {
-    this._announcements.push(announcement);
-  }
-
-  intToOrderOption(num: number) {
-    return FilterAnnouncementPipe.intToOrderOption(num);
-  }
-/*
-  listAnnouncementCreated() {
-    this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated$.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
-  }
-*/
   ngOnInit() {
    // this.listAnnouncementCreated();
     this.getAnnouncements();
@@ -73,6 +58,24 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
       this.subBroadcast.unsubscribe();
     }
   }
+
+  get currentCourse(): number {
+    return this._currentCourse;
+  }
+
+  receiveAnnouncement(announcement: Announcement) {
+    this._announcements.push(announcement);
+  }
+
+  intToOrderOption(num: number) {
+    return FilterAnnouncementPipe.intToOrderOption(num);
+  }
+/*
+  listAnnouncementCreated() {
+    this.subBroadcast = this.broadcastCreateAnnouncement.AnnouncementCreated$.subscribe(announcementFromServer => this._announcements.push(announcementFromServer));
+  }
+*/
+
 
   deleteAnnouncement(announcement: Announcement) {
     this.subDelete = this.announcementService.delete(announcement).subscribe();
@@ -138,6 +141,15 @@ export class ListAnnouncementComponent implements OnInit, OnDestroy {
 
   onChange(ev: any){
     this._currentCourse = ev;
+  }
+
+  get currentAnnouncement(): Announcement {
+    return this._currentAnnouncement;
+  }
+
+  setCurrentAnnouncement(id: number) {
+    this._currentAnnouncement = this.announcements[id];
+    console.log(this.currentAnnouncement);
   }
 }
 
